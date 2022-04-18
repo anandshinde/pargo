@@ -1,0 +1,133 @@
+<div class="form-field">
+	<button class="close" (click)="onNoClick()">
+		<span class="icon-">close</span>
+	</button>
+</div>
+<div>
+	<span class="my-account__title">{{
+		dataMat.label['global.label.change-password']
+	}}</span>
+
+	<span class="my-account__spantitle">{{
+		dataMat?.label['global.label.change-password.name']
+	}}</span>
+</div>
+<form [formGroup]="form">
+	<div class="form-field my-account__input">
+		<mflooring-input-text
+			[control]="oldPassword"
+			[presentation]="inputTextPresentation"
+			[content]="{
+				placeholder: 'Type here',
+				label: dataMat?.label['global.label.current-password'],
+				type: 'password'
+			}"
+			[serverError]="showError"
+		></mflooring-input-text>
+		<div *ngIf="showError" class="alert alert-danger">
+			<span class="my-account__error">{{
+				dataMat?.label['global.error.password.invalid']
+			}}</span>
+		</div>
+		<div
+			*ngIf="oldPassword.invalid && (oldPassword.touched || oldPassword.dirty)"
+			class="alert alert-danger"
+		>
+			<div class="text-danger" *ngIf="oldPassword.errors.required">
+				<span class="my-account__error">{{
+					dataMat?.label['global.error.mandatory']
+				}}</span>
+			</div>
+		</div>
+	</div>
+	<div class="form-field my-account__input">
+		<mflooring-input-text
+			[control]="password"
+			[presentation]="inputTextPresentation"
+			[content]="{
+				placeholder: 'Type here',
+				label: dataMat?.label['global.label.new-password'],
+				type: 'password'
+			}"
+		></mflooring-input-text>
+		<div
+			*ngIf="password.invalid && (password.touched || password.dirty)"
+			class="alert alert-danger"
+		>
+			<div class="text-danger" *ngIf="password.errors.required">
+				<span class="my-account__error">{{
+					dataMat?.label['global.error.mandatory']
+				}}</span>
+			</div>
+			<div class="text-danger" *ngIf="password.errors.pattern">
+				<span class="my-account__error">{{
+					dataMat?.label['global.label.password.error.invalid']
+				}}</span>
+			</div>
+		</div>
+	</div>
+	<div class="form-field my-account__input">
+		<mflooring-input-text
+			[control]="confirmPassword"
+			[presentation]="inputTextPresentation"
+			[content]="{
+				placeholder: 'Type here',
+				label: dataMat?.label['global.label.confirm-password'],
+				type: 'password'
+			}"
+		></mflooring-input-text>
+		<div
+			*ngIf="
+				confirmPassword.invalid &&
+				(confirmPassword.touched || confirmPassword.dirty)
+			"
+			class="alert alert-danger"
+		>
+			<div class="text-danger" *ngIf="confirmPassword.errors.required">
+				<span class="my-account__error">{{
+					dataMat?.label['global.error.mandatory']
+				}}</span>
+			</div>
+			<div class="text-danger" *ngIf="confirmPassword.errors.pattern">
+				<span class="my-account__error">{{
+					dataMat?.label['global.error.password-pattern']
+				}}</span>
+			</div>
+			<div
+				class="text-danger"
+				*ngIf="confirmPassword.hasError('not_same_password')"
+			>
+				<span class="my-account__error">{{
+					dataMat?.label['global.label.password.error.match']
+				}}</span>
+			</div>
+		</div>
+	</div>
+	<div class="my-account__staticPassword">
+		<mflooring-password-requirements
+			[content]="{
+				case:
+					!password.hasError('required') &&
+					!password.hasError('hasCapitalCase') &&
+					!password.hasError('hasSmallCase'),
+				length:
+					!password.hasError('required') &&
+					!password.hasError('minlength') &&
+					!password.hasError('maxLength'),
+				special:
+					!password.hasError('required') &&
+					!password.hasError('hasSpecialCharacters'),
+				numeric:
+					!password.hasError('required') && !password.hasError('hasNumber')
+			}"
+		></mflooring-password-requirements>
+	</div>
+
+	<div class="my-account__action" [ngClass]="{ 'is-disabled': !form.valid }">
+		<mflooring-link-compound
+			(handleClickAction)="form.valid && onSubmit(form.value)"
+			[content]="submitButtonContentProps"
+			[presentation]="submitButtonPresentationProps"
+		></mflooring-link-compound>
+	</div>
+</form>

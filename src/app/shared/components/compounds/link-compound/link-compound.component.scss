@@ -1,0 +1,252 @@
+@import 'src/styles/settings/settings.colors';
+@import 'src/styles/tools/tools.typography';
+@import 'src/styles/tools/tools.mediaquery';
+
+$primary-btn-color: $primary-color;
+$secondary-btn-color: $secondary-color;
+
+$primary-background: #{$color-black};
+$primary-background-red: #{$color-red-dark};
+
+$primary-background-hover: #{$color-grey-light};
+$primary-background-active: #{$color-black};
+$primary-border-color: #{$color-black};
+$primary-border-color-hover: #{$color-grey-light};
+$primary-border-color-active: #{$color-black};
+$primary-text-color: #{$color-white};
+$primary-link-color: #{$color-black};
+
+$secondary-background: #{$color-white};
+$secondary-background-hover: #{$color-white};
+$secondary-background-active: #{$color-white};
+$secondary-border-color: #{$color-black};
+$secondary-border-color-hover: #{$color-grey-light};
+$secondary-border-color-active: #{$color-black};
+$secondary-foreground-color: #{$color-grey-light};
+
+$border-width: 1px;
+$border-radius: 5px;
+$border-margin: 0.5px;
+
+$button-label-sizes: [15, 13];
+$button-link-label-sizes: [15, 18];
+
+@mixin primaryButton($bg: $color-grey-light, $fg: $primary-text-color) {
+	// border-color: $bg;
+	background-color: $bg;
+	color: $fg;
+
+	&:hover {
+		// border-color: lighten($bg, 15%);
+		background-color: lighten($bg, 15%);
+		color: $fg;
+	}
+}
+
+@mixin secondaryButton($bg: $color-white, $fg: $secondary-foreground-color) {
+	border-color: $fg;
+	background-color: transparent;
+	color: $fg;
+
+	&:hover {
+		background-color: transparent;
+		color: $fg;
+	}
+}
+
+:host {
+	.icon- {
+		margin-left: 5px;
+		font-size: 0.7em;
+	}
+}
+
+button {
+	outline: none;
+	border-width: var(--button-border-width, #{$border-width});
+	border-style: solid;
+	border-radius: var(--button-border-radius, #{$border-radius});
+	padding: 10px 25px;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	margin: var(--button-border-margin, #{$border-margin});
+	text-decoration: none;
+	text-align: center;
+
+	&.primary {
+		@include primaryButton($bg: $primary-btn-color);
+		@include font-nunito-semibold($size: [15, 13], $lineheight: 19px);
+
+		&.color-red {
+			@include primaryButton($bg: $primary-btn-color);
+		}
+		&.theme-light {
+			color: $secondary-color;
+			background-color: $primary-color;
+			border: 0px solid $primary-color;
+
+			&.color-red {
+				color: $color-red-dark;
+			}
+			&.color-grey {
+				background-color: $color-grey;
+			}
+			&:hover {
+				background-color: $color-grey;
+				color: $color-white;
+				box-shadow: 0px 1px 3px #000000eb;
+				transition: all 0.5s;
+			}
+		}
+
+		&.theme-dark {
+			color: $color-black;
+			background-color: $secondary-color;
+			border: none;
+			&:hover {
+				background-color: $color-grey;
+				color: $color-white;
+				box-shadow: 0px 1px 3px #000000eb;
+				transition: all 0.5s;
+			}
+		}
+	}
+
+	&.secondary {
+		@include secondaryButton($fg: $secondary-btn-color);
+		@include font-nunito-semibold($size: [15, 13], $lineheight: 19px);
+
+		&.color-red {
+			@include secondaryButton($fg: $secondary-btn-color);
+
+			& .label {
+				text-transform: none;
+			}
+		}
+		&.theme-light {
+			color: $color-black;
+			background-color: transparent;
+			border: 1px solid $primary-color;
+
+			&.color-red {
+				color: $color-red-dark;
+			}
+		}
+
+		&.theme-dark {
+			color: $secondary-color;
+			background-color: transparent;
+			border: 1px solid $secondary-color;
+		}
+		&:hover {
+			background-color: $color-white;
+			color: $color-black;
+			box-shadow: 0px 1px 3px $primary-color;
+			transition: all 0.5s;
+		}
+	}
+
+	& .no-wrap {
+		white-space: nowrap;
+	}
+
+	.label {
+		text-transform: capitalize;
+		text-decoration: none;
+
+		&.standard-font {
+			text-decoration: initial;
+			@include font-nunito-semibold($size: [15, 13], $lineheight: 19px);
+		}
+	}
+
+	&[disabled] {
+		pointer-events: none;
+		background: $color-grey-light;
+		color: $color-grey;
+		opacity: 0.5;
+		border: none;
+	}
+}
+
+.text-link {
+	display: flex;
+	text-decoration: none;
+	align-items: center;
+	line-height: 0;
+
+	&.standard-font {
+		@include font-nunito-regular($size: [15, 13]);
+
+		&:hover {
+			text-decoration: underline;
+			transition: all 0.5s;
+		}
+	}
+
+	.label {
+		color: inherit;
+		white-space: nowrap;
+
+		&.align-right {
+			order: 1;
+		}
+	}
+
+	.icon- {
+		color: inherit;
+	}
+
+	&.theme-light {
+		color: $primary-link-color;
+
+		&.color-red {
+			color: $color-red-dark;
+		}
+		&.color-grey {
+			color: $color-grey;
+		}
+	}
+
+	&.theme-dark {
+		color: $color-white;
+		&.color-red {
+			color: $color-red-dark;
+		}
+	}
+}
+
+// mflooring-icon-button {
+// 	margin-right: 10px;
+// }
+
+.icon_right {
+	.link-compound__icon {
+		margin-left: 5px;
+	}
+}
+
+.icon_left {
+	// .link-compound__icon {
+	// 	margin-right: 5px;
+	// }
+
+	.label {
+		order: 1;
+	}
+}
+
+.width {
+	&-normal {
+		width: inherit;
+	}
+
+	&-wide {
+		width: auto;
+	}
+}
+
+.align-center {
+	margin: auto;
+}

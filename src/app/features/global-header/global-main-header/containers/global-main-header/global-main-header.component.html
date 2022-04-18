@@ -1,0 +1,30 @@
+<div [brManageMenuButton]="menu"></div>
+
+<div class="header-wrapper" [class.fixed]="isNavFixed" [ngClass]="pageTitleVisDemo">
+	<div class="main-header">
+		<mflooring-layout-wrapper
+			[content]="layoutContainerProp.content"
+			[presentation]="layoutContainerProp.presentation"
+		>
+			<div class="header-container">
+				<ng-container *ngIf="menu && menuItems?.length">
+					<mflooring-main-desktop
+						*ngIf="!isMobile"
+						[position]="isNavFixed"
+						[menuItems]="menuItems"
+						[page]="page"
+						[mainHeaderData]="mainHeaderData"
+					></mflooring-main-desktop>
+					<mflooring-main-mobile
+						*ngIf="!!isMobile"
+						[position]="isNavFixed"
+						[menuItems]="menuItems"
+						[page]="page"
+						[mainHeaderData]="mainHeaderData"
+					></mflooring-main-mobile>
+				</ng-container>
+			</div>
+		</mflooring-layout-wrapper>
+	</div>
+	<mflooring-message-bar></mflooring-message-bar>
+</div>

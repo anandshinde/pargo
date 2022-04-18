@@ -1,0 +1,57 @@
+<div class="mflooring-login-forgot">
+	<div class="form-field">
+		<button class="close" (click)="onNoClick()">
+			<span class="icon-">close</span>
+		</button>
+	</div>
+
+	<div>
+		<span class="login-forgot__title">Forgot Password</span>
+		<span class="login-forgot__span"
+			>Enter the email address you registered with and we'll send you an email
+			to reset your password.</span
+		>
+	</div>
+	<form [formGroup]="form">
+		<div class="form-field login-forgot__input">
+			<mflooring-input-text
+				[control]="uid"
+				[presentation]="inputTextPresentation"
+				[content]="{
+					placeholder: 'Type here',
+					label: dataMat?.label['global.label.email']
+				}"
+			></mflooring-input-text>
+			<div
+				class="alert alert-danger"
+				*ngIf="
+					form.controls['uid'].invalid &&
+					(form.controls['uid'].touched || form.controls['uid'].dirty)
+				"
+			>
+				<div class="text-danger" *ngIf="form.controls['uid'].errors.required">
+					<span class="login__error">{{
+						dataMat?.label['global.error.mandatory']
+					}}</span>
+				</div>
+
+				<div class="text-danger" *ngIf="form.controls['uid'].errors.pattern">
+					<span class="login__error">{{
+						dataMat?.label['global.label.email.error.invalid']
+					}}</span>
+				</div>
+			</div>
+		</div>
+
+		<div
+			class="login__action__forgot"
+			[ngClass]="{ 'is-disabled': !form.valid }"
+		>
+			<mflooring-link-compound
+				(handleClickAction)="form.valid && onSubmit(form.value)"
+				[content]="submitButtonContentProps"
+				[presentation]="submitButtonPresentationProps"
+			></mflooring-link-compound>
+		</div>
+	</form>
+</div>

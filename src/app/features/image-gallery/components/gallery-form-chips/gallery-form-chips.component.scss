@@ -1,0 +1,54 @@
+@import 'src/styles/tools/tools.typography';
+
+@import 'src/styles/settings/settings.colors';
+
+$default-tag-input-min-height: 40px;
+$default-delete-icon-width: 16px;
+$default-delete-icon-margin-left: 5px;
+
+:host ::ng-deep tag-input {
+	height: auto;
+	display: flex;
+	align-items: center;
+	min-height: $default-tag-input-min-height;
+
+	& .ng2-tag-input {
+		border-bottom: unset !important;
+		padding: 0 !important;
+	}
+
+	& .tag__text {
+		@include font-gotham-light($size: 14px);
+	}
+
+	& delete-icon {
+		display: flex;
+		align-items: center;
+		margin-left: $default-delete-icon-margin-left;
+		width: $default-delete-icon-width;
+		height: unset;
+
+		&:hover {
+			transform: none;
+		}
+	}
+
+	& delete-icon span {
+		line-height: unset;
+		display: flex;
+	}
+
+	& delete-icon svg {
+		height: auto !important;
+	}
+
+	& tag {
+		display: flex;
+		align-items: center;
+		background: $mohawk-black !important;
+	}
+
+	& tag-input-form {
+		display: none;
+	}
+}

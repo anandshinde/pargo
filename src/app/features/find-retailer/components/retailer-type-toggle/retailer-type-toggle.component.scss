@@ -1,0 +1,43 @@
+@import 'src/styles/elements/elements.lists';
+@import 'src/styles/elements/elements.links';
+@import 'src/styles/tools/tools.typography';
+@import 'src/styles/tools/tools.mediaquery';
+
+.type-toggle {
+	background-color: $color-white;
+	border-radius: rem(5);
+
+	&__mobile {
+		display: block;
+		@include mq-breakpoint-md() {
+			// display: none;
+		}
+
+		::ng-deep .mat-form-field-underline {
+			display: none;
+		}
+	}
+
+	::ng-deep .mat-form-field {
+		border: 1px solid $color-grey;
+		padding: 6.2px 10px;
+		border-radius: rem(5);
+		position: relative;
+		width: 100%;
+		color: $mohawk-black;
+		@include font-nunito-semibold($size: [14, 11], $lineheight: 1.3);
+		&-wrapper {
+			padding: 0;
+		}
+
+		&-infix {
+			border: 0;
+			padding: 0;
+		}
+
+		.mat-select-value{
+			color: $mohawk-black;
+			@include font-nunito-semibold($size: [14, 11], $lineheight: 1.3);
+		}
+	}
+}

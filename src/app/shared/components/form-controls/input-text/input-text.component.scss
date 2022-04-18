@@ -1,0 +1,100 @@
+@import './src/styles/settings/settings.colors';
+
+@import './src/styles/tools/tools.typography';
+
+@import './src/styles/tools/tools.animations';
+
+// Default light theme variables
+$input-text-border-color: $color-brown-medium;
+$input-text-border-color-selected: $color-teal;
+$input-text-color: $color-brown-medium;
+$input-text-background-color: $color-white;
+
+.input-text {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+
+	&__control {
+		width: 100%;
+		background-color: $input-text-background-color;
+		border: 1px solid $input-text-border-color;
+		padding: 10px;
+		outline: none;
+		border-radius: 5px;
+
+		@include font-nunito-semibold($size: [15, 13], $lineheight: 20px);
+
+		&:focus {
+			border: 1px solid $input-text-border-color-selected;
+		}
+
+		&.ng-touched.ng-invalid {
+			border-color: $color-red;
+			color: $color-red;
+		}
+
+		&.ng-touched.ng-invalid::placeholder {
+			color: $color-red;
+		}
+	}
+
+	&__icon {
+		background-color: transparent;
+		position: absolute;
+		right: 0;
+		left: auto;
+		border: 0;
+		outline: none;
+		padding: 11px 10px 0 5px;
+		font-size: 1.2rem;
+		cursor: pointer;
+	}
+
+	.input-text__control {
+		padding: 10px 40px 10px 10px;
+	}
+
+	&.icon-first {
+
+		button {
+			left: 5px;
+			right: auto;
+		}
+
+		.input-text__control {
+			padding: 10px 10px 10px 40px;
+		}
+	}
+
+	&__label {
+		margin-bottom: 5px;
+
+		@include font-nunito-light(inherit);
+	}
+
+	&--tabbed-content {
+
+		& > .input-text__control {
+			border-radius: 0;
+		}
+	}
+
+	// This is for a special case only on the FAR popup modal 
+	// in utility-actionsdialog.component
+	&__border {
+		display: none;
+		position: absolute;
+		top: 0;
+		left: 34px;
+		width: 1px;
+		height: 100%;
+		background: $color-teal;
+		z-index: 1;
+	}
+}
+
+.server-error {
+	border-color: $color-red;
+	color: $color-red;
+}

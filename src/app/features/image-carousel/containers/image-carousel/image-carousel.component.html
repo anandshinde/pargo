@@ -1,0 +1,92 @@
+<ng-container *ngIf="documentIsConfigured; else please_configure">
+	<ng-container [brManageContentButton]="document"></ng-container>
+
+	<div class="main-image-carousel">
+		<ng-container
+			*ngIf="{
+				template: carouselTemplate$ | async,
+				content: carouselImagesContent$ | async
+			} as data"
+		>
+			<section class="layout-container">
+				<div class="layout-container__grid">
+					<div class="layout-container__grid__area">
+						<section class="focused-slide">
+							<div class="focused-slide__wrapper">
+								<div class="carousel-header">
+									<div class="carousel-text">
+										<span class="carousel-text-inner">{{
+											data.template.heading
+										}}</span>
+									</div>
+									<div class="carousel-button-view-all">
+										<mflooring-link-compound
+											class="float-right btn-img-carousel"
+											[content]="{
+												text: data.template.button,
+												target: '',
+												url: data.template['button-url']
+											}"
+											[presentation]="{
+												buttonType: 'primary',
+												buttonWidth: 'full',
+												theme: 'light'
+											}"
+										>
+										</mflooring-link-compound>
+										<!-- <button class="float-right btn-img-carousel"><span class="btn-text-view-all">View All</span></button> -->
+									</div>
+								</div>
+								<div class="image-carousel-main">
+									<swiper
+										#focusedSlideCarousel
+										[config]="baseConfig"
+										(swiper)="onSwiper($event)"
+										(breakpoint)="update($event)"
+									>
+										<ng-template
+											swiperSlide
+											*ngFor="let slide of data.content; index as i; count as c"
+										>
+											<section class="focused-slide__slide">
+												<div class="focused-slide__image">
+													<mflooring-image-compound
+														[content]="{
+															image: slide.image?.content.desktop,
+															imageMobile: slide.image?.content.mobile
+														}"
+														[presentation]="slide.image?.presentation"
+													>
+													</mflooring-image-compound>
+													<div class="bottom-left">{{ slide?.name }}</div>
+												</div>
+											</section>
+										</ng-template>
+									</swiper>
+									<div class="focused-slide-navigation">
+										<div class="focused-slide-navigation__wrapper">
+											<div
+												class="
+													slider-focused-slide
+													focused-slide-pagination
+													swiper-pagination
+												"
+											></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</section>
+		</ng-container>
+	</div>
+</ng-container>
+
+<ng-template #please_configure>
+	<mflooring-please-configure
+		[componentName]="name"
+		*ngIf="isPreview"
+	></mflooring-please-configure>
+</ng-template>

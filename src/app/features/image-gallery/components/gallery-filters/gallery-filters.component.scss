@@ -1,0 +1,17 @@
+@import 'src/styles/tools/tools.typography';
+
+@import 'src/styles/settings/settings.colors';
+
+@import 'src/styles/tools/tools.mediaquery';
+
+.gallery-filters__title {
+	display: none;
+	color: $color-black;
+	padding-bottom: 10px;
+	padding-top: 20px;
+	@include font-nunito-semibold($size: 26px, $lineheight: 35px);
+
+	@include mq-breakpoint-md() {
+		display: block;
+	}
+}

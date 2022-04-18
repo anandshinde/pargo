@@ -1,0 +1,125 @@
+@import 'src/styles/settings/settings.colors';
+@import 'src/styles/tools/tools.fonts-units';
+@import 'src/styles/tools/tools.typography';
+
+@mixin button-size($size: 'small') {
+	@if ($size == 'xsmall') {
+		width: 20px;
+		height: 20px;
+		font-size: rem(10);
+	} @else if($size == 'small') {
+		width: 30px;
+		height: 30px;
+		font-size: rem(14);
+	} @else if($size == 'medium') {
+		width: 40px;
+		height: 40px;
+		font-size: rem(14);
+	} @else {
+		min-width: 45px;
+		min-height: 45px;
+		font-size: rem(18);
+	}
+}
+
+.no-background {
+	background: none;
+	border: none;
+}
+
+:host::ng-deep {
+	.type-icon-white {
+		color: white;
+	}
+}
+
+button {
+	border-radius: 50%;
+	border-width: 1px;
+	border-style: solid;
+	position: relative;
+	cursor: pointer;
+
+	.icon- {
+		color: inherit;
+	}
+
+	&.size-xsmall {
+		@include button-size(xsmall);
+	}
+
+	&.size-small {
+		@include button-size(small);
+	}
+
+	&.size-medium {
+		@include button-size(medium);
+	}
+
+	&.size-large {
+		@include button-size(large);
+	}
+
+	&.type-red-bordered {
+		background-color: transparent;
+		border-color: $color-red-dark;
+		color: $color-red-dark;
+	}
+
+	&.type-red-solid {
+		background-color: $color-red-dark;
+		border-color: $color-red-dark;
+		color: $color-white;
+	}
+
+	&.type-grey-bordered {
+		background-color: transparent;
+		border-color: $color-grey;
+		color: $color-grey;
+	}
+
+	&.type-grey-solid {
+		background-color: $color-grey;
+		border-color: $color-grey;
+		color: $color-white;
+	}
+
+	&.type-white-bordered {
+		background-color: transparent;
+		border-color: $color-white;
+		color: $color-white;
+	}
+
+	&.type-white-solid {
+		background-color: $color-white;
+		border-color: $color-white;
+		color: $color-grey;
+	}
+
+	&.type-mixed-bordered {
+		background-color: transparent;
+		border-color: $color-white;
+		color: $color-red-dark;
+	}
+
+	&.type-mixed-solid {
+		background-color: $color-white;
+		border-color: $color-white;
+		color: $color-red-dark;
+	}
+
+	&.direction {
+		&-left {
+			transform: scale(-1);
+		}
+	}
+
+	.icon- {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		font-size: inherit;
+		color: inherit;
+	}
+}

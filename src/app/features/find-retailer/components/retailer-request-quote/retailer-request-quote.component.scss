@@ -1,0 +1,473 @@
+@import 'src/styles/settings/settings.containers';
+@import 'src/styles/settings/settings.colors';
+@import 'src/styles/tools/tools.typography';
+@import 'src/styles/tools/tools.mediaquery';
+@import 'src/styles/elements/elements.lists';
+@import 'src/styles/elements/elements.links';
+
+$form-gap-desktop: 50px;
+$form-gap-mobile: 0px;
+$button-background-color: #{$color-black};
+:host {
+	display: block;
+	position: relative;
+}
+
+.retailer-request-modal {
+	position: relative;
+	padding: 10px 0;
+
+	@include mq-breakpoint-md() {
+		padding: 20px 40px;
+	}
+
+	&__form {
+		// min-height: 100vh;
+		overflow-y: scroll;
+		overflow-x: hidden;
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+
+		@include mq-breakpoint-md() {
+			height: initial;
+			overflow: initial;
+		}
+
+		&::-webkit-scrollbar {
+			display: none;
+		}
+	}
+
+	&__name {
+		color: $mohawk-black;
+		//text-decoration: underline;
+		text-align: center;
+		@include font-nunito-regular($size: 16px);
+	}
+
+	&__title {
+		text-align: center;
+		color: $color-brown-medium;
+		@include font-nunito-semibold($size: 25px, $lineheight: 5px);
+	}
+
+	.requestlabel__title {
+		margin-top: 20px;
+		margin-bottom: 15px;
+		color: $mohawk-black;
+		@include font-gotham-medium(14px);
+
+		&.contact_info,
+		&.interested__in {
+			@include font-gotham-medium(16px);
+		}
+	}
+
+	.formdesign {
+		display: grid;
+		grid-column: span 2;
+		grid-template-columns: minmax(0, 1fr);
+		gap: $form-gap-mobile;
+
+		@include mq-breakpoint-md() {
+			grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+			gap: $form-gap-desktop;
+		}
+
+		.form-field {
+			margin-top: 0px;
+			margin-bottom: 15px;
+			position: relative;
+			@include mq-breakpoint-md() {
+				margin-bottom: 20px;
+			}
+			.input-text__control {
+				border-radius: 0;
+			}
+		}
+
+		.required__label {
+			position: absolute;
+			right: 0;
+			color: $color-brown-medium;
+			// @include font-gotham-light(10px);
+			@include font-nunito-light($size: 10);
+		}
+	}
+
+	.custom-popupover {
+		border: 0.5px solid #767676;
+		border-radius: 5px;
+		position: relative;
+
+		.custom-label {
+			display: flex;
+			justify-content: space-between;
+			padding: 10px 20px 10px 16px;
+			color: $mohawk-black;
+			@include font-gotham-medium(12px);
+			@include mq-breakpoint-xs() {
+				@include font-gotham-medium(14px);
+			}
+
+			span.icon- {
+				//transform: rotate(90deg);
+				transition: 0.1s;
+				padding-top: 6px;
+				color: #767676;
+				font-size: 10px;
+			}
+		}
+
+		.custom-radio-button {
+			display: block;
+			margin-right: 0;
+			margin-left: 15px;
+			margin-bottom: 5px;
+		}
+
+		.show-dropdown {
+			position: absolute;
+			background: #fff;
+			width: 100%;
+			top: 36px;
+			@include mq-breakpoint-md() {
+				top: 39px;
+			}
+			border-bottom: 0.5px solid #767676;
+			border-left: 0.5px solid #767676;
+			border-right: 0.5px solid #767676;
+			border-top: 0;
+			box-sizing: content-box;
+			left: -1px;
+			padding-bottom: 10px;
+			padding-top: 10px;
+			z-index: 1;
+		}
+		&.dropdownopen {
+			span.icon- {
+				transform: rotate(180deg);
+				transition: 0.1s;
+			}
+		}
+	}
+
+	.custom-popupover.dropdownopen {
+		.customlabel {
+			font-weight: 600;
+			border-bottom: 0;
+
+			span.icon- {
+				transform: rotate(270deg);
+			}
+		}
+	}
+
+	.custom-radio-button {
+		margin-right: 30px;
+
+		::ng-deep .mat-radio-label-content {
+			color: $mohawk-black;
+			@include font-nunito-semibold($size: 13px);
+			padding-left: 13px;
+		}
+	}
+
+	.request__note {
+		margin-top: 10px;
+		display: none;
+		color: $color-brown-medium;
+		// @include font-gotham-light(12px);
+		@include font-nunito-italic($size: 10);
+		@include mq-breakpoint-md() {
+			display: block;
+		}
+
+		p {
+			margin-bottom: 15px;
+		}
+	}
+}
+
+.closebtn {
+	position: absolute;
+	right: -10px;
+	top: 0;
+	cursor: pointer;
+	@include mq-breakpoint-md() {
+		right: 0;
+	}
+}
+
+.readmore {
+	@include font-nunito-light($size: 12);
+	a {
+		text-decoration: underline;
+		color: $color-brown-medium;
+		// @include font-gotham-light(12px);
+		@include font-nunito-light($size: 12);
+	}
+}
+
+.field-preferred {
+	@include mq-breakpoint-md() {
+		position: relative;
+		top: 10px;
+		margin-bottom: 0 !important;
+		margin-top: 0 !important;
+	}
+
+	.requestlabel__title {
+		@include mq-breakpoint-md() {
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+	}
+
+	mat-radio-group {
+		@include mq-breakpoint-md() {
+			position: relative;
+			top: 20px;
+		}
+	}
+}
+
+.retailer-request__action {
+	text-align: center;
+	margin-top: 30px;
+	margin-bottom: 10px;
+	.is-disabled {
+		::ng-deep button {
+			opacity: 0.4 !important;
+			cursor: not-allowed !important;
+		}
+	}
+	&.back-to-home {
+		button {
+			width: 60%;
+			@include mq-breakpoint-md() {
+				width: 145px;
+			}
+		}
+	}
+}
+
+.message_section {
+	text-align: center;
+	@include mq-breakpoint-md() {
+	}
+}
+
+.request-form__title__success {
+	// color: $color-cyan;
+	color: $mohawk-black;
+	padding: 15px 0 10px;
+	// @include font-gotham-light($size: 20px);
+	@include font-nunito-light($size: 20);
+	@include mq-breakpoint-md() {
+		padding: 40px 0 25px;
+		// @include font-gotham-light($size: 30px);
+		@include font-nunito-light($size: 30);
+	}
+}
+
+.request-form__retailer__response {
+	color: $mohawk-black;
+	@include font-nunito-light($size: 18px);
+	font-weight: 600;
+	@include mq-breakpoint-md() {
+	}
+}
+
+.request-form__message {
+	margin-top: 10px;
+	padding: 10px 20px 0;
+	color: $color-brown-medium;
+	// @include font-gotham-light($size: 14px);
+	@include font-nunito-light($size: 14);
+	@include mq-breakpoint-md() {
+		padding: 22px 210px 0;
+	}
+}
+
+.request-form__goto-home {
+	display: inline-block;
+	margin: 60px auto;
+	text-decoration: underline;
+	@include mq-breakpoint-md() {
+		display: inline-block;
+	}
+
+	a {
+		color: $color-brown-medium;
+		// @include font-gotham-light($size: 16px);
+		@include font-nunito-light($size: 16);
+	}
+}
+
+.highlight__text {
+	color: $mohawk-black;
+	font-weight: 600;
+}
+
+.form-field-close-button {
+	position: relative;
+	margin-left: auto;
+	float: right;
+}
+
+.retailer-request__error {
+	color: $color-red;
+	position: absolute;
+
+	// @include font-gotham-light(12);
+	@include font-nunito-light($size: 13);
+	@include mq-breakpoint-md() {
+		// @include font-gotham-light(13);
+		@include font-nunito-light($size: 13);
+	}
+}
+
+.text-danger {
+	position: relative;
+	top: 0;
+}
+
+:host::ng-deep {
+	.form-field {
+		.input-text__label {
+			color: $mohawk-black;
+			margin-bottom: 0;
+			@include font-nunito-regular($size: 12px);
+		}
+
+		.input-text__control {
+			//border-radius: 0;
+			border: 0.5px solid $color-grey;
+			&::placeholder {
+				color: $color-grey;
+				@include font-nunito-light($size: 14px);
+			}
+		}
+	}
+
+	.mat-radio-button.mat-accent .mat-radio-inner-circle {
+		background-color: $color-teal;
+	}
+
+	.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+		border-color: rgba(0, 0, 0, 0.54);
+		border-width: 1px;
+	}
+	.custom-radio-button.mat-radio-button .mat-radio-outer-circle {
+		border-width: 1px;
+	}
+}
+
+.custom__checkbox {
+	display: inline-block;
+	z-index: 1;
+	cursor: pointer;
+	-webkit-user-select: none;
+	user-select: none;
+	position: relative;
+	margin-bottom: 8px;
+	width: 100%;
+	@include mq-breakpoint-md() {
+		width: 50%;
+	}
+	label {
+		cursor: pointer;
+		padding-left: 30px;
+		color: $color-brown-medium;
+		// @include font-gotham-light($size: 12px);
+		@include font-nunito-light($size: 12);
+	}
+
+	input {
+		position: absolute;
+		opacity: 0;
+		cursor: pointer;
+		height: 0;
+		width: 0;
+	}
+
+	input:checked ~ .checkmark {
+		background-color: $color-white;
+	}
+
+	.checkmark {
+		position: absolute;
+		top: 2px;
+		left: 0;
+		height: 16px;
+		width: 16px;
+		border-radius: 0;
+		background-color: $color-white;
+		border: 0.5px solid #707070;
+	}
+
+	:hover input ~ .checkmark {
+		background-color: $color-white;
+	}
+
+	.checkmark:after {
+		content: '';
+		position: absolute;
+		display: none;
+	}
+
+	input:checked ~ .checkmark:after {
+		display: block;
+	}
+
+	.checkmark:after {
+		left: 5px;
+		top: -4px;
+		width: 8px;
+		height: 14px;
+		border: solid $color-teal;
+		border-width: 0 4px 4px 0;
+		transform: rotate(45deg);
+		-webkit-transform: rotate(45deg);
+		-ms-transform: rotate(45deg);
+	}
+}
+
+.retailer-request__mailing__label {
+	color: $color-brown-medium;
+	// @include font-gotham-light(12);
+	@include font-nunito-light($size: 12);
+}
+
+::ng-deep {
+	mat-dialog-container {
+		&.mat-dialog-container {
+			// max-height: calc(100% - 50px) !important;
+			// overflow: auto;
+		}
+		@include mq-breakpoint-md() {
+			&.mat-dialog-container {
+				overflow: auto;
+			}
+		}
+	}
+	.cdk-overlay-pane {
+	}
+	@include mq-breakpoint-md() {
+		.cdk-overlay-pane {
+			overflow: auto;
+		}
+	}
+}
+.formdesign.formdesign__bottom {
+	padding-top: 15px;
+	@include mq-breakpoint-md() {
+		padding-top: 0px;
+	}
+	::ng-deep {
+		.mat-checkbox-inner-container {
+			margin: 4px 10px 0 0;
+		}
+	}
+}

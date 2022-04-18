@@ -1,0 +1,23 @@
+<div class="input-text" [ngClass]="[typeClass, iconPositionClass]">
+	<label class="input-text__label" [attr.for]="name" *ngIf="!!label">
+		{{ label }}
+	</label>
+	<input
+		class="input-text__control"
+		[attr.name]="name"
+		[attr.type]="typeFormControl"
+		[placeholder]="placeholder"
+		[formControl]="control"
+		[attr.maxlength]="maxlength"
+		[ngClass]="{'server-error': serverError}"
+		#input
+	/>
+	<span class="input-text__border"></span>
+	<button
+		type="submit"
+		class="input-text__icon"
+		*ngIf="hasIcon"
+	>
+		<span class="icon-">{{ icon }}</span>
+	</button>
+</div>

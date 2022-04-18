@@ -1,0 +1,50 @@
+<ul class="footer-mobile">
+	<li class="footer-mobile__item footer-mobile__logo-box">
+		<mflooring-logo-footer
+			class="footer-mobile__logo"
+			[content]="logoContent"
+			[presentation]="logoPresentation"
+		></mflooring-logo-footer>
+	</li>
+
+	<li class="footer-mobile__item footer-mobile__menu submenu-mobile">
+		<mflooring-expansion-menu-mobile
+			[items]="menu?.siteMenuItems"
+			[page]="page"
+		>
+		</mflooring-expansion-menu-mobile>
+	</li>
+
+	<li class="footer-mobile__item">
+		<mflooring-footer-input-text
+			label="FIND A RETAILER"
+			placeholder="Enter Zip Code"
+			[footerData]="footerData"
+			[id]="'zip-code-mobile'"
+		></mflooring-footer-input-text>
+	</li>
+	<li class="footer-mobile__item">
+		<ul class="footer-mobile__social__menu" role="menu">
+			<li role="menuitem" *ngFor="let icon of socialIcons; trackBy: trackBy">
+				<a
+					class="footer__social-links__item theme-{{ theme }}"
+					rel="noopener, noreferrer"
+					captureClicks
+					data-link-type="social"
+					[href]="icon?.url"
+					[attr.data-link-name]="icon.name"
+				>
+					<mflooring-icon-button
+						[presentation]="{
+							size: 'small',
+							type: '',
+							iconName: icon?.name,
+							iconUrl: icon?.imgUrl
+						}"
+						class="main-header-search--icon"
+					></mflooring-icon-button>
+				</a>
+			</li>
+		</ul>
+	</li>
+</ul>

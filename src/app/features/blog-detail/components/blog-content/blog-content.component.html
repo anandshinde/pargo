@@ -1,0 +1,49 @@
+<ng-container
+	*ngIf="{
+		content: blogContentContent$ | async,
+		presentation: blogContentPresentation$ | async
+	} as data"
+>
+	<section
+		class="blog-detail-content"
+		[ngClass]="{ grey: data.content?.greyBackground }"
+	>
+		<div
+			class="blog-detail-content__container"
+			*ngFor="let item of data.content?.content"
+			[ngSwitch]="item.type"
+		>
+			<div class="blog-detail-content__inset" *ngSwitchCase="'hippostd:html'">
+				<mflooring-rich-text-compound
+					[content]="item.value?.content"
+					[presentation]="item?.value?.presentation"
+				>
+				</mflooring-rich-text-compound>
+			</div>
+
+			<div class="blog-detail-content__maxWidth"  *ngSwitchCase="'brxm:ImageCompound'">
+				<mflooring-image-compound				
+				[content]="item?.value?.content"
+				[presentation]="item?.value?.presentation"
+				></mflooring-image-compound>
+			</div>
+			<mflooring-video-player
+				*ngSwitchCase="'brxm:VideoCompound'"
+				[content]="item?.value?.content"
+				[presentation]="item?.value?.presentation"
+			></mflooring-video-player>
+			<mflooring-link-compound
+				*ngSwitchCase="'brxm:LinkCompound'"
+				[content]="item?.value?.content"
+				[presentation]="item?.value?.presentation"
+			></mflooring-link-compound>
+			<div class="blog-detail-content__maxWidth" *ngSwitchCase="'brxm:ProductImageCompound'">
+				<mflooring-product-image-compound				
+				[content]="item?.value?.content"
+				[presentation]="item?.value?.presentation"
+				></mflooring-product-image-compound>
+			</div>
+			
+		</div>
+	</section>
+</ng-container>

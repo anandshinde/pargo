@@ -1,0 +1,106 @@
+@import 'src/styles/settings/settings.colors';
+
+@import 'src/styles/elements/elements.lists';
+
+@import 'src/styles/elements/elements.links';
+
+@import 'src/styles/tools/tools.typography';
+
+@import 'src/styles/tools/tools.mediaquery';
+
+$default-container-padding-y: 10px;
+
+:host {
+	display: flex;
+	padding: $default-container-padding-y 0;
+	justify-content: space-between;
+
+	@include mq-breakpoint-md() {
+		justify-content: space-between;
+	}
+}
+
+:host a {
+	@include reset-link();
+}
+
+:host .hidden {
+	display: none !important;
+}
+
+:host .gallery-pagination__list {
+	display: flex;
+	color: $color-grey-light;
+
+	@include reset-list();
+	@include font-nunito-light($size: 18px);
+	.gallery-pagination__item {
+		@include font-nunito-light($size: 18px);
+		a {
+			span {
+				color: $color-grey;
+			}
+		}
+	}
+
+	@include mq-breakpoint-md() {
+		display: flex;
+	}
+}
+
+:host .gallery-pagination__item {
+	& > * {
+		padding: 5px 15px;
+	}
+
+	&::before {
+		content: '|';
+	}
+
+	&:first-child::before {
+		content: ' ';
+	}
+}
+
+:host .gallery-pagination__button {
+	display: none;
+	flex-direction: column;
+	row-gap: 10px;
+	align-items: center;
+
+	@include mq-breakpoint-md() {
+		//display: none;
+	}
+
+	::ng-deep .prev {
+		[class^='icon-'] {
+			transform: rotate(180deg);
+			order: 0;
+			margin-left: 0;
+		}
+
+		.label {
+			order: 1;
+			margin-left: 5px;
+		}
+	}
+}
+
+:host .gallery-pagination__counter {
+	display: block;
+
+	@include mq-breakpoint-md() {
+		display: block;
+	}
+}
+
+:host .gallery-pagination__item--current-page {
+	color: $mohawk-black;
+}
+::ng-deep {
+	pagination-template {
+		.gallery-pagination__list {
+			margin-top: 5px;
+		}
+	}
+}

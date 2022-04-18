@@ -1,0 +1,69 @@
+<ng-container *ngIf="singleBannerData$ | async as data">
+	<span class="single-banner-hyperlink">
+		<a *ngIf="data?.banner?.bannerLinks[1]?.content?.text !== ''" captureClicks [href]="data?.banner?.bannerLinks[1]?.content?.url">
+			<ng-container *ngTemplateOutlet="singleBannerComponent"></ng-container>
+		</a>
+		<a *ngIf="data?.banner?.bannerLinks[1]?.content?.text === ''">
+			<ng-container *ngTemplateOutlet="singleBannerComponent"></ng-container>
+		</a>
+	</span> 
+
+	<ng-template #singleBannerComponent>
+		<mflooring-layout-wrapper [content]="{
+				backgroundImage: {
+					image: data?.banner?.imageBg,
+					imageMobile: data?.banner?.imageBgMobile
+				}
+			}" [presentation]="{
+				inset: false,
+				hasBackground: true
+			}" id="layoutWrapper">
+			<artical inViewNotifier (isVisible)="isInViewport($event)">
+				<div id="mainBannerContainer" class="main_banner_container {{ presentation?.alignment }}" [ngClass]="
+						presentation.verticalAlignment !== undefined
+							? 'vertical-' + presentation?.verticalAlignment
+							: ''
+					">
+					<section>
+						<ng-container>
+							<div class="rect__middle__main" id="rectangle">
+								<div class="rect__middle__main__row {{ presentation?.size }}">
+									<div class="text">
+										<ng-container>
+											<span [innerHTML]="data?.banner?.bannerHeadline" id="bannerHeadline"></span>
+										</ng-container>
+										<ng-container *ngTemplateOutlet="richTextTemplate"></ng-container>
+										<mflooring-link-compound id="buttonLinkCompound"
+											*ngIf="data?.banner?.bannerLinks[1]?.content.text !== ''"
+											[content]="data?.banner?.bannerLinks[1]?.content" [presentation]="
+												data?.banner?.bannerLinks[1]?.presentation
+											"></mflooring-link-compound>
+									</div>
+
+									<ng-conatiner class="single-banner__color-shown" *ngIf="presentation?.includeColor">
+										<mflooring-link-compound id="linkCompound" [content]="{
+												text: presentation?.color,
+												target: '',
+												iconName: 'target',
+												iconType: 'icon-white'
+											}" [presentation]="
+												data?.banner?.bannerLinks[0]?.presentation
+											"></mflooring-link-compound>
+									</ng-conatiner>
+								</div>
+							</div>
+						</ng-container>
+					</section>
+					<ng-template #richTextTemplate>
+						<mflooring-rich-text-compound id="richText" [content]="{
+								richText: data?.banner?.bannerContent
+							}" [presentation]="{
+								theme: 'light',
+								customClass: 'simple-banner-component'
+							}"></mflooring-rich-text-compound>
+					</ng-template>
+				</div>
+			</artical>
+		</mflooring-layout-wrapper>
+	</ng-template>
+</ng-container>

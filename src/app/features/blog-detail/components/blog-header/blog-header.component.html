@@ -1,0 +1,34 @@
+<ng-container
+	*ngIf="{
+		content: blogHeaderContent$ | async,
+		presentation: blogHeaderPresentation$ | async
+	} as data"
+>
+	<section
+		class="blog-detail-header"
+		[ngClass]="{ grey: data.content?.greyHeader }"
+	>
+		<div class="blog-detail-header__container">
+			<header class="blog-detail-header__header">
+				<h1 class="blog-detail-header__title">{{ data.content?.title }}</h1>
+				<div class="blog-detail-header__date-section">
+					<span>{{ data.content?.date }}</span>
+				</div>
+			</header>
+			<div class="blog-detail-header__content">
+				<mflooring-rich-text-compound
+				[content]="data.content?.description.value.content"
+				[presentation]="data.content?.presentation"
+				>
+				</mflooring-rich-text-compound>
+			</div>
+			<!-- <div class="blog-detail-header__image">
+					<mflooring-image-compound
+						[content]="{
+							image: data.content?.image
+						}"
+					></mflooring-image-compound>
+			</div>  -->
+		</div>
+	</section>
+</ng-container>

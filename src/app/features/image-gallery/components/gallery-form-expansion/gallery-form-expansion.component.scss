@@ -1,0 +1,110 @@
+@import './src/styles/settings/settings.colors';
+
+@import './src/styles/tools/tools.typography';
+
+@import './src/styles/settings/settings.animations';
+
+$default-padding-x: 25px;
+$default-row-gap: 7px;
+
+* {
+	box-sizing: inherit;
+}
+
+:host {
+	//  **** ANGULAR MATERIAL: EXPANSION PANEL **** //
+
+	//.mat-accordion
+	.mat-accordion {
+		display: flex;
+	}
+
+	.mat-accordion--column {
+		flex-direction: column;
+		row-gap: 5px;
+	}
+
+	//.mat-expansion-panel
+	.mat-expansion-panel {
+		border-radius: 5px !important;
+		box-shadow: none;
+		border: 1px solid $color-brown-medium;
+		padding: 0 20px;
+	}
+
+	//.mat-expansion-panel-header
+
+	.mat-expansion-panel-header {
+		// padding: 0 $default-padding-x;
+		padding: 0;
+	}
+
+	.mat-expansion-panel-header:not(.mat-expanded),
+	.mat-expansion-panel-header:not(.mat-expanded):hover {
+		background-color: $color-white !important;
+	}
+
+	.mat-expansion-panel-header:not(.mat-expanded)
+		.mat-expansion-panel-header-title {
+		color: $color-brown-medium;
+
+		&:after,
+		&:before {
+			background-color: $color-white;
+		}
+
+		&:after {
+			transform: translateY(-50%) rotate(90deg);
+		}
+	}
+
+	//.mat-expansion-panel-header-title
+
+	.mat-expansion-panel-header-title {
+		color: $color-brown-medium;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-right: 0;
+	}
+
+	.gallery-expansion__title__text {
+		@include font-nunito-regular($size: [16, 14]);
+		line-height: 22px;
+		color: $color-black;
+		@include mq-breakpoint-md() {
+			line-height: 19px;
+		}
+	}
+
+	.gallery-expansion__title__icon {
+		transition: transform $transition-duration-fast ease-in-out;
+		font-size: 25px;
+		line-height: 1.4;
+	}
+
+	.mat-expanded .gallery-expansion__title__icon {
+		transform: rotate(180deg);
+	}
+
+	//.mat-expansion-panel-body
+
+	:host ::ng-deep .mat-expansion-panel-body {
+		padding: 0 $default-padding-x !important;
+	}
+
+	// **** CUSTOM CLASSES **** //
+
+	.expansion-panel__item {
+		color: inherit;
+		text-decoration: none;
+		width: 100%;
+		display: block;
+	}
+
+	.expansion-panel__menu {
+		display: flex;
+		flex-direction: column;
+		row-gap: $default-row-gap;
+	}
+}

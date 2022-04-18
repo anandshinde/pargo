@@ -1,0 +1,10 @@
+<mflooring-select-filter
+	[content]="filter"
+	*ngFor="let filter of content; trackBy"
+>
+	<mflooring-radio-button
+		[content]="filter.options"
+		[control]="form.get(filter?.formControlName)"
+	>
+	</mflooring-radio-button>
+</mflooring-select-filter>

@@ -1,0 +1,36 @@
+@import 'src/styles/settings/settings.colors';
+
+@import 'src/styles/tools/tools.typography';
+
+@import 'src/styles/tools/tools.mediaquery';
+
+@import 'src/styles/elements/elements.lists';
+
+$default-footer-margin-top: 30px;
+$footer-background: $color-black;
+
+:host {
+	display: block;
+	position: relative;
+	background: $footer-background;
+}
+::ng-deep mflooring-global-footer .layout-container {
+	&__grid {
+		&.inset {
+			background: $footer-background;
+		}
+	}
+}
+mflooring-footer-copyright {
+	border-top: 0px solid $color-dark-grey;
+
+	@include mq-breakpoint-md() {
+		border-top: 0.5px solid $color-dark-grey;
+	}
+}
+
+.footer-container {
+	padding: 0;
+	z-index: 1;
+	min-height: 300px;
+}

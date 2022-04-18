@@ -1,0 +1,34 @@
+<ul class="menu-utility menu-utility-mobile" role="menu">
+	<li
+		role="menuitem"
+		class="menu-utility__item"
+		[class.menu__item--opened]="!!openedMenu"
+	>
+		<mflooring-menu-item
+			(click)="onOpenMenu(10)"
+			class="item__parent"
+			[class.item__parent--opened]="openedMenu"
+		>
+			MOHAWK
+		</mflooring-menu-item>
+
+		<ul class="mobilemenu" role="menu" [class.mobilemenu--opened]="openedMenu">
+			<li
+				class="mobilemenu__item"
+				role="menuitem"
+				[class.mobilemenu__item--parent]="item.childMenuItems.length"
+				*ngFor="let item of menuFlatted; index as i"
+			>
+				<mflooring-menu-item
+					class="mobilemenu__link"
+					[page]="page"
+					[site]="item?._links?.site"
+					[linkName]="item?.name"
+					(click)="onCloseMenu()"
+				>
+					{{ item.name }}
+				</mflooring-menu-item>
+			</li>
+		</ul>
+	</li>
+</ul>

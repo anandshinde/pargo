@@ -1,0 +1,58 @@
+@import '~swiper/swiper-bundle.min.css';
+@import 'src/styles/settings/settings.colors';
+@import 'src/styles/tools/tools.mediaquery';
+
+$default-navigator-font-size-mobile: 30px;
+$default-navigator-font-size-desktop:25px;
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+	text-rendering: auto;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+	color: $color-swiper-navigation;
+
+	&.dark {
+		color: unset;
+	}
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+	font-size: $default-navigator-font-size-mobile;
+
+	@include mq-breakpoint-md() {
+		font-size: $default-navigator-font-size-desktop;
+	}
+}
+
+
+@mixin basic-pagination-bullet(
+	$shape: circle,
+	$size: 10px,
+	$spacing: 2px,
+	$active-color: $color-red-dark
+) {
+	width: $size;
+	height: $size;
+	border-radius: 0;
+	display: inline-block;
+	background-color: $color-black;
+	opacity: 0.2;
+	margin: 0 $spacing;
+
+	@if ($shape == circle) {
+		border-radius: 50%;
+	}
+
+	@if ($shape == rectangle) {
+		height: $size / 5;
+	}
+
+	&-active {
+		background-color: $active-color;
+		opacity: 1;
+	}
+}

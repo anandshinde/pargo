@@ -1,0 +1,295 @@
+@import 'src/styles/tools/tools.typography';
+
+@import 'src/styles/tools/tools.colors';
+
+@import 'src/styles/settings/settings.colors';
+
+@import 'src/styles/elements/elements.links';
+
+$rich-text-component-tile-grid-sizes: [16, 18];
+$rich-text-trends-banner-heading-sizes: [30, 40];
+$rich-text-para-sizes: [15, 16];
+$rich-text-list-item-para-sizes: [14, 16];
+$trend-collection-para-sizes: [16, 16];
+$trend-collection-heading-sizes: [22, 28];
+$trend-intro-overlay-para-sizes: [15, 16];
+$trend-intro-overlay-heading-sizes: [24, 28];
+$trend-explore-heading-sizes: [22, 28];
+$heading-sizes: [20, 25];
+$banner-heading-sizes: [24, 28];
+$banner-para-sizes: [16, 16];
+$feature-para-sizes: [16, 14];
+$feature-heading-sizes: [25, 25];
+$explore-trend-name-sizes: [22, 20];
+$tile-heading-size: [24, 28];
+$faq-cta-sizes: [15, 18];
+$icon-tool-text-sizes: [14, 16];
+$faq-para-sizes: [16, 18];
+$trend-explore-more-heading: [22, 28];
+$accordion-title-sizes: [15, 18];
+$feature-reg-text-sizes: [15, 18];
+$tile-para-sizes: [16, 16];
+$floor-finder-header-sizes: [28, 40];
+
+#gettingstarted + strong {
+	@include font-nunito-regular($size: $heading-sizes);
+}
+
+#installation + strong {
+	@include font-nunito-regular($size: $heading-sizes);
+}
+
+#professional + strong {
+	@include font-nunito-regular($size: [22, 25]);
+}
+
+#faq + strong {
+	@include font-nunito-regular($size: $heading-sizes);
+}
+
+#features + span {
+	@include font-nunito-light($size: $feature-reg-text-sizes);
+}
+
+.rich-text {
+	@include themeColors();
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		// text-transform: uppercase;
+		margin-bottom: 10px;
+
+		@include font-nunito-regular(23);
+	}
+
+	h1 {
+		@include font-nunito-regular($size: $rich-text-trends-banner-heading-sizes);
+	}
+
+	p {
+		@include font-nunito-light($size: $rich-text-para-sizes);
+	}
+
+	strong {
+		@include font-nunito-regular($size: $rich-text-para-sizes);
+	}
+
+	a {
+		color: $color-teal;
+
+		&:visited {
+			color: $color-teal;
+		}
+	}
+
+	&.component-floor-finder-header {
+		p {
+			strong {
+				@include font-nunito-regular($size: $floor-finder-header-sizes);
+			}
+		}
+	}
+
+	&.component-accordion-title {
+		strong {
+			@include font-nunito-regular($size: $accordion-title-sizes);
+		}
+	}
+
+	&.component-tile-grid {
+		h1,
+		h2 {
+			text-transform: none;
+			@include font-nunito-regular(28);
+		}
+
+		h3,
+		h4 {
+			text-transform: none;
+			@include font-nunito-regular(24);
+		}
+
+		h5,
+		h6 {
+			text-transform: none;
+			@include font-nunito-regular(21);
+		}
+
+		strong {
+			@include font-nunito-regular($size: $tile-heading-size);
+		}
+	}
+
+	&.component-trend-collection-overlay {
+		p {
+			@include font-nunito-light($size: $trend-collection-para-sizes);
+			margin: 0px;
+		}
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		strong {
+			@include font-nunito-regular($size: $trend-collection-heading-sizes);
+		}
+	}
+
+	&.component-trend-intro-overlay {
+		p {
+			@include font-nunito-light($size: $trend-intro-overlay-para-sizes);
+		}
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		strong {
+			@include font-nunito-regular($size: $trend-intro-overlay-heading-sizes);
+		}
+	}
+
+	&.component-rich-content-rte {
+		h1,
+		h4,
+		h5,
+		h6 {
+			@include font-nunito-regular($size: $trend-explore-heading-sizes);
+		}
+
+		h2,
+		h3 {
+			text-transform: none;
+
+			@include font-nunito-regular($size: $trend-explore-more-heading);
+
+			strong {
+				@include font-nunito-regular($size: $trend-explore-more-heading);
+			}
+		}
+
+		p {
+			@include font-nunito-light($size: $feature-para-sizes);
+		}
+	}
+
+	&.component-trend-name {
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		strong {
+			@include font-nunito-regular($size: $explore-trend-name-sizes);
+		}
+	}
+
+	&.component-banner-heading-text {
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		strong {
+			@include font-nunito-regular($size: $banner-heading-sizes);
+		}
+
+		p {
+			@include font-nunito-light($size: $banner-para-sizes);
+		}
+	}
+
+	&.component-icon-heading-text-overlay {
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			@include font-nunito-regular($size: $feature-heading-sizes);
+
+			strong {
+				@include font-nunito-regular($size: $feature-heading-sizes);
+			}
+		}
+
+		p {
+			strong {
+				font-size: 14px !important;
+
+				@include font-nunito-regular();
+				@include mq-breakpoint-md() {
+					font-size: 16px !important;
+				}
+			}
+		}
+	}
+
+	&.component-icon-tool-text {
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		strong {
+			@include font-nunito-regular($size: $icon-tool-text-sizes);
+		}
+	}
+}
+
+.rich-text__read-more {
+	text-align: center;
+	margin-top: 10px;
+
+	button {
+		color: $color-teal;
+
+		@include font-nunito-regular(18);
+
+		@include reset-button();
+	}
+}
+
+p,
+li {
+	@include font-nunito-light($size: $rich-text-list-item-para-sizes);
+}
+
+.faq {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		// text-transform: uppercase;
+		margin-bottom: 10px;
+
+		@include font-nunito-regular(25);
+	}
+
+	p {
+		@include font-nunito-light($size: $faq-para-sizes);
+	}
+
+	strong {
+		@include font-nunito-light($size: $faq-cta-sizes);
+	}
+}
+
+.component-tile-grid {
+	p {
+		@include font-nunito-light($size: [16, 18]);
+	}
+}

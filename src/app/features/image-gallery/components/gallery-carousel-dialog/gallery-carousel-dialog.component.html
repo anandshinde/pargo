@@ -1,0 +1,17 @@
+<section class="gallery-carousel__content" mat-dialog-content>
+	<section class="gallery-carousel__action" mat-dialog-title>
+		<a href="javascript:void(0);" mat-dialog-close>x</a>
+	</section>
+	<mflooring-carousel-wrapper
+		[content]="null"
+		[presentation]="carouselPresentation"
+	>
+		<mflooring-gallery-carousel-item
+			(closeCarouselDialog)="onCloseCarouselDialog()"
+			class="swiper-slide"
+			[content]="item"
+			*ngFor="let item of images"
+		>
+		</mflooring-gallery-carousel-item>
+	</mflooring-carousel-wrapper>
+</section>

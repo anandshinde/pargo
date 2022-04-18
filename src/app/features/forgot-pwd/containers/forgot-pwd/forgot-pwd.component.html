@@ -1,0 +1,122 @@
+<mflooring-layout-wrapper [presentation]="{ isInset: true }">
+	<div class="is-background">
+		<img
+			src="https://mohawk.scene7.com/is/image/MohawkResidential/LF000786_room_01?scl=2.25&wid=2500&hei=800&op_sharpen=1&align=0,.2"
+		/>
+	</div>
+	<section class="forgot-pwd">
+		<div class="forgot-pwd__title">
+			<h2>Create New Password</h2>
+		</div>
+		<div class="forgot-pwd__form">
+			<form [formGroup]="form">
+				<div class="form-field password_text">
+					<input
+						id="password-req-input"
+						class="input-text__control"
+						type="password"
+						placeholder="Type here"
+						[formControl]="password"
+						(focus)="passwordPattern = true"
+						(blur)="passwordPattern = false"
+					/>
+					<div
+						class="alert alert-danger"
+						*ngIf="password.invalid && (password.touched || password.dirty)"
+					>
+						<div class="text-danger" *ngIf="password.errors.required">
+							<span class="forgot-pwd__error">{{
+								resourceBundleData['global.label.error.empty']
+							}}</span>
+						</div>
+						<div class="text-danger" *ngIf="password.errors.pattern">
+							<span class="forgot-pwd__error">{{
+								resourceBundleData['global.label.password.error.invalid']
+							}}</span>
+						</div>
+					</div>
+					<mflooring-password-requirements
+						*ngIf="password.invalid && passwordPattern"
+						class="tooltip focus-show"
+						[content]="{
+							case:
+								!password.hasError('required') &&
+								!password.hasError('hasCapitalCase') &&
+								!password.hasError('hasSmallCase'),
+							length:
+								!password.hasError('required') &&
+								!password.hasError('minlength') &&
+								!password.hasError('maxLength'),
+							special:
+								!password.hasError('required') &&
+								!password.hasError('hasSpecialCharacters'),
+							numeric:
+								!password.hasError('required') &&
+								!password.hasError('hasNumber')
+						}"
+					></mflooring-password-requirements>
+				</div>
+				<div class="form-field password_text">
+					<mflooring-input-text
+						[control]="confirm"
+						[presentation]="inputTextPresentation"
+						[content]="{
+							placeholder: 'Type here',
+							label: 'Confirm New Password',
+							type: 'password'
+						}"
+					></mflooring-input-text>
+
+					<div
+						class="alert alert-danger"
+						*ngIf="confirm.invalid && (confirm.touched || confirm.dirty)"
+					>
+						<div class="text-danger" *ngIf="confirm.errors.required">
+							<span class="forgot-pwd__error">{{
+								resourceBundleData['global.label.error.empty']
+							}}</span>
+						</div>
+						<div class="text-danger" *ngIf="confirm.errors.pattern">
+							<span class="forgot-pwd__error">{{
+								resourceBundleData['global.error.password-pattern']
+							}}</span>
+						</div>
+						<div
+							class="text-danger"
+							*ngIf="confirm.hasError('not_same_password')"
+						>
+							<span class="forgot-pwd__error focus-hide"
+								>Password is not matching to Confirm Password</span
+							>
+						</div>
+					</div>
+				</div>
+			</form>
+
+			<div
+				class="forgot-pwd__action"
+				[ngClass]="{ 'is-disabled': !form.valid }"
+			>
+				<mflooring-link-compound
+					(handleClickAction)="form.valid && onSubmit(form.value)"
+					[content]="submitButtonContentProps"
+					[presentation]="submitButtonPresentationProps"
+				>
+				</mflooring-link-compound>
+			</div>
+		</div>
+		<div class="forgot-pwd__footer">
+			<div class="forgot-pwd__footer__division">OR</div>
+			<div class="forgot-pwd__footer__text">Don’t have an account?</div>
+			<div class="forgot-pwd__footer__text">
+				<button
+					type="button"
+					class="create-button forgot-pwd__label"
+					(click)="navigateToRegister()"
+				>
+					Create an Account
+				</button>
+			</div>
+		</div>
+	</section>
+</mflooring-layout-wrapper>

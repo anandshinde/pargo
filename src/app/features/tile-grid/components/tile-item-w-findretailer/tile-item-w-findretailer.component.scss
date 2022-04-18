@@ -1,0 +1,154 @@
+@import './src/styles/tools/tools.mediaquery';
+@import './src/styles/tools/tools.typography';
+@import './src/styles/settings/settings.colors';
+@import './src/styles/components/components.rich-text';
+@import './src/styles/components/components.tile-grid';
+@import './src/styles/settings/settings.layout';
+
+$default-column-width-desktop-max: 469px;
+$discover-tile-testimonial-cta-sizes: [15, 20];
+$content-max-width: 1100px;
+:host {
+	display: grid;
+	margin-bottom: 35px;
+	@include mq-breakpoint-md() {
+		margin-bottom: 45px;
+		// margin-top: 25px;
+	}
+
+	@include mq-breakpoint-sm() {
+		grid-template-columns: repeat(
+			2,
+			minmax($default-column-width-desktop-min, 100%)
+		);
+		grid-gap: 0;
+		grid-template-areas:
+			'first first'
+			'second third';
+		bottom: 50px;
+	}
+}
+::ng-deep {
+	.tile-w-findretailer {
+		.layout-container {
+			&__grid {
+				&.inset {
+					padding: 0 !important;
+					@include mq-breakpoint-sm() {
+						@include mq-content-width() {
+							grid-template-columns:
+								calc((100% - #{$content-max-width}) / 2)
+								auto calc((100% - #{$content-max-width}) / 2) !important;
+						}
+					}
+					@include mq-breakpoint-md() {
+						@include mq-content-width() {
+							grid-template-columns:
+								calc((100% - #{$content-max-width}) / 2)
+								auto calc((100% - #{$content-max-width}) / 2) !important;
+						}
+					}
+					@include mq-breakpoint-lg() {
+						@include mq-content-width() {
+							grid-template-columns:
+								calc((100% - #{$content-max-width}) / 2)
+								auto calc((100% - #{$content-max-width}) / 2) !important;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+:host ::ng-deep {
+	mflooring-layout-wrapper {
+		::ng-deep {
+			img,
+			picture {
+				border-radius: 5px;
+				@include mq-breakpoint-md() {
+					border-radius: 5px;
+				}
+			}
+		}
+
+		.layout-container {
+			margin: 0 25px;
+			@include mq-breakpoint-md() {
+				margin: 0;
+			}
+			&__grid {
+				&__area {
+					border-radius: 5px;
+					background: transparent
+						linear-gradient(180deg, #00000000 0%, #0000004e 26%, #000000 100%)
+						0% 0% no-repeat padding-box;
+					@include mq-breakpoint-md() {
+						border-radius: 5px;
+					}
+				}
+			}
+		}
+	}
+
+	mflooring-tile-item {
+		min-height: 250px;
+		@include mq-breakpoint-md() {
+		}
+		.box {
+			height: 100%;
+		}
+		.text {
+			position: relative;
+			bottom: auto;
+			width: auto;
+			height: 100%;
+			text-align: left;
+			color: $secondary-color;
+			opacity: 1;
+			max-width: 370px;
+			margin-top: 0;
+			text-align: center;
+			margin-bottom: 0;
+			letter-spacing: 0px;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			@include mq-breakpoint-md() {
+				margin-left: 85px;
+				text-align: left;
+				max-width: 440px;
+			}
+			h2 {
+				@include font-nunito-semibold($size: 25px, $lineheight: 35px);
+				margin-bottom: 15px;
+				@include mq-breakpoint-md() {
+					@include font-nunito-bold($size: 25px, $lineheight: 30px);
+				}
+			}
+			p {
+				@include font-nunito-regular($size: 16px, $lineheight: 22px);
+			}
+		}
+
+		.footer {
+			&__input {
+				width: 100%;
+				@include mq-breakpoint-md() {
+					width: 80%;
+					margin: 0;
+					max-width: 240px;
+				}
+			}
+			&__input-label {
+				margin-bottom: 5px;
+				display: none;
+			}
+		}
+		&:nth-child(1) {
+			grid-area: first;
+			min-height: 250px;
+		}
+	}
+}

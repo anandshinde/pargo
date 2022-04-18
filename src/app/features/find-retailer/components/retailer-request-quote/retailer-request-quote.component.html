@@ -1,0 +1,278 @@
+<ng-container *ngIf="newQuote">
+	<section class="retailer-request-modal">
+		<div class="closebtn">
+			<a class="close" (click)="onNoClick()">
+				<span class="icon-">close</span>
+			</a>
+		</div>
+
+		<h3 class="retailer-request-modal__title">{{ this.data.retailerName }}</h3>
+		<div class="retailer-request-modal__name">Quote Request</div>
+		<div class="retailer-request-modal__form">
+			<form class="retailer-request__form" [formGroup]="form">
+				<div class="formdesign">
+					<div class="leftcolumn">
+						<div class="form-field">
+							<p class="requestlabel__title interested__in">
+								I’m Interested in:
+							</p>
+							<div
+								class="custom__checkbox"
+								*ngFor="let interest of interestedIn; let i = index"
+							>
+								<label>
+									<input
+										type="checkbox"
+										[value]="interest.value"
+										(change)="onCheckChange($event)"
+									/>
+									{{ interest.description }}
+									<span class="checkmark"></span>
+								</label>
+							</div>
+						</div>
+						<div
+							class="form-field custom-popupover"
+							[ngClass]="purchaseDropdown ? 'dropdownopen' : 'dropdownClosed'"
+						>
+							<label
+								class="custom-label"
+								(click)="purchaseDropdown = !purchaseDropdown"
+							>
+								<span *ngIf="form.value.purchaseMonth === ''"
+									>When are you looking to purchase?*
+								</span>
+								<span *ngIf="form.value.purchaseMonth !== ''">{{
+									form.value.purchaseMonth
+								}}</span>
+								<span class="icon-">down</span>
+							</label>
+							<div class="show-dropdown" *ngIf="purchaseDropdown">
+								<mat-radio-group formControlName="purchaseMonth">
+									<mat-radio-button
+										class="custom-radio-button"
+										*ngFor="let month of months"
+										[value]="month"
+										(change)="purchaseDropdown = !purchaseDropdown"
+									>
+										{{ month }}
+									</mat-radio-button>
+								</mat-radio-group>
+							</div>
+						</div>
+						<div class="request__note">
+							<p class="request__note">
+								NOTE: Information supplied by you will be provided to the Pergo
+								retailer identified above on your behalf. Pergo is not acting on
+								behalf of or as an agent for the retailer. Pergo makes no
+								representations or warranties regarding the use of information
+								provided by you in this email and supplied to the retailer, or
+								the timeliness or content of the retailer’s reply to you. By
+								completing this form, you give Pergo permission to contact you
+								regarding your experience with this retailer.
+							</p>
+							<p class="readmore">
+								Read our
+								<a captureClicks [href]="baseUrl">privacy policy</a>.
+							</p>
+						</div>
+					</div>
+					<div class="rightcolumn">
+						<p class="requestlabel__title contact_info">CONTACT INFORMATION</p>
+						<div class="form-field">
+							<!-- <span class="requiredLabel">* = Required</span> -->
+							<mflooring-input-text
+								[control]="firstName"
+								[presentation]="inputTextPresentation"
+								[content]="{
+									placeholder: 'Type here',
+									label: 'First Name*'
+								}"
+							></mflooring-input-text>
+							<div
+								*ngIf="
+									firstName.invalid && (firstName.touched || firstName.dirty)
+								"
+								class="alert alert-danger"
+							>
+								<div class="text-danger" *ngIf="firstName.errors.required">
+									<span class="retailer-request__error">
+										First Name is required field
+									</span>
+								</div>
+								<div
+									class="text-danger"
+									*ngIf="firstName.hasError('maxlength')"
+								>
+									<span class="retailer-request__error">
+										Maximum field limit reached
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="form-field">
+							<mflooring-input-text
+								[control]="lastName"
+								[presentation]="inputTextPresentation"
+								[content]="{
+									placeholder: 'Type here',
+									label: 'Last Name*'
+								}"
+							></mflooring-input-text>
+							<div
+								*ngIf="lastName.invalid && (lastName.touched || lastName.dirty)"
+								class="alert alert-danger"
+							>
+								<div class="text-danger" *ngIf="lastName.errors.required">
+									<span class="retailer-request__error">
+										Last Name is required field
+									</span>
+								</div>
+								<div class="text-danger" *ngIf="lastName.hasError('maxlength')">
+									<span class="retailer-request__error">
+										Maximum field limit reached
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="form-field">
+							<mflooring-input-text
+								[control]="email"
+								[presentation]="inputTextPresentation"
+								[content]="{
+									placeholder: 'Type here',
+									label: 'Email*'
+								}"
+							></mflooring-input-text>
+							<div
+								*ngIf="email.invalid && (email.touched || email.dirty)"
+								class="alert alert-danger"
+							>
+								<div class="text-danger" *ngIf="email.errors.required">
+									<span class="retailer-request__error"
+										>Email is required field</span
+									>
+								</div>
+
+								<div class="text-danger" *ngIf="email.errors.pattern">
+									<span class="retailer-request__error"
+										>Email is not in proper format</span
+									>
+								</div>
+
+								<div class="text-danger" *ngIf="email.hasError('userExists')">
+									<span class="retailer-request__error">User Email exists</span>
+								</div>
+							</div>
+						</div>
+						<div class="form-field">
+							<mflooring-input-text
+								[control]="phoneNumber"
+								[presentation]="inputTextPresentation"
+								[content]="{
+									placeholder: 'Type here',
+									label: 'Phone Number',
+									maxlength: 14,
+									type: 'tel'
+								}"
+							></mflooring-input-text>
+							<div
+								*ngIf="
+									phoneNumber.invalid &&
+									(phoneNumber.touched || phoneNumber.dirty)
+								"
+								class="alert alert-danger"
+							>
+								<div class="text-danger" *ngIf="phoneNumber.errors.pattern">
+									<span class="retailer-request__error">
+										Phone Number is not in proper format
+									</span>
+								</div>
+								<div
+									class="text-danger"
+									*ngIf="phoneNumber.hasError('maxlength')"
+								>
+									<span class="form-error"> Maximum field limit reached </span>
+								</div>
+							</div>
+						</div>
+						<div class="form-field field-preferred">
+							<p class="requestlabel__title">Preferred contact method</p>
+							<mat-radio-group formControlName="preferred">
+								<mat-radio-button
+									class="custom-radio-button"
+									*ngFor="let preferredItem of preferredItems"
+									[value]="preferredItem"
+								>
+									{{ preferredItem }}
+								</mat-radio-button>
+							</mat-radio-group>
+						</div>
+					</div>
+				</div>
+				<div class="formdesign formdesign__bottom">
+					<div class="leftcolumn">
+						<div class="form-field">
+							<div class="retailer-request__mailing">
+								<mflooring-checkbox [control]="mailingList">
+									<span class="retailer-request__mailing__label">
+										Sign up to receive our FREE eNewsletter. Get the latest
+										product info, design tips and ideas.
+									</span>
+								</mflooring-checkbox>
+							</div>
+						</div>
+					</div>
+					<div class="rightcolumn"></div>
+				</div>
+				<div class="retailer-request__action">
+					<mflooring-link-compound
+						[ngClass]="{ 'is-disabled': !form.valid }"
+						[content]="{
+							text: 'Request Quote'
+						}"
+						[presentation]="{
+							theme: 'light',
+							buttonType: 'primary',
+							customClass: ''
+						}"
+						(click)="form.valid && onSubmit(form.value)"
+					>
+					</mflooring-link-compound>
+				</div>
+			</form>
+		</div>
+	</section>
+</ng-container>
+<ng-container *ngIf="appointmentStatus | async">
+	<!-- <ng-container *ngIf="quoteStatus"> -->
+	<div class="closebtn">
+		<a class="close" (click)="onNoClick()">
+			<span class="icon-">close</span>
+		</a>
+	</div>
+	<div class="message_section">
+		<h3 class="request-form__title__success">Thank You!</h3>
+		<p class="request-form__retailer__response">
+			Your requested quote for Walter White Flooring has been submitted.
+		</p>
+		<p class="request-form__message">
+			The team from <span class="highlight__text">{{ DealerName }}</span> will
+			review your request and will get back to you shortly.
+		</p>
+		<!-- <span class="request-form__goto-home" captureClicks>
+			<a class="request-form__goto-home_link" (click)="goHome($event)" href
+				>Go to Pergo Home</a
+			>
+		</span> -->
+		<div class="retailer-request__action back-to-home">
+			<button
+				type="submit"
+				class="primary theme-dark button--normal"
+				(click)="goHome($event)"
+			>
+				<span class="label">Back to Home</span>
+			</button>
+		</div>
+	</div>
+</ng-container>

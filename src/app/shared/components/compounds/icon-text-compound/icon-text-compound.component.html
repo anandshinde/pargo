@@ -1,0 +1,18 @@
+<div
+	class="icon-text {{ componentImagePositionClassName }}"
+	[ngClass]="{ 'has-link': componentHasLink }"
+	[attr.title]="componentHasLink ? componentLinkInfo!.title : null"
+	[attr.role]="componentHasLink ? 'button' : null"
+	[attr.tabindex]="componentHasLink ? 0 : null"
+	(click)="buttonClick(componentLinkInfo!.link)"
+	(keydown.enter)="buttonClick(componentLinkInfo!.link)"
+>
+	<div class="icon-text__image">
+		<mflooring-image-compound [content]="componentImage" [presentation]="null">
+		</mflooring-image-compound>
+	</div>
+	<div class="icon-text__text">
+		<mflooring-rich-text-compound [content]="componentText" [presentation]="{component: 'icon-heading-text-overlay'}">
+		</mflooring-rich-text-compound>
+	</div>
+</div>

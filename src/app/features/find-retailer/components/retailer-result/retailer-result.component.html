@@ -1,0 +1,228 @@
+<mflooring-layout-wrapper [content]="" [presentation]="{ isInset: true }">
+	<article class="result" itemscope itemtype="https://schema.org/LocalBusiness">
+		<div class="result__grid">
+			<div class="result__icon">
+				<img [src]="retailer.marker" />
+				<span>{{ content.index + 1 }}</span>
+			</div>
+			<header itemprop="name">
+				<div class="result__title__distance">
+					<span class="result__title" (click)="resultClicked()">
+						<a captureClicks href="{{ getRetailerInfoURL() }}" rel="noopener">{{
+							retailer?.storeName
+						}}</a>
+					</span>
+					<div class="result__distance-rating">
+						<span class="result__rating mobile__hide">
+							<mflooring-star-rating
+								[content]="{
+									rating: retailer.averageRating,
+									totalReviews: retailer.reviewCount,
+									serviceUrl: retailer.birdEyeUrl
+								}"
+								[presentation]="{
+									color: 'black'
+								}"
+								*ngIf="!!retailer.averageRating"
+							></mflooring-star-rating>
+						</span>
+						<span class="result__distance">{{ distance }}</span>
+					</div>
+				</div>
+				<div class="result__distance-rating mobile__show">
+					<span class="result__rating">
+						<mflooring-star-rating
+							[content]="{
+								rating: retailer.averageRating,
+								totalReviews: retailer.reviewCount,
+								serviceUrl: retailer.birdEyeUrl
+							}"
+							[presentation]="{
+								color: 'black'
+							}"
+							*ngIf="!!retailer.averageRating"
+						></mflooring-star-rating>
+					</span>
+				</div>
+
+				<p *ngIf="retailer?.edgePremier" class="result__details__selection">
+					<mflooring-icon-button
+						[presentation]="{
+							size: 'medium',
+							type: '',
+							iconName: 'badge'
+						}"
+						class="badge__icon"
+					></mflooring-icon-button>
+					Best Selection
+				</p>
+			</header>
+			<div class="result__logistics">
+				<div
+					class="result__logistics__address"
+					itemprop="address"
+					itemscope
+					itemtype="https://schema.org/PostalAddress"
+				>
+					<span itemprop="streetAddress">{{ retailer?.address1 }}</span
+					><br />
+					<span itemprop="addressLocality">{{ retailer?.city }}</span
+					>, <span itemprop="addressRegion">{{ retailer?.state }}</span
+					>&nbsp;<span itemprop="postalCode">{{ retailer?.zip }}</span>
+				</div>
+				<div
+					*ngIf="retailer?.edgePremier"
+					class="result__details__selection mobile"
+				>
+					<mflooring-icon-button
+						[presentation]="{
+							size: 'medium',
+							type: '',
+							iconName: 'badge'
+						}"
+						class="badge__icon"
+					></mflooring-icon-button>
+					Best Selection
+				</div>
+				<div
+					class="result__logistics__phone"
+					itemprop="telephone"
+					*ngIf="!!retailer?.phone"
+				>
+					<mflooring-icon-button
+						[presentation]="{
+							size: 'xsmall',
+							type: '',
+							iconName: 'phone'
+						}"
+						class="phone__icon"
+					></mflooring-icon-button>
+					<a [attr.href]="'tel:+' + webPhone"> {{ displayPhone }}</a>
+				</div>
+				<div
+					class="result__logistics__hours"
+					itemprop="openingHoursSpecification"
+					itemscope
+					itemtype="https://schema.org/OpeningHoursSpecification"
+					*ngIf="hoursOfOperation"
+				>
+					<div>
+						<span>Hours: </span>
+						<span *ngIf="hoursOfOperation.from">
+							<time itemprop="opens">{{ hoursOfOperation.from }}</time> -
+							<time itemprop="closes">{{ hoursOfOperation.to }}</time>
+						</span>
+					</div>
+				</div>
+				<div class="result__logistics__myretailer">
+					<mat-radio-group aria-label="Select As My Retailer">
+						<mat-radio-button
+							[value]="{
+								affiliation: retailer?.affiliation,
+								id: retailer?.dealerID,
+								name: retailer?.storeName,
+								address: retailer.address1,
+								city: retailer.city,
+								state: retailer.state,
+								zip: retailer.zip,
+								latitude: retailer.latitude,
+								longitude: retailer.longitude,
+								reviewCount: retailer.reviewCount,
+								reviewRating: retailer.averageRating,
+								index: content.index + 1
+							}"
+							[checked]="mySelectedRetailer$ | async"
+							(change)="selectMyRetailer($event)"
+							>{{
+								getSelectedRetailerLabel(mySelectedRetailer$ | async)
+							}}</mat-radio-button
+						>
+					</mat-radio-group>
+				</div>
+				<div *ngIf="retailer?.edgePremier" class="couponMobile">
+					<button class="coupon_btn" (click)="openCouponModal('coupon')">
+						COUPON AVAILABLE
+					</button>
+				</div>
+			</div>
+			<div class="result__offerings">
+				<h4>Collections We Offer</h4>
+				<ul>
+					<li *ngFor="let collection of collections | async">
+						<a [attr.href]="collection.url" captureClicks>{{
+							collection.label
+						}}</a>
+					</li>
+				</ul>
+			</div>
+			<div class="result__details">
+				<ul>
+					<li *ngIf="retailer?.edgePremier">
+						<button class="coupon_btn" (click)="openCouponModal('coupon')">
+							COUPON AVAILABLE
+						</button>
+					</li>
+					<li *ngIf="isIndependentRetailer">
+						<button (click)="openModal('quote')">Request a Quote</button>
+					</li>
+					<li *ngIf="isIndependentRetailer">
+						<button
+							*ngIf="!!hoursOfOperation"
+							(click)="openAppointmentModal('appt')"
+						>
+							Request an Appointment
+						</button>
+					</li>
+					<li>
+						<div class="result__myretailerBtn">
+							<mflooring-link-compound
+								class="moreInfo"
+								[content]="{
+									text: 'More Information',
+									url: getRetailerInfoURL(),
+									queryString: { title: storeBC }
+								}"
+								[presentation]="{
+									buttonAction: 'link',
+									buttonWidth: 'full',
+									buttonType: 'primary',
+									noWrap: true
+								}"
+								(click)="resultClicked()"
+							></mflooring-link-compound>
+							<mflooring-link-compound
+								class="submit__mobile"
+								[content]="{
+									text: 'Submit',
+									url: getRetailerInfoURL(),
+									queryString: { title: storeBC }
+								}"
+								[presentation]="{
+									buttonAction: 'link',
+									buttonWidth: 'full',
+									buttonType: 'primary',
+									noWrap: true
+								}"
+								(click)="resultClicked()"
+							></mflooring-link-compound>
+							<mflooring-link-compound
+								class="result__directions"
+								[content]="{
+									text: 'Get Directions',
+									url: retailer?.directions
+								}"
+								[presentation]="{
+									buttonAction: 'link',
+									buttonWidth: 'full',
+									buttonType: 'secondary',
+									noWrap: true
+								}"
+								(click)="resultClicked()"
+							></mflooring-link-compound>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</article>
+</mflooring-layout-wrapper>

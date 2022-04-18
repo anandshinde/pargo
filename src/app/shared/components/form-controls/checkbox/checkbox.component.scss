@@ -1,0 +1,33 @@
+@import 'src/styles/tools/tools.typography';
+
+@import 'src/styles/settings/settings.colors';
+
+:host {
+	line-height: normal;
+}
+
+:host ::ng-deep .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
+:host ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+	background-color: $color-teal !important;
+}
+
+:host ::ng-deep .mat-checkbox-frame {
+	border-color: $color-brown-medium !important;
+	border-width: 1px !important;
+}
+
+:host ::ng-deep .mat-checkbox-label {
+	white-space: normal;
+	display: inline-flex !important;
+
+	@include font-nunito-light($size: 14px, $lineheight: 1);
+}
+
+:host ::ng-deep .mat-checkbox-layout {
+	display: flex;
+	align-items: flex-start;
+}
+
+:host ::ng-deep .mat-checkbox-inner-container {
+	margin: 0 8px 0 0;
+}

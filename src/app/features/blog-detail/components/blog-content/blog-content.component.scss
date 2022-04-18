@@ -1,0 +1,103 @@
+@import 'src/styles/tools/tools.fonts-units';
+@import 'src/styles/tools/tools.mediaquery';
+@import 'src/styles/settings/settings.colors';
+@import 'src/styles/settings/settings.typography';
+@import 'src/styles/tools/tools.typography';
+@import 'src/styles/elements/elements.containers';
+
+.blog-detail-content {
+	&__container {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+
+		::ng-deep mflooring-rich-text-compound {
+			display: inline-block;
+			h1 {
+				@include font-nunito-light($size: [25, 30], $lineheight: 1.3);
+				margin: rem(20) 0 rem(20) 0;
+			}
+
+			h2 {
+				@include font-nunito-light($size: [25, 30], $lineheight: 1.3);
+				margin: rem(20) 0 rem(20) 0;
+			}
+
+			p {
+				@include font-nunito-light($size: [15, 18], $lineheight: 1.3);
+				color: $color-dark-grey;
+				margin: rem(20) 0 rem(20) 0;
+			}
+
+			a {
+				text-decoration: none;
+				color: $color-red-dark;
+			}
+		}
+
+		mflooring-image-compound {
+			width: 100%;
+			display: block;
+			padding: rem(10) 0;
+			@include mq-breakpoint-md() {
+				 padding: rem(15) 0;
+				max-width: rem(747)
+			}
+
+			::ng-deep {
+				picture {
+					display: flex;
+					justify-content: center;
+				}
+				img {
+					width: rem(400);
+					height: rem(250);
+					border-radius: rem(5);
+					@include mq-breakpoint-sm() {
+						overflow: hidden;
+						width: rem(1200);
+						height: rem(435);
+					}
+				}
+			}
+		}
+
+		mflooring-video-player {
+			padding-top: rem(10);
+			padding-bottom: rem(10);
+
+			@include mq-breakpoint-md() {
+				padding: rem(20);
+			}
+
+			::ng-deep video {
+				max-width: rem(400);
+				@include mq-breakpoint-md() {
+					max-width: rem(740);
+				}
+			}
+		}
+
+		mflooring-link-compound {
+			padding: rem(10);
+
+			@include mq-breakpoint-md() {
+				padding: rem(20);
+			}
+		}
+
+		
+	}
+
+	&__maxWidth{
+		width:100%;
+
+		@include mq-breakpoint-md() {
+		   max-width: rem(747)
+	   }
+	}
+
+	&__inset {
+		width: 100%;
+	}
+}

@@ -1,0 +1,23 @@
+<section class="product-image">
+    <div class="product-image__container">
+        <div class="product-image__img">
+            <mflooring-image-compound
+				[content]="{
+					image: productImage
+				}"
+			></mflooring-image-compound>
+        </div>
+        <div  class="product-image__wrapper">
+            <div class="product-image__content">
+                <p>Product Name: <span>{{productName}}</span></p>
+                <p>Product Color: <span>{{productColor}}</span></p>
+            </div>
+            <div class="product-image__link">
+                <mflooring-link-compound
+						[content]="productUrl?.content"
+						[presentation]="productUrl?.presentation"
+				></mflooring-link-compound>
+            </div>
+        </div>
+    </div>
+</section>

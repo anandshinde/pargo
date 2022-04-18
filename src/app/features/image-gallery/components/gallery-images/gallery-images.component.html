@@ -1,0 +1,14 @@
+<section class="gallery-images__counter">
+	<ng-content></ng-content>
+</section>
+<section class="gallery-images__images">
+	<mflooring-image-compound
+		(click)="onOpenImage(index)"
+		[content]="{image: item.image?.content.desktop,
+		imageMobile: item.image?.content.mobile
+		}"
+		[presentation]="item.image?.presentation"
+		*ngFor="let item of content; let index = index"
+	>
+	</mflooring-image-compound>
+</section>

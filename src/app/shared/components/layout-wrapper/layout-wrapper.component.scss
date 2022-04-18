@@ -1,0 +1,92 @@
+@import 'src/styles/tools/tools.mediaquery';
+
+@import 'src/styles/settings/settings.containers';
+
+$horizontal-margins: 25px;
+$top-margin: 0;
+$bottom-margin: 0;
+
+:host {
+}
+
+.layout-container {
+	mflooring-image-compound {
+		width: 100%;
+		height: 100%;
+		display: block;
+	}
+
+	&__background {
+		grid-area: background;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center;
+
+		&.align-left {
+			background-position: left;
+		}
+
+		&.align-right {
+			background-position: right;
+		}
+	}
+
+	&__grid {
+		display: grid;
+		position: relative;
+		grid-template-areas: 'content';
+		grid-template-columns: 100%;
+		grid-template-rows: auto;
+		padding: 0;
+
+		@include mq-breakpoint-md() {
+			padding: 0;
+			grid-template-columns: 1fr;
+			grid-template-areas: 'content';
+			grid-template-rows: auto;
+		}
+
+		&.inset {
+			padding: 0 var(--horizontal-margins, #{$horizontal-margins});
+			grid-template-columns: 100%;
+			grid-template-areas: 'content';
+
+			@include mq-content-width() {
+				grid-template-columns:
+					calc((100% - #{$content-max-width}) / 2)
+					auto calc((100% - #{$content-max-width}) / 2);
+				grid-template-areas: '. content .';
+			}
+		}
+
+		&__area {
+			grid-area: content;
+			position: relative;
+		}
+	}
+}
+
+.stack-in-mobile {
+	grid-template-areas:
+		'background'
+		'content';
+	grid-template-rows: auto auto;
+
+	@include mq-breakpoint-md() {
+		grid-template-columns: 1fr;
+		grid-template-areas: 'content';
+		grid-template-rows: auto;
+	}
+
+	.layout-container__background {
+		position: relative;
+
+		@include mq-breakpoint-md() {
+			position: absolute;
+			padding-bottom: 0;
+		}
+	}
+}

@@ -1,0 +1,289 @@
+@import 'src/styles/settings/settings.containers';
+
+@import 'src/styles/tools/tools.mediaquery';
+
+@import './src/styles/settings/settings.colors';
+
+@import 'src/styles/tools/tools.typography';
+
+@import 'src/styles/elements/elements.links';
+
+$button-background-color: #{$color-black};
+
+$border-width: 0.5px;
+$border-radius: 5px;
+$border-margin: 0.5px;
+
+$form-gap-desktop: 20px;
+$form-gap-mobile: 10px;
+
+:host {
+	display: block;
+	position: relative;
+}
+
+:host ::ng-deep {
+	.layout-container {
+		&__grid {
+			&.inset {
+				padding: 0;
+				@include mq-breakpoint-lg() {
+					grid-template-columns: calc((100% - 100%) / 2) auto calc(
+							(100% - 100%) / 2
+						);
+				}
+			}
+		}
+	}
+	h2 {
+		@include font-nunito-light($size: 26px, $lineheight: 35px);
+		margin-bottom: 40px;
+		text-align: center;
+		color: $color-white;
+		@include mq-breakpoint-md() {
+			@include font-nunito-light($size: 30px, $lineheight: 40px);
+			margin-bottom: 25px;
+			color: $mohawk-black;
+		}
+	}
+	.input-text {
+		&__label {
+			@include font-nunito-regular($size: 13px, $lineheight: 18px);
+
+			color: $mohawk-black;
+			@include mq-breakpoint-md() {
+				@include font-nunito-regular($size: 13px, $lineheight: 18px);
+				margin-bottom: 4px;
+			}
+		}
+		&__control {
+			border: 1px solid $color-grey;
+			border-radius: 5px;
+			height: 42px;
+			@include font-nunito-regular($size: 13px, $lineheight: 34px);
+		}
+	}
+	.tooltip {
+		@include font-nunito-regular($size: 14px, $lineheight: 15px);
+	}
+}
+
+.is-background {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	&::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 1;
+		background: rgba(0, 0, 0, 0.6);
+		@include mq-breakpoint-md() {
+			background: rgba(0, 0, 0, 0.2);
+		}
+	}
+	img {
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
+	}
+}
+
+.forgot-pwd {
+	position: relative;
+	z-index: 1;
+	max-width: 635px;
+	border-radius: 5px;
+	background: transparent;
+	margin: 45px auto;
+	padding: 0px;
+
+	@include mq-breakpoint-md() {
+		background: $color-white;
+		padding: 35px 0 0 0;
+		margin: 100px auto;
+	}
+	&__form {
+		padding: 25px 30px;
+		background: $color-white;
+		border-radius: 5px;
+		margin: auto 25px;
+		@include mq-breakpoint-md() {
+			background: transparent;
+			margin: 0;
+			padding: 0px 90px 0 90px;
+		}
+	}
+	&__action {
+		padding: 35px 0;
+		@include mq-breakpoint-md() {
+			display: flex;
+			justify-content: center;
+			grid-column: span 2;
+			padding: 40px 0 70px 0;
+		}
+	}
+	&__footer {
+		margin: 0;
+		overflow: hidden;
+		@include mq-breakpoint-md() {
+			background: $color-extra-light-grey;
+			padding: 40px 0;
+			width: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			border-radius: 0 0 5px 5px;
+		}
+		&__division {
+			position: relative;
+			width: 100%;
+			text-align: center;
+			@include font-nunito-regular($size: 15px, $lineheight: 20px);
+			color: $color-white;
+			margin: 35px 0;
+			@include mq-breakpoint-md() {
+				display: none;
+			}
+			&::before,
+			&::after {
+				content: '';
+				position: absolute;
+				top: 9px;
+				width: 40%;
+				background: $color-grey;
+				height: 1px;
+			}
+			&::before {
+				left: 0;
+			}
+			&::after {
+				right: 0;
+			}
+		}
+		&__text {
+			@include font-nunito-regular($size: 22px, $lineheight: 30px);
+			text-align: center;
+			color: $color-white;
+			@include mq-breakpoint-md() {
+				padding-right: 15px;
+				@include font-nunito-regular($size: 12px, $lineheight: 16px);
+				color: $mohawk-black;
+			}
+		}
+
+		.create-button {
+			@include reset-button();
+			cursor: pointer;
+			text-align: right;
+			padding: 0;
+			height: auto;
+			width: 100%;
+			left: 0;
+			right: 0;
+			display: flex;
+			justify-content: center;
+			color: $color-teal;
+			text-transform: capitalize;
+			text-decoration: underline;
+			@include font-nunito-semibold($size: 16px, $lineheight: 22px);
+			@include mq-breakpoint-md() {
+				position: relative;
+				display: block;
+				bottom: auto;
+				margin-top: 0;
+				@include font-nunito-bold($size: 12px, $lineheight: 16px);
+			}
+		}
+	}
+}
+
+.password_text {
+	color: $mohawk-black;
+	@include font-nunito-regular($size: 11px, $lineheight: 18px);
+	margin-bottom: 10px;
+}
+
+.forgot-pwd__error {
+	color: $color-red;
+	@include font-nunito-regular($size: 12px, $lineheight: 16px);
+}
+
+.forgot-account__success {
+	display: inline-block;
+	color: green;
+	@include font-nunito-regular($size: 11px, $lineheight: 18px);
+}
+
+.is-disabled {
+	pointer-events: none;
+	opacity: 0.25;
+}
+
+.tooltip {
+	//position: relative;
+	position: absolute;
+	background: $color-white;
+	border: 1px solid $color-grey-light;
+	//top: 15px;
+	padding: 20px 25px;
+	border-radius: 5px;
+	z-index: 1;
+	margin-left: -18px;
+	margin-top: 10px;
+	max-width: 300px;
+	width: 100%;
+	@include mq-breakpoint-md() {
+		margin-left: -15px;
+		margin-top: 10px;
+		max-width: 250px;
+	}
+}
+.tooltip:after,
+.tooltip:before {
+	bottom: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: ' ';
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.tooltip:after {
+	border-color: rgba(255, 255, 255, 0);
+	border-bottom-color: $color-white;
+	border-width: 10px;
+	margin-left: -10px;
+}
+.tooltip:before {
+	border-color: rgba(221, 221, 221, 0);
+	border-bottom-color: $color-grey-light;
+	border-width: 11px;
+	margin-left: -11px;
+}
+.form-field {
+	::ng-deep .input-text__control {
+		height: 45px;
+	}
+}
+
+:host ::ng-deep .tooltip {
+	p.login-forgot {
+		@include font-nunito-bold($size: 11px, $lineheight: 14px);
+	}
+
+	li,
+	.req-labels {
+		@include font-nunito-regular($size: [14, 11], $lineheight: 14px);
+	}
+}

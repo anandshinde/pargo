@@ -1,0 +1,45 @@
+@import './src/styles/settings/settings.colors';
+
+@import './src/styles/tools/tools.typography';
+
+@import './src/styles/tools/tools.mediaquery';
+
+$tile-heading-text-sizes: [24, 28];
+$tile-para-text-sizes: [16, 16];
+$tile-testimonial-para-sizes: [16, 18];
+
+@mixin rich-text__tile-grid() {
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		margin-bottom: 0;
+
+		@include font-nunito-regular($size: $tile-heading-text-sizes);
+	}
+
+	p {
+		@include font-nunito-light($size: $tile-para-text-sizes);
+	}
+}
+
+@mixin rich-text__tile-grid__quote() {
+	color: $color-body-text;
+
+	p {
+		@include font-nunito-light($size: $tile-testimonial-para-sizes);
+	}
+
+	strong {
+		color: $color-teal;
+
+		@include font-nunito-bold(15);
+
+		@include mq-breakpoint-md() {
+			@include font-nunito-bold(20);
+		}
+	}
+}

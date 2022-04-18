@@ -1,0 +1,43 @@
+@import './src/styles/tools/tools.mediaquery';
+@import './src/styles/components/components.rich-text';
+@import 'src/styles/settings/settings.colors';
+@import 'src/styles/tools/tools.typography';
+@import './src/styles/elements/elements.links';
+@import 'src/styles/settings/settings.colors';
+@import 'src/styles/tools/tools.typography';
+@import 'src/styles/tools/tools.mediaquery';
+@import 'src/styles/components/components.banner';
+
+:host ::ng-deep mflooring-layout-wrapper {
+	.layout-container {
+		height: 100%;
+		min-height: 250px;
+
+		&__grid {
+			height: 100%;
+			min-height: 250px;
+		}
+	}
+}
+.text {
+	bottom: 0px;
+	text-align: left;
+	letter-spacing: 0px;
+	color: $secondary-color;
+	opacity: 1;
+	position: absolute;
+	margin: 30px;
+	::ng-deep h2 {
+		@include font-nunito-semibold($size: [26, 25], $lineheight: 35px);
+	}
+
+	.explore-button {
+		float: left;
+	}
+}
+// .tile-hyperlink {
+// 	a {
+// 		text-decoration: none;
+// 		color: inherit;
+// 	}
+// }

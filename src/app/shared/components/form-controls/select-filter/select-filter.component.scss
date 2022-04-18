@@ -1,0 +1,65 @@
+@import 'src/styles/elements/elements.links';
+
+@import 'src/styles/tools/tools.typography';
+
+@import 'src/styles/settings/settings.colors';
+
+@import './src/styles/settings/settings.animations';
+
+$default-select-min-width: 172px;
+$default-select-max-width: 172px;
+$default-select-padding: 7px 15px;
+$default-icon-margin-left: 10px;
+$default-icon-min-width: 13px;
+$default-options-min-width: 300px !important;
+
+.select__control {
+	background-color: $color-white;
+	border: solid 1px $color-brown-medium;
+	padding: $default-select-padding;
+	min-width: $default-select-min-width;
+	max-width: $default-select-max-width;
+	display: inline-flex;
+	justify-content: space-between;
+	align-items: center;
+
+	@include reset-link();
+
+	& > * {
+		color: $color-brown-medium;
+	}
+}
+
+.select__control__category {
+	@include font-nunito-light($size: 16px, $lineheight: 1);
+}
+
+.select__control__icon {
+	margin-left: $default-icon-margin-left;
+	min-width: $default-icon-min-width;
+	transition: transform $transition-duration-fast ease-in-out;
+	transform: rotate(90deg);
+	@include font-nunito-light($size: 12px);
+}
+
+.select__control__icon--opened {
+	transform: rotate(-90deg);
+}
+
+::ng-deep .select__options__container {
+	min-width: $default-options-min-width;
+	max-width: none !important;
+
+	& > .mat-menu-content {
+		padding: 20px !important;
+	}
+}
+
+::ng-deep .select__options__backdrop {
+	+ .cdk-overlay-connected-position-bounding-box > {
+		.cdk-overlay-pane {
+			width: 300px !important;
+			transform: unset !important;
+		}
+	}
+}

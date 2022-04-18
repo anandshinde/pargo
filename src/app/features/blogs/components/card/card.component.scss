@@ -1,0 +1,70 @@
+@import 'src/styles/tools/tools.fonts-units';
+@import 'src/styles/tools/tools.mediaquery';
+@import 'src/styles/settings/settings.colors';
+@import 'src/styles/settings/settings.typography';
+@import 'src/styles/tools/tools.typography';
+article {
+	.card {
+		min-height: 430px;
+		margin: 0 0 20px;
+		border-radius: 5px;
+		box-shadow: 0 5px 25px #0000001a;
+		padding: 25px;
+		break-inside: avoid;
+		@include mq-breakpoint-md() {
+			margin: 0 0 30px;
+		}
+		.card-img {
+			img {
+				height: 202px;
+				width: 100%;
+				object-fit: cover;
+				object-position: center center;
+				border-radius: 5px;
+			}
+		}
+		.card-heading {
+			padding: 10px 0 20px 0;
+			h3 {
+				margin: 0px;
+				@include font-nunito-light($size: [21], $lineheight: 28px);
+
+				color: $mohawk-black;
+			}
+		}
+		::ng-deep {
+			.para {
+				min-height: 91px;
+				color: $mohawk-black;
+				p {
+					@include font-nunito-light($size: [14, 12], $lineheight: 18px);
+					display: -webkit-box;
+					-webkit-line-clamp: 4;
+					-webkit-box-orient: vertical;
+					overflow: hidden;
+				}
+			}
+		}
+		::ng-deep {
+			.read-more {
+				display: flex;
+				justify-content: space-between;
+
+				a {
+					text-decoration: underline;
+					@include font-nunito-bold($size: 14px, $lineheight: 19px);
+					color: $color-grey;
+					&:hover {
+						color: $color-black;
+						opacity: 0.9;
+					}
+				}
+				h6 {
+					@include font-nunito-semibold($size: [12], $lineheight: 16px);
+					color: $color-grey;
+					margin-bottom: 0;
+				}
+			}
+		}
+	}
+}

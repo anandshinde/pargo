@@ -1,0 +1,22 @@
+<section class="mflooring-tile-text">
+	<mflooring-layout-wrapper
+		[content]="backgroundContent"
+		[presentation]="backgroundPresentation"
+	>
+		<div
+			class="mflooring-tile-text__content"
+			[ngClass]="{ 'has-link': componentHasLink }"
+			[attr.title]="componentHasLink ? componentLinkInfo!.title : null"
+			[attr.role]="componentHasLink ? 'button' : null"
+			[attr.tabindex]="componentHasLink ? 0 : null"
+			(click)="buttonClick(componentLinkInfo!.link)"
+			(keydown.enter)="buttonClick(componentLinkInfo!.link)"
+		>
+			<mflooring-rich-text-compound
+				[content]="textContent"
+				[presentation]="textPresentation"
+			>
+			</mflooring-rich-text-compound>
+		</div>
+	</mflooring-layout-wrapper>
+</section>

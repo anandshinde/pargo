@@ -1,0 +1,32 @@
+<div class="gallery-carousel__item__wrapper">
+	<div class="gallery-carousel__item__image">
+		<mflooring-image-compound
+			[content]="{
+				image: content.image?.content.desktop,
+				imageMobile: content.image?.content.mobile
+			}"
+			[presentation]="content.image?.presentation"
+		>
+		</mflooring-image-compound>
+	</div>
+	<ul class="gallery-carousel__item__description">
+		<li>
+			<p [hidden]="!content.name">
+				<span>Product Name: </span><strong>{{ content.name }}</strong>
+			</p>
+		</li>
+		<li>
+			<p [hidden]="!content.color">
+				<span>Product Color: </span><strong>{{ content.color }}</strong>
+			</p>
+		</li>
+		<li class="gallery-carousel__item__action">
+			<mflooring-link-compound
+				(click)="onCloseCarouselDialog()"
+				[content]="content.cta.content"
+				[presentation]="content.cta.presentation"
+			>
+			</mflooring-link-compound>
+		</li>
+	</ul>
+</div>

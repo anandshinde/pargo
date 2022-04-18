@@ -1,0 +1,25 @@
+@import 'src/styles/tools/tools.mediaquery';
+
+$default-container-gap: 5px;
+$default-container-padding-bottom: 10px;
+$filters-margin-bottom: 10px;
+
+:host {
+	display: none;
+	flex-direction: column;
+	row-gap: $default-container-gap;
+	//padding-bottom: $default-container-padding-bottom;
+
+	@include mq-breakpoint-md() {
+		display: flex;
+	}
+}
+
+:host .gallery-filters__filters {
+	//margin-bottom: $filters-margin-bottom;
+}
+::ng-deep {
+	.cdk-overlay-backdrop.select__options__backdrop.cdk-overlay-backdrop-showing {
+		cursor: pointer;
+	}
+}

@@ -1,0 +1,21 @@
+<ng-container
+	*ngIf="{
+		banner: bannerContent$ | async,
+		resourceBundleData: bannerResourceBundle$ | async
+	} as content"
+>
+	<ng-container *ngIf="bannerType === 'single'">
+		<mflooring-single-banner
+			*ngFor="let banner of content?.banner?.slides"
+			[content]="{
+				banner: banner?.content,
+				resourceBundle: content?.resourceBundleData
+			}"
+			[presentation]="banner?.presentation"
+		></mflooring-single-banner>
+	</ng-container>
+	<ng-container *ngIf="bannerType === 'carousel'">
+		<mflooring-carousel-banner [content]="content?.banner?.slides">
+		</mflooring-carousel-banner>
+	</ng-container>
+</ng-container>

@@ -1,0 +1,381 @@
+<ng-container *ngIf="documentIsConfigured; else please_configure">
+	<ng-container
+		*ngIf="{
+			content: richContentData$ | async,
+			params: richContentParams$ | async
+		} as richContentData"
+	>
+		<!--  <ng-container [brManageContentButton]="document"></ng-container>-->
+		<section
+			class="rich-content bg-color-padding"
+			[ngClass]="{
+				'grey-bg': richContentData.params.greybackground,
+				'bottom-padding':
+					richContentData.params.document ===
+					'rich-content/sustainability-rich-content',
+				'extended-inset':
+					richContentData.params.document ===
+					'rich-content/sustainabilitycolumn'
+			}"
+		>
+			<mflooring-layout-wrapper [presentation]="{ inset: true }">
+				<article
+					inViewNotifier
+					(isVisible)="isInViewport($event)"
+					class="plain-featured"
+				>
+					<div
+						class="rich-content__content"
+						*ngFor="let data of richContentData.content; trackBy: trackBy"
+					>
+						<div
+							class="rich-content__contentItem"
+							*ngFor="let item of data.richContent; trackBy: trackBy"
+						>
+							<mflooring-two-column-compound
+								[class.content-column]="item.value.presentation.ratio !== ''"
+								[presentation]="item?.value?.presentation"
+								*ngIf="item?.type === types.twoColumn"
+							>
+								<div
+									leftColumn
+									[class.content-column-next]="
+										item.value.presentation.ratio !== ''
+									"
+									*ngFor="let item of item?.value?.leftColumn; trackBy: trackBy"
+								>
+									<mflooring-rich-content-component-map [data]="item">
+									</mflooring-rich-content-component-map>
+								</div>
+
+								<div
+									rightColumn
+									[class.content-column-next]="
+										item.value.presentation.ratio !== ''
+									"
+									*ngFor="
+										let item of item?.value?.rightColumn;
+										trackBy: trackBy
+									"
+								>
+									<mflooring-rich-content-component-map [data]="item">
+									</mflooring-rich-content-component-map>
+								</div>
+							</mflooring-two-column-compound>
+
+							<!-- It contains web view for three column compound-->
+							<ng-container
+								*ngIf="!isMobile && item?.type === types.threeColumn"
+							>
+								<mflooring-three-column-compound
+									[ngClass]="{
+										'grey-background': richContentData?.params?.greybackground,
+										sustainability:
+											richContentData.params.document ===
+											'rich-content/sustainabilitycolumn',
+										sustainabilitythreecolumn:
+											richContentData.params.document ===
+											'rich-content/sustainabilitythreecolumn'
+									}"
+									[presentation]="item?.value?.presentation"
+									[content]="item?.value?.content"
+								>
+									<div
+										leftColumn
+										*ngFor="
+											let item of item?.value?.leftColumn;
+											trackBy: trackBy
+										"
+									>
+										<mflooring-rich-content-component-map [data]="item">
+										</mflooring-rich-content-component-map>
+									</div>
+
+									<div
+										middleColumn
+										*ngFor="
+											let item of item?.value?.middleColumn;
+											trackBy: trackBy
+										"
+									>
+										<mflooring-rich-content-component-map [data]="item">
+										</mflooring-rich-content-component-map>
+									</div>
+
+									<div
+										rightColumn
+										*ngFor="
+											let item of item?.value?.rightColumn;
+											trackBy: trackBy
+										"
+									>
+										<mflooring-rich-content-component-map [data]="item">
+										</mflooring-rich-content-component-map>
+									</div>
+								</mflooring-three-column-compound>
+							</ng-container>
+							<!-- Web View Ends -->
+
+							<!-- It contains mobile view for three column compound with and without carousel -->
+							<ng-container
+								*ngIf="isMobile && item?.type === types.threeColumn"
+							>
+								<div
+									class="rich-content__slider"
+									[ngClass]="{
+										sustainability:
+											richContentData.params.document ===
+											'rich-content/sustainabilitythreecolumn'
+									}"
+								>
+									<mflooring-rich-text-compound
+										class="rich-content__slider__title"
+										[presentation]="item?.value?.content?.title?.presentation"
+										[content]="item?.value?.content?.title?.content"
+									>
+									</mflooring-rich-text-compound>
+
+									<div
+										class="carouel-wrapper"
+										*ngIf="richContentData?.params?.ismobilecarousel"
+									>
+										<swiper
+											#richContentThreeColumnCarousel
+											[config]="baseConfig"
+											(swiper)="onSwiper($event)"
+											(breakpoint)="update($event)"
+										>
+											<ng-template swiperSlide>
+												<div
+													leftColumn
+													*ngFor="
+														let item of item?.value?.leftColumn;
+														trackBy: trackBy
+													"
+												>
+													<mflooring-rich-content-component-map [data]="item">
+													</mflooring-rich-content-component-map>
+												</div>
+											</ng-template>
+											<ng-template swiperSlide>
+												<div
+													middleColumn
+													*ngFor="
+														let item of item?.value?.middleColumn;
+														trackBy: trackBy
+													"
+												>
+													<mflooring-rich-content-component-map [data]="item">
+													</mflooring-rich-content-component-map>
+												</div>
+											</ng-template>
+											<ng-template swiperSlide>
+												<div
+													rightColumn
+													*ngFor="
+														let item of item?.value?.rightColumn;
+														trackBy: trackBy
+													"
+												>
+													<mflooring-rich-content-component-map [data]="item">
+													</mflooring-rich-content-component-map>
+												</div>
+											</ng-template>
+										</swiper>
+										<div class="rich-content-3col-navigation">
+											<div
+												class="
+													slider-rich-content-3col
+													rich-content-3col-pagination
+												"
+											></div>
+										</div>
+									</div>
+								</div>
+
+								<mflooring-three-column-compound
+									[ngClass]="{
+										'grey-background': richContentData?.params?.greybackground,
+										sustainability:
+											richContentData.params.document ===
+											'rich-content/sustainabilitycolumn'
+									}"
+									[presentation]="item?.value?.presentation"
+									[content]="item?.value?.content"
+									*ngIf="!richContentData?.params?.ismobilecarousel"
+								>
+									<div
+										leftColumn
+										*ngFor="
+											let item of item?.value?.leftColumn;
+											trackBy: trackBy
+										"
+									>
+										<mflooring-rich-content-component-map [data]="item">
+										</mflooring-rich-content-component-map>
+									</div>
+
+									<div
+										middleColumn
+										*ngFor="
+											let item of item?.value?.middleColumn;
+											trackBy: trackBy
+										"
+									>
+										<mflooring-rich-content-component-map [data]="item">
+										</mflooring-rich-content-component-map>
+									</div>
+
+									<div
+										rightColumn
+										*ngFor="
+											let item of item?.value?.rightColumn;
+											trackBy: trackBy
+										"
+									>
+										<mflooring-rich-content-component-map [data]="item">
+										</mflooring-rich-content-component-map>
+									</div>
+								</mflooring-three-column-compound>
+							</ng-container>
+							<!-- Mobile View Ends -->
+							<section
+								[@animateUp]="(inViewport$ | async) ? 'inview' : 'outview'"
+							>
+								<mflooring-four-column-compound
+									[presentation]="item?.value?.presentation"
+									[content]="item?.value?.content"
+									*ngIf="item?.type === types.fourColumn"
+								>
+									<div
+										firstColumn
+										*ngFor="
+											let item of item?.value?.firstColumn;
+											trackBy: trackBy
+										"
+									>
+										<mflooring-rich-content-component-map [data]="item">
+										</mflooring-rich-content-component-map>
+									</div>
+
+									<div
+										secondColumn
+										*ngFor="
+											let item of item?.value?.secondColumn;
+											trackBy: trackBy
+										"
+									>
+										<mflooring-rich-content-component-map [data]="item">
+										</mflooring-rich-content-component-map>
+									</div>
+
+									<div
+										thirdColumn
+										*ngFor="
+											let item of item?.value?.thirdColumn;
+											trackBy: trackBy
+										"
+									>
+										<mflooring-rich-content-component-map [data]="item">
+										</mflooring-rich-content-component-map>
+									</div>
+
+									<div
+										fourthColumn
+										*ngFor="
+											let item of item?.value?.fourthColumn;
+											trackBy: trackBy
+										"
+									>
+										<mflooring-rich-content-component-map [data]="item">
+										</mflooring-rich-content-component-map>
+									</div>
+								</mflooring-four-column-compound>
+							</section>
+
+							<div
+								[@animateUp]="(inViewport$ | async) ? 'inview' : 'outview'"
+								*ngIf="item?.type === types.richText"
+							>
+								<mflooring-rich-text-compound
+									*ngIf="item?.type === types.richText"
+									[content]="item?.value?.content"
+									[presentation]="{ customClass: 'trend-explore-more' }"
+								>
+								</mflooring-rich-text-compound>
+							</div>
+							<div
+								[@animateUp]="(inViewport$ | async) ? 'inview' : 'outview'"
+								*ngIf="item?.type === types.link"
+							>
+								<mflooring-link-compound
+									*ngIf="item?.type === types.link"
+									[content]="item?.value?.content"
+									[presentation]="item?.value?.presentation"
+								>
+								</mflooring-link-compound>
+							</div>
+							<div
+								[@animateUp]="(inViewport$ | async) ? 'inview' : 'outview'"
+								*ngIf="item?.type === types.image"
+							>
+								<mflooring-image-compound
+									*ngIf="item?.type === types.image"
+									[content]="item?.value?.content"
+									[presentation]="item?.value?.presentation"
+								>
+								</mflooring-image-compound>
+							</div>
+							<mflooring-title-compound
+								*ngIf="item?.type === types.title"
+								[content]="item?.value"
+								[presentation]="item?.presentation"
+							>
+							</mflooring-title-compound>
+
+							<mflooring-quote-compound
+								*ngIf="item?.type === types.quote"
+								[content]="item?.value"
+								[presentation]="item?.presentation"
+							>
+							</mflooring-quote-compound>
+
+							<mflooring-video-player
+								class="video-mohawk"
+								*ngIf="item?.type === types.video"
+								[content]="item?.value?.content"
+								[presentation]="item?.value?.presentation"
+							>
+							</mflooring-video-player>
+							<mflooring-social-tile
+								*ngIf="item?.type === types.socialTile"
+								[content]="item?.value?.content"
+								[presentation]="item?.value?.presentation"
+							>
+							</mflooring-social-tile>
+
+							<mat-accordion
+								*ngIf="item?.type === types.faq"
+								displayMode="flat"
+							>
+								<mflooring-faq-compound
+									[content]="item?.value?.content"
+									[presentation]="item?.value?.presentation"
+								>
+								</mflooring-faq-compound>
+							</mat-accordion>
+						</div>
+						<hr *ngIf="data.richDivider" />
+					</div>
+				</article>
+			</mflooring-layout-wrapper>
+		</section>
+	</ng-container>
+</ng-container>
+
+<ng-template #please_configure>
+	<!--  <mflooring-please-configure-->
+	<!--    [componentName]="name"-->
+	<!--    *ngIf="isPreview"-->
+	<!--  ></mflooring-please-configure>-->
+</ng-template>

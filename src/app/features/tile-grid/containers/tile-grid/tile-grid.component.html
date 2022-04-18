@@ -1,0 +1,72 @@
+<ng-container [brManageContentButton]="document"></ng-container>
+<ng-container
+	*ngIf="{
+		template: tileGridTemplate$ | async,
+		content: tileGridContent$ | async
+	} as data"
+>
+	<div
+		[class.tile-w-findretailer]="data.template.template === 'gridwfindretailer'"
+	>
+		<mflooring-layout-wrapper [presentation]="{ isInset: true }">
+			<mflooring-tile-two-top-column
+				[class.flipped]="data.template.flipped"
+				*ngIf="data.template.template === 'grid2topcolumn'"
+			>
+				<ng-container *ngTemplateOutlet="tileGridItems"></ng-container>
+			</mflooring-tile-two-top-column>
+			<mflooring-tile-two-bottom-column
+				*ngIf="data.template.template === 'grid2bottomcolumn'"
+			>
+				<ng-container *ngTemplateOutlet="tileGridItems"></ng-container>
+			</mflooring-tile-two-bottom-column>
+			<ng-container *ngIf="data.template.template === 'gridwfindretailer'">
+				<mflooring-tile-item-w-findretailer class="tile-w-findretailer">
+					<ng-container *ngTemplateOutlet="tileGridItems"></ng-container>
+				</mflooring-tile-item-w-findretailer>
+			</ng-container>
+		</mflooring-layout-wrapper>
+
+		<ng-template #tileGridItems>
+			<ng-container
+				*ngFor="let item of data.content; let i = index; trackBy: trackBy"
+			>
+				<mflooring-tile-item
+					[content]="item"
+					*ngIf="i < tileCount"
+					[templateType]="data?.template.template"
+				>
+				</mflooring-tile-item>
+			</ng-container>
+		</ng-template>
+
+		<div
+			class="toggle-items"
+			*ngIf="
+				data.template.template === 'grid2topcolumn' && data.content.length > 4
+			"
+		>
+			<a
+				class="show-more-items"
+				*ngIf="data.content.length > tileCount && tileCount < 6"
+				(click)="loadMore()"
+			>
+				View More Styles
+			</a>
+			<a
+				class="show-less-items"
+				*ngIf="(data.content.length < tileCount || tileCount >= 5) && show"
+				(click)="loadless();scrollToTop()"
+			>
+				Show Less Styles
+			</a>
+		</div>
+	</div>
+</ng-container>
+
+<ng-template #please_configure>
+	<mflooring-please-configure
+		[componentName]="name"
+		*ngIf="isPreview"
+	></mflooring-please-configure>
+</ng-template>

@@ -1,0 +1,76 @@
+<section class="menu-mobile">
+	<a
+		class="menu-mobile__hamburger"
+		href="Javascript:void(0);"
+		[matMenuTriggerFor]="mobileMenu"
+		[matMenuTriggerData]="{ menuItemsRender: menuItemsRender, page: page }"
+		(menuOpened)="menuOpened(true)"
+		(menuClosed)="menuOpened(false)"
+	>
+		<span class="icon-" [hidden]="isMenuOpened">
+			{{ !!mainHeaderData && mainHeaderData['hamburger']['icon'] }}
+		</span>
+		<span class="icon-" [hidden]="!isMenuOpened">
+			{{ !!mainHeaderData && mainHeaderData['close']['icon'] }}
+		</span>
+	</a>
+	<mflooring-menu-item
+		[site]="logoUrl?._links?.site"
+		[page]="page"
+		[routerLink]="['/']"
+	>
+		<mflooring-logo
+			class="menu-mobile__logo"
+			[content]="logoContent"
+			[presentation]="logoPresentation"
+		></mflooring-logo>
+	</mflooring-menu-item>
+
+	<div class="mobile-icons">
+		<div class="main-header-search" (click)="openSearch()">
+			<!-- <span class="main-header-search--icon icon-" id="search">search</span> -->
+			<mflooring-icon-button
+				[presentation]="{
+					size: 'medium',
+					type: '',
+					iconName: 'search'
+				}"
+				class="menu-utility__icon"
+			></mflooring-icon-button>
+		</div>
+		<div>
+			<a captureClicks href="/login">
+				<!-- <span class="menu-utility__icon icon-">account</span> -->
+				<mflooring-icon-button
+					[presentation]="{
+						size: 'medium',
+						type: '',
+						iconName: 'account'
+					}"
+					class="menu-utility__icon"
+				></mflooring-icon-button>
+			</a>
+		</div>
+		<div>
+			<mflooring-icon-button
+				[presentation]="{
+					size: 'medium',
+					type: '',
+					iconName: 'bag'
+				}"
+				class="menu-utility__icon"
+			></mflooring-icon-button>
+		</div>
+	</div>
+</section>
+
+<mat-menu #mobileMenu="matMenu" yPosition="below" class="menu-mobile__menu">
+	<ng-template
+		matMenuContent
+		let-menuItemsRender="menuItemsRender"
+		let-page="page"
+	>
+		<mflooring-expansion-menu-mobile [items]="menuItemsRender" [page]="page">
+		</mflooring-expansion-menu-mobile>
+	</ng-template>
+</mat-menu>

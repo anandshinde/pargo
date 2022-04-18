@@ -1,0 +1,187 @@
+@import 'src/styles/settings/settings.colors';
+@import 'src/styles/elements/elements.lists';
+@import 'src/styles/elements/elements.links';
+@import 'src/styles/tools/tools.typography';
+
+.my-account-favorites {
+	&__list {
+		padding: 0px;
+		@include mq-breakpoint-md() {
+			padding: 0px 0 0 15px;
+		}
+	}
+
+	ul {
+		display: block;
+		flex-wrap: wrap;
+		@include reset-list();
+		margin: 0;
+		@include mq-breakpoint-md() {
+			display: flex;
+		}
+	}
+
+	li {
+		padding: 0px 30px;
+		margin-bottom: 60px;
+		@include mq-breakpoint-md() {
+			padding: 0;
+			&:nth-child(2n) {
+				margin-left: 60px;
+			}
+		}
+	}
+}
+
+.favorite {
+	display: flex;
+	align-items: flex-start;
+	@include mq-breakpoint-md() {
+	}
+	&__image {
+		height: 100px;
+		position: relative;
+		margin-right: 15px;
+
+		.close-icon {
+			position: absolute;
+			top: 10px;
+			right: 5px;
+			color: white;
+			z-index: 1;
+			font-size: 14px;
+			cursor: pointer;
+			.icon- {
+				font-weight: bold;
+			}
+		}
+		::ng-deep img {
+			height: 130px;
+			width: 130px;
+			@include mq-breakpoint-md() {
+				height: 115px;
+				width: 115px;
+			}
+		}
+		::ng-deep img {
+			height: 100px;
+			width: 100px;
+		}
+
+		mflooring-image-compound {
+			display: block;
+			width: 100px;
+
+			::ng-deep picture {
+				img {
+					height: 100px;
+					width: 100px;
+				}
+			}
+		}
+	}
+
+	// &__code {
+	// 	display: none;
+	// }
+
+	&__details {
+		padding: 0;
+		min-height: 80px;
+
+		&__title {
+			grid-area: title;
+			text-align: left;
+			color: $mohawk-black;
+			@include font-nunito-bold($size: [18, 16]);
+			line-height: 24px;
+			@include mq-breakpoint-md() {
+				line-height: 22px;
+			}
+		}
+		&__sub-title {
+			grid-area: title;
+			text-align: left;
+			color: $color-grey;
+			text-transform: uppercase;
+			margin-bottom: 10px;
+			@include font-nunito-bold($size: [9, 8]);
+			line-height: 12px;
+			@include mq-breakpoint-md() {
+				line-height: 11px;
+			}
+		}
+		&__style {
+			min-height: 45px;
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
+			margin-bottom: 10px;
+			.box {
+				display: flex;
+				align-items: center;
+				&__left {
+					padding-right: 15px;
+					@include font-nunito-bold($size: [9, 8]);
+					line-height: 12px;
+					text-transform: uppercase;
+					@include mq-breakpoint-md() {
+						line-height: 11px;
+					}
+				}
+				&__right {
+					@include font-nunito-regular($size: [13, 12]);
+					line-height: 18px;
+					@include mq-breakpoint-md() {
+						line-height: 16px;
+					}
+				}
+			}
+		}
+		&__button {
+			padding: 0;
+			margin: 0;
+			color: $color-teal;
+			background: none;
+			cursor: pointer;
+			text-decoration: underline;
+			@include font-nunito-bold($size: [16, 12]);
+			line-height: 22px;
+			@include mq-breakpoint-md() {
+				line-height: 16px;
+			}
+			&:hover {
+				text-decoration: none;
+			}
+		}
+
+		// 	&__action {
+		// 		grid-area: actions;
+		// 		text-align: right;
+		// 	}
+
+		// 	button {
+		// 		&:first-child {
+		// 			color: $color-teal;
+		// 		}
+		// 	}
+		// }
+
+		// .bag {
+		// 	&.active {
+		// 		color: $color-teal;
+		// 	}
+	}
+}
+
+button {
+	@include reset-button();
+}
+
+.icon- {
+	cursor: pointer;
+}
+
+.ismflooringextreme {
+	width: 50px;
+}

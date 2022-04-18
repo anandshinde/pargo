@@ -1,0 +1,84 @@
+@import 'src/styles/settings/settings.colors';
+
+@import 'src/styles/tools/tools.typography';
+
+@import 'src/styles/tools/tools.mediaquery';
+
+@import 'src/styles/elements/elements.lists';
+
+:host {
+	display: block;
+	position: relative;
+}
+
+:host::ng-deep {
+	.breadcrumb {
+		.menu-utility__icon {
+			button.size-xsmall {
+				padding: 15px 0;
+			}
+		}
+		button {
+			.icon- {
+				left: 0% !important;
+				transform: translate(0%, -50%) !important;
+			}
+		}
+	}
+}
+
+ul {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: flex-start;
+	// margin: 20px auto;
+
+	@include reset-list();
+}
+
+li {
+	display: flex;
+	align-items: center;
+}
+
+.breadcrumb {
+	text-transform: capitalize;
+	// margin-right: 10px;
+	@include font-nunito-regular($size: 14px);
+
+	&:first-child {
+		margin-left: 0;
+	}
+	a {
+		&:first-child {
+			margin-left: 0;
+		}
+	}
+
+	&-icon {
+		font-size: 5px;
+		font-weight: 900;
+	}
+
+	.home-icon {
+		margin-right: 5px;
+	}
+
+	a,
+	.label {
+		color: $color-black;
+		text-decoration: none;
+		margin-right: 10px;
+		@include font-nunito-semibold($size: 13px);
+	}
+
+	svg {
+		display: none;
+
+		@include mq-breakpoint-md() {
+			display: inline;
+			margin-right: 5px;
+		}
+	}
+}

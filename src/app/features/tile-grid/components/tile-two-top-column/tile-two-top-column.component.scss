@@ -1,0 +1,147 @@
+@import './src/styles/tools/tools.mediaquery';
+@import './src/styles/tools/tools.typography';
+@import './src/styles/settings/settings.colors';
+@import './src/styles/components/components.rich-text';
+@import './src/styles/components/components.tile-grid';
+
+$default-column-width-desktop-max: 469px;
+$default-padding-desktop: 15px;
+$default-padding-mobile: 25px;
+
+
+:host {
+	display: grid;
+	grid-template-columns: 100%;
+	grid-auto-rows: auto;
+	margin-bottom: 10px;
+	grid-template-areas:
+		'first'
+		'second'
+		'third'
+		'fourth'
+		'fifth'
+		'sixth';
+
+	@include mq-breakpoint-md() {
+		grid-template-columns: repeat(
+			5,
+			minmax(
+				$default-column-width-desktop-min,
+				100%
+			)
+		);
+		margin-bottom: 30px;
+		column-gap: 15px;
+		grid-template-areas:
+			'first first first  second second'
+			'third third third  second second'
+			'fourth fourth fourth  fourth fourth'
+			'fifth fifth sixth  sixth sixth';
+	}
+
+	::ng-deep {
+		mflooring-layout-wrapper {
+			img,
+			picture {
+				border-radius: 5px;
+			}
+			.layout-container {
+				&__grid {
+					&__area {
+						border-radius: 5px;
+						background: $color-black-linear-gradient;
+					}
+				}
+			}
+		}
+		@include mq-breakpoint-md() {
+			mflooring-layout-wrapper {
+				.layout-container {
+					&__grid {
+						&__area {
+							border-radius: 5px;
+							background: $color-black-linear-gradient;
+						}
+					}
+				}
+			}
+		}
+		mflooring-tile-item {
+			height: 100%;
+			min-height: 313px;
+
+			@include mq-breakpoint-md() {
+				min-height: 313px;
+			}
+			.text {
+				width: auto;
+				height: auto;
+				text-align: left;
+				color: $secondary-color;
+				opacity: 1;
+				letter-spacing: 0px;
+				h2 {
+					@include font-nunito-regular($size: 26px, $lineheight: 35px);
+				}
+			}
+
+			&:nth-child(1) {
+				grid-area: first;
+				padding-bottom: $default-padding-mobile;
+
+				@include mq-breakpoint-md() {
+					min-height: 250px;
+					padding-bottom: $default-padding-desktop;
+				}
+			}
+
+			&:nth-child(2) {
+				padding-bottom: $default-padding-mobile;
+
+				grid-area: second;
+				@include mq-breakpoint-md() {
+					min-height: 475px;
+					padding-bottom: 15px;
+				}
+			}
+
+			&:nth-child(3) {
+				padding-bottom: $default-padding-mobile;
+
+				grid-area: third;
+				@include mq-breakpoint-md() {
+					padding-bottom: 15px;
+					min-height: 205px;
+				}
+			}
+
+			&:nth-child(4) {
+				padding-bottom: $default-padding-mobile;
+
+				grid-area: fourth;
+				@include mq-breakpoint-md() {
+					padding-bottom: $default-padding-desktop;
+					min-height: 298px;
+				}
+			}
+			&:nth-child(5) {
+				padding-bottom: $default-padding-mobile;
+
+				grid-area: fifth;
+				@include mq-breakpoint-md() {
+					padding-bottom: $default-padding-desktop;
+					min-height: 415px;
+
+				}
+			}
+			&:nth-child(6) {
+				padding-bottom: $default-padding-mobile;
+				grid-area: sixth;
+				@include mq-breakpoint-md() {
+					padding-bottom: $default-padding-desktop;
+					min-height: 415px;
+				}
+			}
+		}
+	}
+}

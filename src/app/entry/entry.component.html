@@ -1,0 +1,38 @@
+<!--<br-page [configuration]="configuration" [mapping]="mapping">-->
+<!--	<ng-template let-page="page">-->
+<!--		<mflooring-single-column [page]="getPageTemplate(page)"></mflooring-single-column>-->
+<!--	</ng-template>-->
+<!--</br-page>-->
+<br-page
+	[configuration]="configuration"
+	[mapping]="mapping"
+	(state)="setVisitor($event)"
+>
+	<ng-template let-page="page">
+		<div class="single-page-container">
+			<section class="meta">
+				<ng-container brComponent="metadata"></ng-container>
+			</section>
+			<header>
+				<nav class="navbar" role="navigation">
+					<ng-container
+						brComponent="header-navigation/header-container"
+					></ng-container>
+				</nav>
+			</header>
+			<section class="main-body">
+				<ng-container brComponent="drop-zone-1"></ng-container>
+				<ng-container brComponent="drop-zone-2"></ng-container>
+				<ng-container
+					brComponent="form/{{ getPageTemplate(page) }}"
+					*ngIf="getPageTemplate(page) !== 'single-column'"
+				></ng-container>
+				<ng-container brComponent="drop-zone-3"></ng-container>
+				<ng-container brComponent="drop-zone-4"></ng-container>
+			</section>
+			<footer>
+				<ng-container brComponent="footer/footer-container"></ng-container>
+			</footer>
+		</div>
+	</ng-template>
+</br-page>

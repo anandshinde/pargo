@@ -1,0 +1,155 @@
+@import 'src/styles/settings/settings.colors';
+@import 'src/styles/elements/elements.lists';
+@import 'src/styles/elements/elements.links';
+@import 'src/styles/settings/settings.containers';
+@import 'src/styles/tools/tools.mediaquery';
+@import './src/styles/settings/settings.colors';
+@import 'src/styles/tools/tools.typography';
+
+::ng-deep {
+	.order-tab {
+		width: 100%;
+		a {
+			@include font-nunito-regular($size: 12px, $lineheight: 16px);
+			text-decoration: underline;
+			color: $color-teal;
+			&:hover {
+				text-decoration: none;
+			}
+		}
+	}
+}
+
+.order-history {
+	table-layout: fixed;
+	width: 100%;
+
+	.table-grid {
+		min-height: 300px;
+		table {
+			position: relative;
+			width: 100%;
+			color: $mohawk-black;
+			border: 0;
+			padding: 0;
+			margin: 0;
+			tbody {
+				tr {
+					&.active,
+					&:hover {
+						background: $color-extra-light-grey;
+					}
+				}
+			}
+			th,
+			td {
+				padding-left: 10px;
+				padding-right: 10px;
+			}
+			td {
+				@include font-nunito-regular($size: 12px, $lineheight: 16px);
+				padding-top: 15px;
+				padding-bottom: 20px;
+			}
+			.table-header {
+				text-transform: uppercase;
+				@include mq-breakpoint-md() {
+					padding-bottom: 10px;
+					@include font-nunito-extrabold($size: 10px);
+					border-bottom: 1px solid $color-grey-light;
+				}
+				&.date {
+					width: 20%;
+				}
+				&.order {
+					width: 15%;
+				}
+				&.product {
+					width: 45%;
+				}
+				&.qty {
+					width: 10%;
+				}
+				&.total {
+					width: 10%;
+				}
+			}
+		}
+	}
+	.bottom-section {
+		display: flex;
+		padding-top: 15px;
+		color: $mohawk-black;
+		&__left {
+			width: 40%;
+			@include font-nunito-regular($size: 10px, $lineheight: 14px);
+		}
+		&__right {
+			text-align: right;
+			width: 60%;
+			@include font-nunito-regular($size: 12px, $lineheight: 16px);
+		}
+	}
+
+	.order-history-mobile-view {
+		&__card {
+			border-radius: 10px;
+			box-shadow: 0px 5px 25px #0000001a;
+			padding: 30px 20px;
+			margin-bottom: 25px;
+			.card-title {
+				color: $color-grey;
+				margin-bottom: 20px;
+				@include font-nunito-semibold($size: 17px, $lineheight: 25px);
+			}
+			.mobile-table-grid {
+				table {
+					width: 100%;
+					th {
+						color: $mohawk-black;
+						border: 0;
+						padding: 0 0 15px 0;
+						margin: 0;
+						text-decoration: underline;
+						@include font-nunito-extrabold($size: 12px, $lineheight: 16px);
+						text-align: right;
+						&:first-child {
+							width: 80%;
+							text-align: left;
+						}
+					}
+					td {
+						padding-bottom: 3px;
+						text-align: right;
+						&:first-child {
+							text-align: left;
+						}
+					}
+				}
+				.bottom-btn {
+					padding-top: 20px;
+					text-align: center;
+					display: flex;
+					justify-content: center;
+					button {
+						outline: none;
+						border: 1px solid;
+						border-radius: 5px;
+						padding: 10px 25px;
+						cursor: pointer;
+						text-decoration: none;
+						text-align: center;
+						color: $color-white;
+						background-color: $mohawk-black;
+						@include font-nunito-regular($size: 17px, $lineheight: 23px);
+						width: 100%;
+						@include mq-breakpoint-md() {
+							@include font-nunito-bold($size: 10px, $lineheight: 14px);
+							width: auto;
+						}
+					}
+				}
+			}
+		}
+	}
+}

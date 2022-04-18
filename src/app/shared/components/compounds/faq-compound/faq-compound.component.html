@@ -1,0 +1,181 @@
+<mat-expansion-panel
+  [expanded]="isOpened"
+  [ngClass]="[themeClass, typeClass]"
+  hideToggle="true"
+  (afterExpand)="callPanelOpener(content?.title?.content)"
+  (afterCollapse)="
+		isExpanded = false;
+		selectedAccIndex === index ? callPanelClossed(index) : null
+	"
+>
+  <mat-expansion-panel-header
+    [class.expansion-panel-header--dark]="headerIsDark"
+    [class.expansion-panel-header--blue]="headerIsBlue"
+    [class.no-top-border]="index === selectedAccIndex + 1"
+  >
+    <mat-panel-title [ngClass]="[headerAlignment]">
+      <ng-container *ngIf="isReadMore">
+        <mflooring-rich-text-compound
+          *ngIf="!isExpanded"
+          [content]="content?.title?.content"
+          [presentation]="content?.title?.presentation"
+        ></mflooring-rich-text-compound>
+        <mflooring-rich-text-compound
+          *ngIf="isExpanded"
+          [content]="readLess"
+          [presentation]="content?.title?.presentation"
+        ></mflooring-rich-text-compound>
+      </ng-container>
+      <ng-container *ngIf="!isReadMore">
+        <mflooring-rich-text-compound
+          [content]="content?.title?.content"
+          [presentation]="content?.title?.presentation"
+        ></mflooring-rich-text-compound>
+      </ng-container>
+      <ng-container *ngIf="isExpanded">
+        <mflooring-icon-button
+          [presentation]="{
+						size: 'xsmall',
+						type: '',
+						iconName: 'caret-up'
+					}"
+          class="menu-utility__icon"
+        ></mflooring-icon-button>
+      </ng-container>
+      <ng-container *ngIf="!isExpanded">
+        <mflooring-icon-button
+          [presentation]="{
+						size: 'xsmall',
+						type: '',
+						iconName: 'caret-down'
+					}"
+          class="menu-utility__icon"
+        ></mflooring-icon-button>
+      </ng-container>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <ng-container *ngFor="let collapsed of content?.collapsed">
+    <mflooring-rich-text-compound
+      *ngIf="collapsed?.type === types.richText"
+      [content]="collapsed?.value?.content"
+      [presentation]="collapsed?.value?.presentation"
+    >
+    </mflooring-rich-text-compound>
+    <mflooring-image-compound
+      *ngIf="collapsed?.type === types.image"
+      [content]="{image: collapsed?.value?.content?.desktop}"
+      [presentation]="collapsed?.value?.presentation"
+    >
+    </mflooring-image-compound>
+    <mflooring-pdf-compound
+      *ngIf="collapsed?.type === types.pdf"
+      [content]="collapsed?.value?.content"
+      [presentation]="collapsed?.value?.presentation"
+    >
+    </mflooring-pdf-compound>
+    <mflooring-video-player
+      *ngIf="collapsed?.type === types.video"
+      [content]="collapsed?.value?.content"
+      [presentation]="collapsed?.value?.presentation"
+    >
+    </mflooring-video-player>
+
+    <mflooring-two-column-compound
+      [presentation]="collapsed?.value?.presentation"
+      *ngIf="collapsed?.type === types.twoColumn"
+    >
+      <div
+        leftColumn
+        *ngFor="let item of collapsed?.value?.leftColumn; trackBy: trackBy"
+      >
+        <mflooring-rich-content-component-map [data]="item">
+        </mflooring-rich-content-component-map>
+      </div>
+
+      <div
+        rightColumn
+        *ngFor="let item of collapsed?.value?.rightColumn; trackBy: trackBy"
+      >
+        <mflooring-rich-content-component-map [data]="item">
+        </mflooring-rich-content-component-map>
+      </div>
+    </mflooring-two-column-compound>
+
+    <mflooring-three-column-compound
+      [presentation]="collapsed?.value?.presentation"
+      [content]="collapsed?.value?.content"
+      *ngIf="collapsed?.type === types.threeColumn"
+    >
+      <div
+        leftColumn
+        *ngFor="let item of collapsed?.value?.leftColumn; trackBy: trackBy"
+      >
+        <mflooring-rich-content-component-map [data]="item">
+        </mflooring-rich-content-component-map>
+      </div>
+
+      <div
+        middleColumn
+        *ngFor="let item of collapsed?.value?.middleColumn; trackBy: trackBy"
+      >
+        <mflooring-rich-content-component-map [data]="item">
+        </mflooring-rich-content-component-map>
+      </div>
+
+      <div
+        rightColumn
+        *ngFor="let item of collapsed?.value?.rightColumn; trackBy: trackBy"
+      >
+        <mflooring-rich-content-component-map [data]="item">
+        </mflooring-rich-content-component-map>
+      </div>
+    </mflooring-three-column-compound>
+
+    <mflooring-four-column-compound
+      [presentation]="collapsed?.value?.presentation"
+      [content]="collapsed?.value?.content"
+      *ngIf="collapsed?.type === types.fourColumn"
+    >
+      <div
+        firstColumn
+        *ngFor="let item of collapsed?.value?.first; trackBy: trackBy"
+      >
+        <mflooring-rich-content-component-map [data]="item">
+        </mflooring-rich-content-component-map>
+      </div>
+
+      <div
+        secondColumn
+        *ngFor="let item of collapsed?.value?.second; trackBy: trackBy"
+      >
+        <mflooring-rich-content-component-map [data]="item">
+        </mflooring-rich-content-component-map>
+      </div>
+
+      <div
+        thirdColumn
+        *ngFor="let item of collapsed?.value?.third; trackBy: trackBy"
+      >
+        <mflooring-rich-content-component-map [data]="item">
+        </mflooring-rich-content-component-map>
+      </div>
+
+      <div
+        fourthColumn
+        *ngFor="let item of collapsed?.value?.fourth; trackBy: trackBy"
+      >
+        <mflooring-rich-content-component-map [data]="item">
+        </mflooring-rich-content-component-map>
+      </div>
+    </mflooring-four-column-compound>
+
+    <mflooring-sqfoot-compound
+      *ngIf="
+				collapsed?.type === types.sqftCalculator &&
+				collapsed?.value?.presentation?.showCalculator === true
+			"
+      [presentation]="collapsed?.value?.presentation"
+    >
+    </mflooring-sqfoot-compound>
+  </ng-container>
+</mat-expansion-panel>

@@ -1,0 +1,213 @@
+@import 'src/styles/tools/tools.mediaquery';
+
+@import 'src/styles/tools/tools.typography';
+
+@import 'src/styles/settings/settings.colors';
+
+@import 'src/styles/settings/settings.containers';
+
+@import 'src/styles/settings/settings.z-layers';
+
+@import 'src/styles/elements/elements.links';
+
+@import 'src/styles/elements/elements.lists';
+
+$header-sizes: [16, 16];
+$default-space-x: 10px;
+$default-gap-x: 7px;
+
+ul {
+	@include reset-list();
+}
+
+:host {
+	display: none;
+	background-color: $color-white;
+
+	@include mq-breakpoint-md() {
+		display: block;
+	}
+
+	.menu-utility {
+		display: inline-flex;
+		align-items: center;
+		justify-content: flex-end;
+		// position: absolute;
+		// min-width: 120px;
+		margin: 0;
+		// right: 10px;
+		// top: 30px;
+		z-index: 1;
+
+		&__item {
+			// padding: 0 10px;
+			@include font-nunito-light(17);
+
+			@include mq-breakpoint-md() {
+				&:last-child {
+					margin-right: $default-space-x;
+				}
+			}
+
+			// &:last-child > * {
+			// 	margin-right: -$default-space-x;
+			// }
+
+			.main-header-search {
+				z-index: 1000;
+
+				&--text,
+				&--icon {
+					color: $color-black;
+					@include font-nunito-light(20);
+					@include mq-breakpoint-md() {
+						@include font-nunito-light(17);
+					}
+				}
+
+				& .icon- {
+					padding-left: 0px;
+					cursor: pointer;
+					color: $color-black;
+				}
+			}
+			a {
+				color: $color-black;
+			}
+			::ng-deep .icon- {
+				font-size: 20px;
+			}
+			::ng-deep button {
+				border: 0;
+				color: $color-black;
+				background: none;
+			}
+		}
+	}
+}
+
+::ng-deep {
+	.container-grid-area {
+		position: relative;
+	}
+	.menu-desktop__link > * {
+		// display: flex !important;
+		// align-items: center;
+		// justify-content: center;
+		height: 100%;
+		color: $color-black !important;
+		text-decoration: none;
+		outline: none;
+		text-align: center;
+		cursor: pointer;
+		padding: 0px 0;
+		text-transform: capitalize;
+		@include font-nunito-bold($size: $header-sizes);
+	}
+}
+
+.menu-desktop {
+	display: grid;
+	grid-template-columns: 1fr 1fr 240px 1fr 1fr;
+	width: 100%;
+	margin: 0px 0 0 0;
+
+	@include mq-breakpoint-md() {
+		grid-template-columns: 1fr 1fr 170px 1fr 1fr;
+	}
+
+	@include mq-breakpoint-lg() {
+		grid-template-columns: 1fr 1fr 240px 1fr 1fr;
+	}
+
+	&__nav {
+		width: 100%;
+		margin: 0 auto;
+		padding: 10px 0;
+	}
+
+	&__item {
+		flex: 1;
+		position: relative;
+		white-space: nowrap;
+		padding: 0 10px 20px 10px;
+		display: inline-flex;
+		align-items: flex-end;
+		justify-content: center;
+		@include mq-breakpoint-lg() {
+			min-width: 140px;
+		}
+		@include mq-breakpoint-xl() {
+			min-width: 160px;
+		}
+		&:last-of-type > mflooring-main-expansion-panel-desktop {
+			left: 25%;
+
+			@include mq-breakpoint-lg() {
+				left: 50%;
+			}
+		}
+		&:nth-child(3) {
+			padding-bottom: 5px;
+		}
+	}
+
+	&__logo {
+		margin-left: auto;
+		margin-right: auto;
+		width: 175px;
+		a {
+			padding-bottom: 5px;
+		}
+	}
+	::ng-deep {
+		button {
+			height: auto !important;
+			.icon- {
+				transform: translate(-50%, -100%) !important;
+			}
+		}
+	}
+}
+
+mflooring-main-expansion-panel-desktop {
+	z-index: $z-layer-main-nav;
+	display: block;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	top: 100%;
+	max-width: 200px;
+}
+
+.header-item {
+	display: flex;
+	width: 100%;
+	margin: auto;
+	align-items: center;
+
+	> div {
+		width: calc(100% - 110px);
+	}
+
+	@include mq-breakpoint-md() {
+		> div:first-child {
+			min-width: 0px !important;
+			display: none !important;
+			transition: width 1s;
+		}
+	}
+	@include mq-breakpoint-xl() {
+		> div:first-child {
+			min-width: 110px !important;
+			display: inline-flex !important;
+		}
+	}
+	> div:first-child,
+	> div:last-child {
+		min-width: 110px;
+		justify-content: flex-end;
+		display: inline-flex;
+		width: auto;
+	}
+}

@@ -1,0 +1,129 @@
+@import 'src/styles/tools/tools.mediaquery';
+@import 'src/styles/tools/tools.typography';
+@import 'src/styles/elements/elements.links';
+@import 'src/styles/elements/elements.lists';
+
+.retailer-results {
+	margin-top: 20px;
+
+	@include mq-breakpoint-md() {
+		margin-top: 50px;
+	}
+
+	&__search{
+		box-shadow: 0 5px 5px rgb(0 0 0 / 20%);
+		padding-bottom: 15px;
+		position: relative;
+    	z-index: 1;
+	}
+
+	header {
+		display: flex;
+		flex-direction: column;
+
+		form {
+			text-align: center;
+
+			button {
+				text-decoration: underline;
+				cursor: pointer;
+				color:$mohawk-black;
+				@include reset-button();
+				@include font-nunito-semibold($size: [14, 14], $lineheight: 1.3);
+			}
+		}
+
+		h2 {
+			text-align: center;
+			margin-bottom: 10px;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: center;
+			color:$mohawk-black;
+            @include font-nunito-regular($size: [16, 16], $lineheight: 1.3);
+
+			@include mq-breakpoint-md() {
+				flex-direction: row;
+			}
+		}
+
+		input {
+			border-width:  1px;
+			border-color: $color-grey;
+			color:$mohawk-black;
+            border-radius: rem(5);
+			border-style: solid;
+			padding: rem(5) rem(5);
+			margin-left: 10px;
+			text-align: left;
+			width: 120px;
+            @include font-nunito-bold($size: [17, 16], $lineheight: 1.3);
+
+			&:focus {
+				border-width: 1px;
+                border-color: $color-grey;
+				// box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+			}
+
+			&::-webkit-inner-spin-button,
+			&::-webkit-outer-spin-button {
+				-webkit-appearance: none;
+				margin: 0;
+			}
+		}
+	}
+
+	&__view-more {
+		margin: 40px 0;
+		display: flex;
+		justify-content: center;
+		color:$mohawk-black;
+
+		button {
+			color: $color-grey !important;
+			text-decoration: underline;
+			@include font-nunito-regular($size: [13, 15], $lineheight: 1.3);
+			@include button();
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+}
+
+.example-section {
+	display: flex;
+	align-content: center;
+	align-items: center;
+	height: 60px;
+}
+
+.retailer__sortBy{
+	display: flex;
+	border-radius: rem(5);
+	background-color: $color-extra-light-grey;
+	align-items: center;
+	margin-top: 30px;
+	padding:10px 20px;
+	p{
+		margin-right: 10px;
+		margin-bottom: 0;
+		white-space: nowrap;
+		color:$mohawk-black;
+		@include font-nunito-bold($size: [14, 12], $lineheight: 1.3);
+	}
+
+	mflooring-retailer-type-toggle{
+		width:100%
+	}
+
+	@include mq-breakpoint-md() {
+		mflooring-retailer-type-toggle{
+			width:100%;
+			max-width: 209px;
+		}
+	}
+	
+}

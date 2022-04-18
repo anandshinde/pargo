@@ -1,0 +1,161 @@
+<section class="my-account-favorites">
+	<!-- <div
+		class="my-account-favorites__list"
+		*ngIf="favorites$ | async as favorites"
+	> -->
+	<div class="my-account-favorites__list">
+		<!-- <ng-container *ngIf="favorites?.length > 0; else noresults"> -->
+		<ng-container>
+			<ul>
+				<!-- <li *ngFor="let content of favorites"> -->
+				<li>
+					<div class="favorite">
+						<div class="favorite__image">
+							<button
+								class="close-icon"
+								(click)="deleteFavorite(content?.productCode)"
+							>
+								<span class="icon-">close</span>
+							</button>
+							<a href="{{ content?.details?.pdp_url }}">
+								<img
+									src="https://s7d4.scene7.com/is/image/MohawkResidential/mf_discovertrendsname_assets_04?scl=1"
+								/>
+
+								<!-- <mflooring-image-compound
+										[content]="{
+											desktop: {
+												original: {
+													url: content?.details?.sku_swatch_images
+												}
+											}
+										}"
+									></mflooring-image-compound> -->
+							</a>
+							<!-- <div class="favorite__code">
+									Product Code {{ content?.productCode }}
+								</div> -->
+						</div>
+						<div class="favorite__details">
+							<!-- <div
+									class="favorite__details__logo"
+									[ngClass]="{
+										ismflooringextreme:
+											content?.details?.brand?.includes('mflooring Extreme') ===
+											true
+									}"
+								>
+									<mflooring-image-compound
+										[content]="{
+											desktop: {
+												original: {
+													url: content?.details?.collection_logo
+												}
+											}
+										}"
+									></mflooring-image-compound>
+								</div> -->
+							<!-- <div class="favorite__details__action">
+									<button>
+										<span class="icon-">heart</span>
+									</button>
+									<span>|</span>
+									<button (click)="handleCartButtonClick($event, content)">
+										<span
+											class="bag icon-"
+											[ngClass]="{
+												active: isInCart$(content?.productCode) | async
+											}"
+											>cart</span
+										>
+									</button>
+								</div> -->
+							<div class="favorite__details__title">
+								RevWood Plus
+								<!-- {{ content?.details?.sku_color }} -->
+							</div>
+							<div class="favorite__details__sub-title">HARDWOOD FLOORING</div>
+							<div class="favorite__details__style">
+								<div class="box">
+									<div class="box__left">STYLE:</div>
+									<div class="box__right">Style Name</div>
+								</div>
+								<div class="box">
+									<div class="box__left">STYLE:</div>
+									<div class="box__right">Style Name</div>
+								</div>
+							</div>
+							<button class="favorite__details__button">View Detail</button>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="favorite">
+						<div class="favorite__image">
+							<button
+								class="close-icon"
+								(click)="deleteFavorite(content?.productCode)"
+							>
+								<span class="icon-">close</span>
+							</button>
+							<a href="{{ content?.details?.pdp_url }}">
+								<img
+									src="https://s7d4.scene7.com/is/image/MohawkResidential/mf_discovertrendsname_assets_04?scl=1"
+								/>
+							</a>
+						</div>
+						<div class="favorite__details">
+							<div class="favorite__details__title">RevWood Plus</div>
+							<div class="favorite__details__sub-title">HARDWOOD FLOORING</div>
+							<div class="favorite__details__style">
+								<div class="box">
+									<div class="box__left">STYLE:</div>
+									<div class="box__right">Style Name</div>
+								</div>
+								<div class="box">
+									<div class="box__left">STYLE:</div>
+									<div class="box__right">Style Name</div>
+								</div>
+							</div>
+							<button class="favorite__details__button">View Detail</button>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="favorite">
+						<div class="favorite__image">
+							<button
+								class="close-icon"
+								(click)="deleteFavorite(content?.productCode)"
+							>
+								<span class="icon-">close</span>
+							</button>
+							<a href="{{ content?.details?.pdp_url }}">
+								<img
+									src="https://s7d4.scene7.com/is/image/MohawkResidential/mf_discovertrendsname_assets_04?scl=1"
+								/>
+							</a>
+						</div>
+						<div class="favorite__details">
+							<div class="favorite__details__title">RevWood Plus</div>
+							<div class="favorite__details__sub-title">HARDWOOD FLOORING</div>
+							<div class="favorite__details__style">
+								<div class="box">
+									<div class="box__left">STYLE:</div>
+									<div class="box__right">Style Name</div>
+								</div>
+								<div class="box">
+									<div class="box__left">STYLE:</div>
+									<div class="box__right">Style Name</div>
+								</div>
+							</div>
+							<button class="favorite__details__button">View Detail</button>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</ng-container>
+	</div>
+</section>
+
+<ng-template #noresults><div>No favorites</div></ng-template>

@@ -1,0 +1,127 @@
+@import 'src/styles/tools/tools.typography';
+
+@import 'src/styles/settings/settings.colors';
+
+@import 'src/styles/tools/tools.mediaquery';
+
+@import 'src/styles/elements/elements.links';
+
+$default-dialog-desktop-padding: 25px 35px 0px;
+$default-dialog-mobile-padding: 30px 10px;
+$default-card-desktop-padding: 50px;
+$default-card-mobile-padding: 45px;
+@mixin max-breakpoint-sm() {
+	@media (max-width: #{$screen-md-min}) {
+		@content;
+	}
+}
+:host {
+	display: block;
+	width: calc(100% - 30px);
+	margin-left: auto;
+	margin-right: auto;
+	overflow: initial;
+	@include mq-breakpoint-md() {
+		width: auto;
+	}
+}
+::ng-deep {
+	.gallery-carousel__content {
+		.dark.swiper-button-next,
+		.dark.swiper-button-prev {
+			--swiper-theme-color: $color-dark-grey;
+			&:hover {
+				--swiper-theme-color: $color-grey;
+			}
+		}
+	}
+}
+::ng-deep #image-gallery__dialog__content {
+	//background: rgba($color: $color-white, $alpha: .9);
+	padding: $default-dialog-mobile-padding;
+	box-shadow: none;
+
+	@include mq-breakpoint-md() {
+		padding: $default-dialog-desktop-padding;
+	}
+}
+
+:host .gallery-carousel__action {
+	padding-left: $default-card-mobile-padding;
+	padding-right: $default-card-mobile-padding;
+	margin-bottom: 5px;
+	position: relative;
+	@include font-gotham-light($size: 12px);
+
+	@include mq-breakpoint-md() {
+		padding-left: $default-card-desktop-padding;
+		padding-right: $default-card-desktop-padding;
+	}
+
+	& > a {
+		@include reset-link();
+	}
+	a {
+		position: absolute;
+		top: -28px;
+		right: -8px;
+		color: #767676;
+		@include font-nunito-semibold($size: 22px);
+	}
+}
+
+:host .gallery-carousel__content {
+	max-height: inherit;
+	overflow: initial;
+	padding: 0 15px;
+	margin: 0 -25px;
+}
+::ng-deep .image-gallery__dialog__backdrop {
+	background: rgba(0, 0, 0, 0.7);
+	transition-duration: 1s;
+}
+@include max-breakpoint-sm() {
+	::ng-deep .my-dialog_new {
+		max-width: -webkit-fill-available !important;
+		width: auto !important;
+	}
+}
+::ng-deep .gallery-carousel__item__description {
+	padding: 25px 0;
+	margin-bottom: 0px;
+	.gallery-carousel__item__action {
+		margin-top: 20px;
+		button.secondary.theme-light,
+		.link-compound.icon_left {
+			border: none;
+			background-color: $color-dark-grey;
+			color: $secondary-color;
+			border-radius: 5px;
+		}
+	}
+}
+::ng-deep mflooring-carousel-wrapper {
+	.carousel-banner {
+		.carousel-banner__content {
+			.swiper-button-next,
+			.swiper-button-prev {
+				top: 33%;
+				@include mq-breakpoint-md() {
+					top: 46%;
+				}
+				&:after {
+					font-size: 25px;
+					text-rendering: auto;
+					font-weight: 600;
+					color: $color-grey;
+				}
+			}
+			.swiper-button-next {
+				right: -7px;
+			}
+			.swiper-button-prev {
+				left: -6px;
+			}
+		}
+	}
+}

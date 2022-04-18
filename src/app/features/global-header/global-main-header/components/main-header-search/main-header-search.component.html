@@ -1,0 +1,83 @@
+<form class="main-header-search--form" [formGroup]="searchForm">
+	<span
+		class="main-header-search--icon icon-"
+		id="search"
+		(click)="searchNewProduct()"
+		>search</span
+	>
+	<input
+		class="search-input"
+		type="text"
+		placeholder="Search for a Product"
+		type="text"
+		minlength="3"
+		aria-labelledby="search"
+		(keyup.enter)="searchNewProduct()"
+		#productSearchInput
+		[formControl]="search"
+		[matAutocomplete]="auto"
+	/>
+	<mat-autocomplete #auto="matAutocomplete">
+		<mat-option
+			*ngFor="let option of filteredProducts | async"
+			[value]="option?.title"
+			(click)="dialogRef.close()"
+		>
+			<a captureClicks [href]="option?.url" class="suggestion-wrapper">
+				<div class="image">
+					<img src="{{ option?.thumb_image }}" />
+				</div>
+				<div class="content">
+					<p [innerHTML]="option?.title | safe: 'html'"></p>
+				</div>
+			</a>
+		</mat-option>
+		<mflooring-link-compound
+			[ngClass]="{ hidden: showCTA === true }"
+			(click)="searchNewProduct()"
+			[content]="{
+				text: (query | async) || ' ',
+				url: '/search',
+				queryString: { q: qs }
+			}"
+			[presentation]="{
+				buttonAction: 'link',
+				buttonWidth: 'normal',
+				buttonType: 'link',
+				noWrap: false
+			}"
+		></mflooring-link-compound>
+	</mat-autocomplete>
+	<mflooring-link-compound
+		class="main-header-search--desktop-only"
+		[ngClass]="{ hidden: showCTA === false }"
+		(click)="searchNewProduct()"
+		[content]="{
+			text: (query | async) || ' ',
+			url: '/search',
+			queryString: { q: qs }
+		}"
+		[presentation]="{
+			buttonAction: 'link',
+			buttonWidth: 'normal',
+			buttonType: 'link',
+			noWrap: false,
+			alignment: 'center'
+		}"
+	></mflooring-link-compound>
+</form>
+<!-- <mflooring-link-compound
+	class="main-header-search--button"
+	(click)="searchNewProduct()"
+	[content]="{
+		text: 'Search',
+		url: '/search',
+		queryString: { q: qs }
+	}"
+	[presentation]="{
+		buttonAction: 'link',
+		buttonWidth: 'full',
+		buttonType: 'primary',
+		noWrap: false
+	}"
+></mflooring-link-compound> -->

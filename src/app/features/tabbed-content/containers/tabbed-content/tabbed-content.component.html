@@ -1,0 +1,43 @@
+<ng-container *ngIf="documentIsConfigured; else please_configure">
+	<ng-container [brManageContentButton]="document"></ng-container>
+	<a id="mflooringTabbedContentTop"></a>
+	<mflooring-layout-wrapper [presentation]="{ isInset: true }">
+		<div *ngIf="hasSearchBar">
+			<div class="search">
+				<div class="icon_search" *ngIf="searchBar?.value.length===0">
+					<mflooring-icon-button [presentation]="{
+						size: 'medium',
+
+						iconName: 'search'
+					}" class="search"></mflooring-icon-button>
+				</div>
+				<input type="text" #searchBar (input)="search($event.target.value)"
+					placeholder="Search FAQ Questions" />
+				<div class="icon_close" *ngIf="searchBar?.value.length">
+					<mflooring-icon-button [presentation]="{
+						size: 'medium',
+
+						iconName: 'close'
+					}" class="close" (click)="clearSearch(); searchBar.value = ''"></mflooring-icon-button>
+				</div>
+			</div>
+		</div>
+		<mflooring-tabbed-tab [content]="filteredData$ | async" [presentation]="topPresentation"
+			[(selectedTabParam)]="selectedTab$">
+			<mflooring-rich-text-compound *ngIf="!!topContent" [content]="topContent" [presentation]="topPresentation"
+				top-content></mflooring-rich-text-compound>
+			<!-- <mflooring-input-text
+				*ngIf="hasSearchBar"
+				[content]="searchContent"
+				[presentation]="searchPresentation"
+				search-bar
+				(keyup)="keyUp$.next($event)"
+				[control]="form.get('search')"
+			></mflooring-input-text> -->
+		</mflooring-tabbed-tab>
+	</mflooring-layout-wrapper>
+</ng-container>
+
+<ng-template #please_configure>
+	<mflooring-please-configure [componentName]="name" *ngIf="isPreview"></mflooring-please-configure>
+</ng-template>

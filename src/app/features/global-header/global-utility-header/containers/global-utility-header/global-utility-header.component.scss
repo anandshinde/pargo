@@ -1,0 +1,32 @@
+@import './src/styles/settings/settings.colors';
+
+@import './src/styles/tools/tools.typography';
+
+@import 'src/styles/tools/tools.mediaquery';
+
+@import 'src/styles/settings/settings.containers';
+
+$default-padding-x: 25px;
+$default-height-nav: 40px;
+
+:host .menu-utility {
+	display: flex;
+	list-style-type: none;
+
+	&--right {
+		margin-left: auto;
+	}
+}
+
+.utility-container {
+	background-color: $color-black;
+	height: $default-height-nav;
+	max-height: $default-height-nav;
+	display: flex;
+	padding: 0;
+	position: relative;
+
+	@include mq-breakpoint-md() {
+		padding: 0;
+	}
+}

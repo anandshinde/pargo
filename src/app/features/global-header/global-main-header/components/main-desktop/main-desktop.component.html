@@ -1,0 +1,110 @@
+<!-- <div class="main-header-search" (click)="openSearch()">
+	<span class="main-header-search--text">Search</span>
+	<span class="main-header-search--icon icon-" id="search">search</span>
+</div> -->
+
+<div class="header-item">
+	<div></div>
+	<div>
+		<mflooring-layout-wrapper
+			[content]="null"
+			[presentation]="{
+				isInset: true
+			}"
+		>
+			<nav class="menu-desktop__nav" aria-label="Main Navigation">
+				<ul class="menu-desktop">
+					<li
+						class="menu-desktop__item"
+						(mouseleave)="closeMenu()"
+						(mouseenter)="openMenu(i)"
+						*ngFor="let item of menuItems; index as i; trackBy: trackBy"
+					>
+						<mflooring-menu-item
+							class="menu-desktop__link"
+							[page]="page"
+							[site]="item?._links?.site"
+							[linkName]="item?.name"
+							[linkContainer]="item?.container"
+							(click)="openMenu(i)"
+						>
+							<ng-container
+								*ngIf="
+									item.name.toUpperCase() === logoNameMenu;
+									else nomflooringLogo
+								"
+							>
+								<mflooring-logo
+									class="menu-desktop__logo"
+									[content]="logoContent"
+									[presentation]="logoPresentation"
+								>
+								</mflooring-logo>
+							</ng-container>
+
+							<ng-template #nomflooringLogo>
+								{{ item.name }}
+								<mflooring-icon-button
+									*ngIf="item.childMenuItems.length > 0"
+									[presentation]="{
+										size: 'xsmall',
+										type: '',
+										iconName: 'down'
+									}"
+									class="menu-utility__icon"
+								></mflooring-icon-button>
+							</ng-template>
+						</mflooring-menu-item>
+
+						<mflooring-main-expansion-panel-desktop
+							*ngIf="item.childMenuItems.length && openedMenu === i"
+							[items]="item.childMenuItems"
+							[page]="page"
+							(closeMenu)="closeMenu()"
+							(mouseleave)="closeMenu()"
+						>
+						</mflooring-main-expansion-panel-desktop>
+					</li>
+				</ul>
+			</nav>
+		</mflooring-layout-wrapper>
+	</div>
+	<div>
+		<ul class="menu-utility" role="menu">
+			<li class="menu-utility__item" role="menuitem">
+				<div class="main-header-search" (click)="openSearch()">
+					<mflooring-icon-button
+						[presentation]="{
+							size: 'large',
+							type: '',
+							iconName: 'search'
+						}"
+						class="main-header-search--icon"
+					></mflooring-icon-button>
+				</div>
+			</li>
+			<li class="menu-utility__item" role="menuitem">
+				<a captureClicks href="/login">
+					<mflooring-icon-button
+						[presentation]="{
+							size: 'large',
+							type: '',
+							iconName: 'account'
+						}"
+						class="menu-utility__icon"
+					></mflooring-icon-button>
+				</a>
+			</li>
+			<li class="menu-utility__item" role="menuitem">
+				<mflooring-icon-button
+					[presentation]="{
+						size: 'large',
+						type: '',
+						iconName: 'bag'
+					}"
+					class="menu-utility__icon"
+				></mflooring-icon-button>
+			</li>
+		</ul>
+	</div>
+</div>

@@ -1,0 +1,253 @@
+<div class="order-history">
+	<ng-container *ngIf="orders$ | async as orders">
+		<ng-container *ngIf="!isMobile">
+			<div class="table-grid">
+				<table cellspacing="0" cellpadding="0">
+					<thead>
+						<tr>
+							<th class="table-header date">DATE</th>
+							<th class="table-header order">ORDER#</th>
+							<th class="table-header product">product(S)</th>
+							<th class="table-header qty">QTY</th>
+							<th class="table-header total">TOTAL</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- <tr>
+							<td class="table-data date">
+								{{ order?.date | date }}
+							</td>
+							<td class="table-data order">
+								<a href="#"></a>
+							</td>
+							<td class="table-data product">
+								<details
+									[open]="order.loaded"
+									(click)="fetchProducts(order.code)"
+								>
+									<summary class="table-data order-number">
+										<span> Order No. </span>{{ order?.code }}
+										<span class="icon-">chevron-down</span>
+									</summary>
+									<div class="loader" *ngIf="!order.loaded">
+										<mflooring-loading
+											[presentation]="{
+												size: 'small'
+											}"
+										></mflooring-loading>
+									</div>
+									<ng-container *ngFor="let entry of order?.entries">
+										<p
+											class="table-data"
+											*ngIf="entry?.product?.name && order.loaded"
+										>
+											({{ entry?.quantity }}) {{ entry?.product?.name }}
+										</p>
+									</ng-container>
+								</details>
+							</td>
+							<td class="table-data qty">
+								({{ order?.quantity }})
+							</td>
+							<td class="table-data total">
+								{{ order?.total | currency }}
+							</td>
+						</tr> -->
+						<tr>
+							<td class="table-data date">Jan 12,2020</td>
+							<td class="table-data order">
+								<a href="#">1123432</a>
+							</td>
+							<td class="table-data product">
+								UltraWood Dark Oak Sample SmartStrand Silk Light Beige Sample
+							</td>
+							<td class="table-data qty">(2)</td>
+							<td class="table-data total">$12.50</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="bottom-section">
+				<div class="bottom-section__left">Showing 2 of 2 Orders</div>
+				<div class="bottom-section__right">
+					Don’t see your order? Visit <a href="">Customer Care</a>
+				</div>
+			</div>
+		</ng-container>
+		<ng-container *ngIf="isMobile">
+			<div class="order-history-mobile-view">
+				<div class="order-history-mobile-view__card">
+					<div class="card-title">Aug 1, 2021</div>
+					<div class="mobile-table-grid">
+						<table cellspacing="0" cellpadding="0">
+							<thead>
+								<tr>
+									<th>PRODCUT(S)</th>
+									<th>TOTAL</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>(1) Dark Pine Sample</td>
+									<td>$12.50</td>
+								</tr>
+								<tr>
+									<td>(1) Forrest Mocha Sample</td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="bottom-btn">
+							<button
+								class="
+									link-compound
+									icon_left
+									theme-light
+									primary
+									width-normal
+									align-center
+									color-black
+								"
+							>
+								SAVE CHANGES
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="order-history-mobile-view__card">
+					<div class="card-title">Aug 1, 2021</div>
+					<div class="mobile-table-grid">
+						<table cellspacing="0" cellpadding="0">
+							<thead>
+								<tr>
+									<th>PRODCUT(S)</th>
+									<th>TOTAL</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>(1) Dark Pine Sample</td>
+									<td>$12.50</td>
+								</tr>
+								<tr>
+									<td>(1) Forrest Mocha Sample</td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="bottom-btn">
+							<button
+								class="
+									link-compound
+									icon_left
+									theme-light
+									primary
+									width-normal
+									align-center
+									color-black
+								"
+							>
+								SAVE CHANGES
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="order-history-mobile-view__card">
+					<div class="card-title">Aug 1, 2021</div>
+					<div class="mobile-table-grid">
+						<table cellspacing="0" cellpadding="0">
+							<thead>
+								<tr>
+									<th>PRODCUT(S)</th>
+									<th>TOTAL</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>(1) Dark Pine Sample</td>
+									<td>$12.50</td>
+								</tr>
+								<tr>
+									<td>(1) Forrest Mocha Sample</td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="bottom-btn">
+							<button
+								class="
+									link-compound
+									icon_left
+									theme-light
+									primary
+									width-normal
+									align-center
+									color-black
+								"
+							>
+								SAVE CHANGES
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</ng-container>
+
+		<!-- <ng-template #mobile>
+			<ng-container *ngFor="let order of orders">
+				<table>
+					<tr>
+						<th class="table-header date">DATE</th>
+						<th class="table-header qty">QTY</th>
+					</tr>
+					<tr>
+						<td class="table-data date">{{ order?.date | date }}</td>
+						<td class="table-data qty">({{ order?.quantity }})</td>
+					</tr>
+					<tr>
+						<th class="table-header product">PRODUCT(S)</th>
+						<th class="table-header total">TOTAL</th>
+					</tr>
+					<tr>
+						<td class="table-data product">
+							<details
+								[open]="order?.loaded"
+								(click)="fetchProducts(order.code, order?.loaded)"
+							>
+								<summary class="table-data order-number">
+									<span> Order No. </span>{{ order?.code }}
+									<span class="icon-">chevron-down</span>
+								</summary>
+								<div class="loader" *ngIf="!order.loaded">
+									<mflooring-loading
+										[presentation]="{
+											size: 'small'
+										}"
+									></mflooring-loading>
+								</div>
+								<ng-container *ngFor="let entry of order?.entries">
+									<p
+										class="table-data"
+										*ngIf="entry?.product?.name && order?.loaded"
+									>
+										({{ entry?.quantity }}) {{ entry?.product?.name }}
+									</p>
+								</ng-container>
+							</details>
+						</td>
+						<td class="table-data total">
+							{{ order?.total | currency }}
+						</td>
+					</tr>
+				</table>
+				<hr *ngIf="orderHistory?.length > 1" />
+			</ng-container>
+		</ng-template> -->
+		<div
+			class="message__order-history"
+			*ngIf="!isLoading && orders?.length < 0"
+		>
+			No order history
+		</div>
+	</ng-container>
+</div>

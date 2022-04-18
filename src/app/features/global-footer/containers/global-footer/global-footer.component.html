@@ -1,0 +1,27 @@
+<div [brManageMenuButton]="menu"></div>
+<mflooring-layout-wrapper
+	[content]="layoutContainerProp.content"
+	[presentation]="{ isInset: isInset }"
+	id="layoutWrapper"
+>
+	<div class="footer-container" [ngClass]="pageTitleVisDemo">
+		<ng-container *ngIf="menu && menu.siteMenuItems.length">
+			<mflooring-footer-menu-desktop
+				[menu]="menu"
+				[page]="page"
+				[footerData]="footerData"
+			></mflooring-footer-menu-desktop>
+			<mflooring-footer-menu-mobile
+				[menu]="menu"
+				[page]="page"
+				[footerData]="footerData"
+			></mflooring-footer-menu-mobile>
+		</ng-container>
+	</div>
+</mflooring-layout-wrapper>
+
+<mflooring-footer-copyright
+	[content]="footerData"
+	[ngClass]="pageTitleVisDemo"
+	id="copyrightComp"
+></mflooring-footer-copyright>

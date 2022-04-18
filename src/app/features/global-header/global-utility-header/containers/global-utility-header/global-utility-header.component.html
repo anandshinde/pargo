@@ -1,0 +1,32 @@
+<div [brManageMenuButton]="menu"></div>
+
+<mflooring-layout-wrapper
+	[content]="layoutContainerProp.content"
+	[presentation]="layoutContainerProp.presentation"
+>
+	<div class="utility-container" [ngClass]="pageTitleVisDemo">
+		<ng-container *ngIf="menu && menu?.siteMenuItems.length">
+			<mflooring-utility-desktop
+				class="menu-desktop"
+				[openedMenu]="openedMenu"
+				[menu]="menu"
+				[page]="page"
+				(openMenu)="openMenu($event)"
+				(closeMenu)="closeMenu()"
+			></mflooring-utility-desktop>
+			<mflooring-utility-mobile
+				class="menu-mobile"
+				[openedMenu]="openedMenu"
+				[menuFlatted]="menuFlatted"
+				[page]="page"
+				(openMenu)="openMenu($event)"
+				(closeMenu)="closeMenu()"
+			></mflooring-utility-mobile>
+		</ng-container>
+
+		<mflooring-utility-actions
+			[content]="(utilityHeaderData$ | async)"
+			class="menu-utility--right"
+		></mflooring-utility-actions>
+	</div>
+</mflooring-layout-wrapper>

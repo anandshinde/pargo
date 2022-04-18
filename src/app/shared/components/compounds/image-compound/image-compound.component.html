@@ -1,0 +1,12 @@
+<!-- <picture class="{{imageSize}}" [ngClass]="{'is-background': isBackground }">
+	<source [attr.srcset]="mobileUrl" [media]="mobileBreakpoint" />
+	<img [src]="desktopUrl" [attr.alt]="altText" [attr.title]="titleText" />
+</picture> -->
+<picture *ngIf="imageContent$ | async as content" class="is-background">
+	<source [attr.srcset]="content.mobile" [media]="breakpoint" />
+	<img
+		[src]="content.desktop"
+		[attr.alt]="content.altText"
+		[attr.title]="content.title"
+	/>
+</picture>

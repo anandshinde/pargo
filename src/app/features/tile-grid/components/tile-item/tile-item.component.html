@@ -1,0 +1,60 @@
+<ng-container *ngIf="tileItemData$ | async as data">
+	<!-- <div class="tile-hyperlink"> -->
+		<a *ngIf=" data.link?.content?.text!==''" captureClicks [href]="data.link?.content?.url">
+			<ng-container *ngTemplateOutlet="tilecomponent"></ng-container>
+		</a>
+		<a *ngIf="data.link?.content?.text===''">
+			<ng-container *ngTemplateOutlet="tilecomponent"></ng-container>
+		</a>
+	<!-- </div> -->
+	<ng-template #tilecomponent>
+		<mflooring-layout-wrapper [content]="{
+			backgroundImage: {
+				image: data.image,
+				imageMobile: data.image
+			}
+		}" [presentation]="{
+			inset: true,
+			hasBackground: true
+		}">
+			<artical inViewNotifier (isVisible)="isInViewport($event)">
+
+				<ng-container>
+					<div class="box">
+
+						<div class="text" [ngClass]="{
+							paragraph: data?.content?.indexOf('/p') > -1
+						}">
+							<span [innerHTML]="data?.tileHeading"></span>
+							<mflooring-rich-text-compound class="rich-text" [content]="{
+								richText: data?.content
+							}" [presentation]="{
+								theme: '',
+								customClass: 'simple-tile-component'
+							}">
+							</mflooring-rich-text-compound>
+							<ng-container>
+								<mflooring-link-compound class="explore-button" [content]="data?.link?.content"
+									[presentation]="{
+									theme:
+										templateType === 'grid2topcolumn' ||
+										templateType === 'grid2bottomcolumn'
+											? 'dark'
+											: 'light',
+									buttonType: data?.link?.presentation?.buttonType,
+									customClass: 'simple-tile-component'
+								}">
+								</mflooring-link-compound>
+								<mflooring-footer-input-text *ngIf="templateType === 'gridwfindretailer'"
+									placeholder="Enter Zip Code" [footerData]="footerData" [id]="'zip-code-desktop'"
+									id="zipCodeRetailer"></mflooring-footer-input-text>
+							</ng-container>
+						</div>
+					</div>
+				</ng-container>
+			</artical>
+
+		</mflooring-layout-wrapper>
+	</ng-template>
+
+</ng-container>

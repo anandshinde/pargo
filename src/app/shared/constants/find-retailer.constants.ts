@@ -1,0 +1,21 @@
+export const baseGetByZipQuery = {
+	zip: null,
+	dealerType: 'mohawkflooring',
+	distance: 25,
+	limit: 50,
+	sale: 'N',
+	minimumRating: 0,
+	forceDistance: 'False',
+	brandGroupCodes: [
+		'000001',
+		'000002',
+		'000003',
+		'000004',
+		'000005',
+		'000006',
+		'000008',
+		'000110',
+		'000111',
+	],
+	groupCodes: ['000019', '000110', '000111'],
+};

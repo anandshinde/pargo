@@ -1,0 +1,121 @@
+@import 'src/styles/settings/settings.colors';
+
+@import 'src/styles/tools/tools.mediaquery';
+
+@import 'src/styles/elements/elements.lists';
+
+@import 'src/styles/tools/tools.typography';
+
+$default-card-padding-mobile: 0;
+
+$default-description-margin-top: 5px;
+$default-description-margin-x: 10px;
+$default-description-gap: 5px;
+$default-action-margin-y: 20px;
+
+:host {
+	padding-left: $default-card-padding-mobile;
+	padding-right: $default-card-padding-mobile;
+	// width: 100% !important;
+
+	@include mq-breakpoint-md() {
+		padding-left: 30px;
+		padding-right: 30px;
+	}
+}
+
+:host pergo-image-compound::ng-deep img {
+	border-radius: 5px;
+	width: 100%;
+}
+
+:host .gallery-carousel__item__wrapper {
+	display: block;
+}
+
+:host .gallery-carousel__item__description {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	flex-direction: column;
+	row-gap: $default-description-gap;
+	padding: 0 40px !important;
+	@include reset-list();
+
+	@include mq-breakpoint-md() {
+		flex-direction: row;
+		align-items: flex-start;
+		margin: 0px;
+		padding: 25px 0 !important;
+		align-items: center;
+		& > li:not(.gallery-carousel__item__action) {
+			width: 38%;
+		}
+		li {
+			&:nth-child(2) {
+				width: 40%;
+			}
+		}
+	}
+	li {
+		&.gallery-carousel__item__action {
+			width: 100%;
+			margin-top: 20px;
+			@include mq-breakpoint-md() {
+				width: 25%;
+				margin-top: 0px;
+			}
+			text-align: right;
+
+			::ng-deep mflooring-link-compound {
+				.link-compound {
+					display: initial;
+					background-color: $mohawk-black;
+					color: $color-white;
+					width: 145px;
+
+					.label {
+						@include font-nunito-light($size: 15);
+					}
+				}
+			}
+		}
+		p {
+			margin: 0 0 0px;
+		}
+	}
+	& strong {
+		color: $color-black;
+		@include font-nunito-bold($size: [16, 18]);
+	}
+
+	& span {
+		color: $color-black;
+		@include font-nunito-light($size: [16, 18]);
+		padding-left: 5px;
+	}
+}
+
+:host .gallery-carousel__item__image {
+	overflow: hidden;
+	margin: 10px 40px;
+	border-radius: 5px;
+	max-height: 260px;
+
+	@include mq-breakpoint-md() {
+		max-height: 435px;
+		margin: 0px auto;
+	}
+}
+
+:host .gallery-carousel__item__action {
+	display: flex;
+	width: 100%;
+	justify-content: center;
+
+	@include mq-breakpoint-md() {
+		display: initial;
+		width: auto;
+		margin: 0;
+	}
+}

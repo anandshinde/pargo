@@ -1,0 +1,23 @@
+<a
+	[matMenuTriggerFor]="selectContent"
+	href="javascript:void(0);"
+	class="select__control"
+	(click)="openSelect()"
+>
+	<span class="select__control__category">{{ category }}</span>
+	<span
+		[class.select__control__icon--opened]="isSelectOpened"
+		class="select__control__icon icon-"
+	>
+	right
+		<!-- chevron-down -->
+	</span>
+</a>
+<mat-menu
+	(closed)="closeSelect()"
+	#selectContent="matMenu"
+	class="select__options__container"
+	backdropClass="select__options__backdrop"
+>
+	<ng-content [matMenuTriggerFor]="menu"></ng-content>
+</mat-menu>

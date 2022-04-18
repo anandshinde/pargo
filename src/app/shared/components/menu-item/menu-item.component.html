@@ -1,0 +1,24 @@
+<ng-template #content>
+	<ng-content></ng-content>
+</ng-template>
+
+<button class="menu-button" *ngIf="hasChildren; else noChildren">
+	<ng-container *ngTemplateOutlet="content"></ng-container>
+</button>
+<ng-template #noChildren>
+	<span *ngIf="!hasLink">
+		<ng-container *ngTemplateOutlet="content"></ng-container>
+	</span>
+
+	<a
+		captureClicks
+		data-link-type="menuItem"
+		[attr.data-link-name]="linkName"
+		[attr.data-link-container]="linkContainer"
+		rel="noopener, noreferrer"
+		[href]="linkUrl"
+		*ngIf="hasLink"
+	>
+		<ng-container *ngTemplateOutlet="content"></ng-container>
+	</a>
+</ng-template>

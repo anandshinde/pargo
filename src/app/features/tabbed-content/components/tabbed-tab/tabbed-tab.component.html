@@ -1,0 +1,110 @@
+<ng-container *ngIf="tabbedTabData$ | async as data">
+	<ng-content select="[top-content]"></ng-content>
+
+	<ng-content select="[search-bar]"></ng-content>
+
+	<ng-container *ngIf="isMobile && data.length > 0">
+		<div class="mobile-tabbed">
+			<div class="swiper-main">
+				<div class="image-carousel-main">
+					<div class="navigation-left">
+						<div class="swiper-button-prev"></div>
+					</div>
+					<ng-container *ngIf="tabbedTabData$ | async as info">
+						<div class="swiper" *ngIf="info.length > 0">
+							<swiper
+								#focusedSlideCarousel
+								[config]="baseConfig"
+								(swiper)="onSwiper($event)"
+								(breakpoint)="update($event)"
+								(indexChange)="sliderChanged($event)"
+							>
+								<ng-template
+									swiperSlide
+									*ngFor="let item of info; index as i; count as c"
+								>
+									<section class="focused-slide__slide">
+										<div class="focused-slide__image">
+											<mflooring-image-compound
+												class="blog-card__image"
+												[content]="{
+													image: item?.iconContent?.desktop
+												}"
+											></mflooring-image-compound>
+										</div>
+									</section>
+									<div class="tabbed-mobile-image-title">
+										{{ item?.label }}
+									</div>
+								</ng-template>
+							</swiper>
+						</div>
+					</ng-container>
+
+					<div class="navigation-right">
+						<div class="swiper-button-next"></div>
+					</div>
+				</div>
+			</div>
+			<div class="mobile-tabbed-content-text">
+				<mat-accordion displayMode="flat" *ngIf="currentMobileItem !== null">
+					<mflooring-faq-compound
+						[isOpened]="faq?.content?.title.panel === openedPanel"
+						[content]="faq?.content"
+						[presentation]="faq?.presentation"
+						(openPanel)="selectedAccIndex = i; setOpenPanel($event)"
+						(closePanel)="selectedAccIndex = -2"
+						[selectedAccIndex]="selectedAccIndex"
+						[index]="i"
+						*ngFor="let faq of currentMobileItem.faq; index as i"
+					></mflooring-faq-compound>
+				</mat-accordion>
+			</div>
+		</div>
+	</ng-container>
+
+	<ng-container *ngIf="!isMobile">
+		<div class="tabbed-tab-desktop">
+			<mat-tab-group
+				mat-align-tabs="center"
+				animationDuration="400"
+				[(selectedIndex)]="selectedTab"
+			>
+				<mat-tab *ngFor="let item of data; trackBy: trackBy">
+					<ng-template mat-tab-label>
+						<div class="tabbed-tab__image">
+							<mflooring-image-compound
+								class="blog-card__image"
+								[content]="{
+									image: item?.iconContent?.desktop
+								}"
+							></mflooring-image-compound>
+						</div>
+						<div class="tabbed-tab__text">{{ item?.label }}</div>
+					</ng-template>
+					<!-- {{ item.faq | json }} -->
+					<ng-template matTabContent>
+						<mat-accordion displayMode="flat">
+							<div class="mflooring-faq">
+								<mflooring-faq-compound
+									[class.no-border-bottom]="
+										selectedAccIndex + 1 === item?.faq.length
+									"
+									class="accordian"
+									[isOpened]="faq?.content?.title.content === openedPanel"
+									[content]="faq?.content"
+									[presentation]="faq?.presentation"
+									(openPanel)="selectedAccIndex = i; setOpenPanel($event)"
+									(closePanel)="selectedAccIndex = -2"
+									[selectedAccIndex]="selectedAccIndex"
+									[index]="i"
+									*ngFor="let faq of item?.faq; index as i"
+								></mflooring-faq-compound>
+							</div>
+						</mat-accordion>
+					</ng-template>
+				</mat-tab>
+			</mat-tab-group>
+		</div>
+	</ng-container>
+</ng-container>

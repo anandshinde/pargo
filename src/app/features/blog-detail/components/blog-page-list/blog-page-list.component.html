@@ -1,0 +1,20 @@
+<ng-container
+	*ngIf="{
+		content: blogPageListContent$ | async,
+		presentation: blogPageListPresentation$ | async
+	} as data"
+>
+	<section class="blog-list">
+		<h2>Related Posts</h2>
+		<div class="blog-list__container">
+			<ng-container *ngFor="let blogList of content.blogList">
+				<div class="blog-list__items">
+					<mflooring-blog-card
+					[content]="blogList"
+					[presentation]="data?.presentation"
+				></mflooring-blog-card> 
+				</div>				
+			</ng-container>
+		</div>
+	</section>
+</ng-container>

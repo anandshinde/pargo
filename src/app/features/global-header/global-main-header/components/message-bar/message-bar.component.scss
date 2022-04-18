@@ -1,0 +1,30 @@
+@import 'src/styles/tools/tools.typography';
+@import 'src/styles/settings/settings.colors';
+@import 'src/styles/elements/elements.links';
+
+:host {
+	display: block;
+	position: relative;
+}
+
+.message-bar {
+	display: block;
+	position: absolute;
+	width: 100%;
+	border-bottom: 1px solid $color-grey-light;
+
+	&__message {
+		width: 100%;
+		padding: 8px 0;
+		text-align: center;
+		color: $color-white;
+		@include font-nunito-regular(14px);
+	}
+
+	button {
+		margin-left: 20px;
+		color: white;
+		cursor: pointer;
+		@include reset-button();
+	}
+}

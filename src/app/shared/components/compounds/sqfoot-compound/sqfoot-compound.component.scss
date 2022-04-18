@@ -1,0 +1,143 @@
+@import 'src/styles/settings/settings.colors';
+
+@import 'src/styles/tools/tools.typography';
+
+@import 'src/styles/tools/tools.animations';
+
+@import 'src/styles/tools/_tools.mediaquery';
+
+@import 'src/styles/elements/elements.links';
+
+// Default light theme variables
+$input-text-border-color: $color-brown-medium;
+$input-text-border-color-selected: $color-teal;
+$input-text-color: $color-brown-medium;
+$input-text-background-color: $color-white;
+$button-background-color: $color-icon-bg;
+$input-placeholder-sizes: [14, 16];
+
+:host {
+	padding-left: 5px !important;
+	padding-right: 5px !important;
+
+	@include mq-breakpoint-md() {
+		padding-left: inherit;
+		padding-right: inherit;
+	}
+}
+
+.sqft-calculator input:nth-child(1) {
+	margin-left: 0;
+
+	@include mq-breakpoint-md() {
+		margin-left: 20px;
+	}
+}
+
+.sqft-calculator {
+	display: grid;
+	align-items: center;
+	grid-template-columns: 1fr 20px 1fr;
+	grid-template-areas: 'tlength mult twidth'
+		'calc calc calc';
+	row-gap: 20px;
+
+	@include mq-breakpoint-sm() {
+		grid-template-columns: minmax(100px, 200px) 30px minmax(100px, 200px) 20px minmax(100px, 200px);
+		grid-template-areas: 'tlength mult twidth . calc';
+	}
+
+	input {
+		grid-area: inpt;
+		width: 100%;
+		height: 50px;
+		background-color: $input-text-background-color;
+		border: 1px solid $input-text-border-color;
+		border-radius: 5px;
+		outline: none;
+		text-align: center;
+
+		@include mq-breakpoint-md() {
+			width: auto;
+			flex-wrap: nowrap;
+		}
+
+		&[name='length'] {
+			grid-area: tlength;
+		}
+
+		&[name='width'] {
+			grid-area: twidth;
+		}
+
+		&:focus {
+			border: 1px solid $input-text-border-color-selected;
+		}
+	}
+
+	::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+		
+		@include font-size-break-point-sizes($size: $input-placeholder-sizes);
+	}
+	
+	::-moz-placeholder { /* Firefox 19+ */
+		
+		@include font-size-break-point-sizes($size: $input-placeholder-sizes);
+	}
+	
+	:-ms-input-placeholder { /* IE 10+ */
+		
+		@include font-size-break-point-sizes($size: $input-placeholder-sizes);
+	}
+	
+	:-moz-placeholder { /* Firefox 18- */
+		
+		@include font-size-break-point-sizes($size: $input-placeholder-sizes);
+	}
+}
+
+.span-text__control {
+	grid-area: mult;
+	text-align: center;
+}
+
+.sqft_calculate {
+	grid-area: calc;
+	position: relative;
+}
+
+button {
+	cursor: pointer;
+
+	@include reset-button();
+
+	&:hover {
+		opacity: .8;
+	}
+
+	&[type='submit'] {
+		width: 100%;
+		height: 50px;
+		background-color: $button-background-color;
+		border-radius: 5px;
+		color: $color-white;
+		text-align: center;
+		text-transform: uppercase;
+	}
+
+	&[type='reset'] {
+		color: $color-grey;
+	}
+}
+
+.sqft_clear {
+	position: absolute;
+	width: 100%;
+	top: 100%;
+	text-align: center;
+
+	button {
+		color: $color-brown-medium;
+		text-decoration: underline;
+	}
+}

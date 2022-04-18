@@ -1,0 +1,27 @@
+<section
+	class="cta-ribbon"
+	*ngIf="(content$ | async) as content"
+>
+	<div class="cta-ribbon__item cta-ribbon__item--image">
+		<mflooring-image-compound [content]="content.logo"></mflooring-image-compound>
+	</div>
+	<div class="cta-ribbon__item cta-ribbon__item--text">
+		<mflooring-rich-text
+			[content]="content.ctaContent"
+			[presentation]="{
+				theme: (presentation$ | async)?.theme,
+				component: 'cta-ribbon'
+			}"
+		></mflooring-rich-text>
+	</div>
+	<div class="cta-ribbon__item cta-ribbon__item--link">
+		<mflooring-link-compound
+			[content]="content.link"
+			[presentation]="{
+				buttonType: 'secondary',
+				buttonWidth: 'full',
+				buttonAction: 'link'
+			}"
+		></mflooring-link-compound>
+	</div>
+</section>

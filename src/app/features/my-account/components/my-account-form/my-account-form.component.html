@@ -1,0 +1,192 @@
+<form [formGroup]="form">
+	<div class="my-account__form">
+		<div class="my-account__form__left-form">
+			<div class="form-field">
+				<mflooring-input-text
+					[control]="firstName"
+					[presentation]="inputTextPresentation"
+					[content]="{
+						placeholder: 'Type here',
+						label: resourceBundleContent['global.label.first-name']
+					}"
+				></mflooring-input-text>
+				<div
+					*ngIf="firstName.invalid && (firstName.touched || firstName.dirty)"
+					class="alert alert-danger"
+				>
+					<div class="text-danger" *ngIf="firstName.errors.required">
+						<span class="my-account__error">{{
+							resourceBundleContent['global.error.mandatory']
+						}}</span>
+					</div>
+					<div class="text-danger" *ngIf="firstName.hasError('maxlength')">
+						<span class="my-account__error">{{
+							resourceBundleContent['global.error.firstname']
+						}}</span>
+					</div>
+				</div>
+			</div>
+			<div class="form-field">
+				<mflooring-input-text
+					[control]="lastName"
+					[presentation]="inputTextPresentation"
+					[content]="{
+						placeholder: 'Type here',
+						label: resourceBundleContent['global.label.last-name']
+					}"
+				></mflooring-input-text>
+				<div
+					*ngIf="lastName.invalid && (lastName.touched || lastName.dirty)"
+					class="alert alert-danger"
+				>
+					<span class="my-account__error">{{
+						resourceBundleContent['global.error.mandatory']
+					}}</span>
+					<div class="text-danger" *ngIf="lastName.hasError('maxlength')">
+						<span class="my-account__error">{{
+							resourceBundleContent['global.error.lastname']
+						}}</span>
+					</div>
+				</div>
+			</div>
+			<div class="form-field">
+				<mflooring-input-text
+					[control]="uid"
+					[presentation]="inputTextPresentation"
+					[content]="{
+						placeholder: 'Type here',
+						label: resourceBundleContent['global.label.email']
+					}"
+				></mflooring-input-text>
+			</div>
+			<div class="form-field">
+				<mflooring-input-text
+					[control]="uid"
+					[presentation]="inputTextPresentation"
+					[content]="{
+						placeholder: 'Type here',
+						label: 'Password*'
+					}"
+				></mflooring-input-text>
+			</div>
+			<div class="form-field text-right">
+				<button class="change-pwd" (click)="openChangePwd()">
+					{{ resourceBundleContent['global.label.change-password'] }}
+				</button>
+			</div>
+		</div>
+		<div class="my-account__form__right-form">
+			<div class="form-field field">
+				<mflooring-input-text
+					[control]="address"
+					[presentation]="inputTextPresentation"
+					[content]="{
+						placeholder: 'Type here',
+						label: 'Street Address'
+					}"
+				></mflooring-input-text>
+				<div
+					*ngIf="address.invalid && (address.touched || address.dirty)"
+					class="alert alert-danger"
+				>
+					<div class="text-danger" *ngIf="address.errors.required">
+						<span class="my-account__error">{{
+							resourceBundleContent['global.error.mandatory']
+						}}</span>
+					</div>
+				</div>
+			</div>
+			<div class="form-field field">
+				<mflooring-input-text
+					[control]="city"
+					[presentation]="inputTextPresentation"
+					[content]="{
+						placeholder: 'Type here',
+						label: resourceBundleContent['global.label.city']
+					}"
+				></mflooring-input-text>
+				<div
+					*ngIf="city.invalid && (city.touched || city.dirty)"
+					class="alert alert-danger"
+				>
+					<div class="text-danger" *ngIf="city.errors.required">
+						<span class="my-account__error">{{
+							resourceBundleContent['global.error.mandatory']
+						}}</span>
+					</div>
+				</div>
+			</div>
+			<div class="form-box">
+				<div class="form-box__state">
+					<div class="form-field">
+						<mflooring-input-text
+							[control]="state"
+							[presentation]="inputTextPresentation"
+							[content]="{
+								placeholder: 'Type here',
+								label: resourceBundleContent['global.label.state']
+							}"
+						></mflooring-input-text>
+						<div
+							*ngIf="state.invalid && (state.touched || state.dirty)"
+							class="alert alert-danger"
+						>
+							<div class="text-danger" *ngIf="state.errors.required">
+								<span class="my-account__error">{{
+									resourceBundleContent['global.error.mandatory']
+								}}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-box__zip">
+					<div class="form-field">
+						<mflooring-input-text
+							[control]="zipCode"
+							[presentation]="inputTextPresentation"
+							[content]="{
+								placeholder: 'Type here',
+								maxlength: 5,
+								label: resourceBundleContent['global.label.zip']
+							}"
+						></mflooring-input-text>
+						<div
+							*ngIf="zipCode.invalid && (zipCode.touched || zipCode.dirty)"
+							class="alert alert-danger"
+						>
+							<div class="text-danger" *ngIf="zipCode.errors.required">
+								<span class="my-account__error">{{
+									resourceBundleContent['global.error.mandatory']
+								}}</span>
+							</div>
+							<div class="text-danger" *ngIf="zipCode.hasError('pattern')">
+								<span class="my-account__error">{{
+									resourceBundleContent['global.error.zip']
+								}}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-field field">
+				<mflooring-input-text
+					[control]="country"
+					[presentation]="inputTextPresentation"
+					[content]="{
+						placeholder: 'Type here',
+						label: 'Country'
+					}"
+				></mflooring-input-text>
+			</div>
+		</div>
+	</div>
+	<div class="bottom-btn">
+		<mflooring-link-compound
+			(handleClickAction)="form.valid && onSubmit(form.value)"
+			[content]="submitButtonContentProps"
+			[presentation]="submitButtonPresentationProps"
+			class="my-account__action"
+			[ngClass]="{ 'is-disabled': !form.valid }"
+		></mflooring-link-compound>
+	</div>
+</form>

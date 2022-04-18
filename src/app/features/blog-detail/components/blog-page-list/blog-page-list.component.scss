@@ -1,0 +1,75 @@
+@import 'src/styles/tools/tools.fonts-units';
+@import 'src/styles/tools/tools.mediaquery';
+@import 'src/styles/settings/settings.colors';
+@import 'src/styles/settings/settings.typography';
+@import 'src/styles/tools/tools.typography';
+@import 'src/styles/elements/elements.containers';
+
+.blog-list {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	margin-top: rem(30);
+	box-shadow: 0 5px 25px rgb(0 0 0 / 20%);
+	border-radius: rem(5);
+	background-color: $color-white;
+	padding-bottom: rem(30);
+	
+
+	@include mq-breakpoint-sm() {
+		margin-top: 0;
+		box-shadow: none;
+		border-radius: none;
+		background-color:none;
+		padding-bottom: rem(0);
+	}
+
+	h2{
+		text-align: center;
+		margin-top: rem(30);
+		color:$mohawk-black;
+		@include font-nunito-light($size: [22, 30], $lineheight: 1.3);
+
+		@include mq-breakpoint-sm() {
+			text-align: left;
+			margin-top: rem(0);
+		}
+	}
+
+	&__container {
+		padding: 0rem rem(10);
+		width: 100%;
+		max-width: rem(878);
+		overflow: hidden;
+		position: relative;
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: flex-start;
+		text-align: left;
+
+		mflooring-blog-card {
+			display: block;
+			margin: rem(20) 0 rem(10);
+
+			@include mq-breakpoint-sm() {
+				margin: rem(20) 0;
+			}
+		}
+
+		@include mq-breakpoint-sm() {
+			box-shadow: 0 5px 25px rgb(0 0 0 / 20%);
+			border-radius: rem(5);
+			background-color: $color-white;
+			flex-direction: row;
+			padding: 2rem 2rem;
+		}
+
+	}
+	&__items{
+		padding-right: 15px;
+		padding-left: 15px;
+		flex-basis: 50%;
+	}
+}

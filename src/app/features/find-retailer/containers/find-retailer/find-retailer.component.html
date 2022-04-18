@@ -1,0 +1,71 @@
+<section class="retailer-results">
+	<!-- Header/Zip Code -->
+    <div class="retailer-results__search">
+	<mflooring-layout-wrapper [content]="null" [presentation]="{ isInset: true }">
+        <header>
+            <form [formGroup]="zipCodeForm">
+                <h2>
+                    <span id="retailPartnersNear">{{ resourceBundleData['global.label.heading'] }} </span>
+                    <input
+                        type="text"
+                        pattern="\d+"
+                        maxlength="5"
+                        aria-labelledby="retailPartnersNear"
+                        (keypress)="validateZipCode($event)"
+                        (keyup.enter)="searchNewZipCode()"
+                        [formControl]="zip"
+                        #retailerSearchInput
+                    />
+                </h2>
+                <button (click)="clearRetailerSearchInput()" type="button">
+                    {{ resourceBundleData['global.link.clear-search.label'] }}
+                </button>
+            </form>
+        </header>
+    </mflooring-layout-wrapper>
+    </div>
+
+    
+
+<mflooring-layout-wrapper [content]="null" [presentation]="{ isInset: false }">
+    <mflooring-mapping
+        [content]="{
+            apiKey: resourceBundleData['mf.google.apiKey'] || '',
+            markers: mapPins | async,
+            center: currentZip$ | async
+        }"
+        
+    ></mflooring-mapping>
+</mflooring-layout-wrapper>
+
+	<!-- Filter Bar -->
+        <mflooring-layout-wrapper [content]="null" [presentation]="{ isInset: true }">
+           <div class="retailer__sortBy">
+               <p>SORT BY:</p>
+                <mflooring-retailer-type-toggle
+                [allRetailers]="allFilters$ | async"
+                [selectedRetailer]="selectedFilter$ | async"
+                (updateRetailer)="setSelectedFilter($event)"
+            ></mflooring-retailer-type-toggle>
+           </div>
+        </mflooring-layout-wrapper>
+
+<!-- Results -->
+<mflooring-retailer-results-list
+[content]="{
+    retailers: (results$() | async),
+    zip: (currentZip$ | async)
+}"
+[presentation]="{
+    isLoading: isLoading
+}"
+>
+</mflooring-retailer-results-list>
+
+<!-- View More Button -->
+<div class="retailer-results__view-more">
+    <button class="link" (click)="viewMore()" *ngIf="showViewMore">
+        View More
+    </button>
+</div>
+</section>

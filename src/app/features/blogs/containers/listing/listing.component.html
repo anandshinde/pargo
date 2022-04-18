@@ -1,0 +1,58 @@
+<ng-container
+	*ngIf="{
+		content: blogsData$ | async
+	} as data"
+>
+	<mflooring-layout-wrapper
+		[presentation]="{
+			isInset: true,
+			hasBackground: true
+		}"
+	>
+		<section class="blogs">
+			<div class="blogs_tabs">
+				<span class="head">Filters:</span>
+				<ul>
+					<li
+						class="box-shadow"
+						*ngFor="let item of categories; let i = index"
+						(click)="changeCategory(item, i)"
+						[ngClass]="{
+							active: item === selectedCategory,
+							removeborder: i === selectedIndex - 1,
+							removelastborder: i === categories?.length - 1
+						}"
+					>
+						{{ item | titlecase }}
+					</li>
+				</ul>
+			</div>
+		</section>
+		<div class="blog-card-list">
+			<div class="masonry-item">
+				<div *ngFor="let item of filteredBlogs; let i = index">
+					<mflooring-card
+						class="cardsList"
+						[content]="item"
+						*ngIf="i < pageCount"
+					></mflooring-card>
+				</div>
+			</div>
+		</div>
+	</mflooring-layout-wrapper>
+	<div class="show-more-button">
+		<a *ngIf="filteredBlogs?.length > pageCount" (click)="loadMore()">
+			VIEW MORE ARTICLES</a
+		>
+		<a
+			*ngIf="
+				(filteredBlogs?.length < pageCount ||
+					filteredBlogs?.length === pageCount) &&
+				show
+			"
+			(click)="loadless(); scrollToTop()"
+		>
+			VIEW LESS ARTICLES</a
+		>
+	</div>
+</ng-container>

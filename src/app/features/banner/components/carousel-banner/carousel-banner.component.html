@@ -1,0 +1,45 @@
+<ng-container *ngIf="content">
+	<section class="bannerList">
+		<div class="bannerList__container">
+			<swiper
+				id="swiper"
+				#bannerCarousel
+				[config]="baseConfig"
+				(swiper)="onSwiper($event)"
+				(breakpoint)="update($event)"
+			>
+				<ng-template swiperSlide *ngFor="let banner of content">
+					<mflooring-single-banner
+						id="singleBanner"
+						[content]="{
+							banner: banner?.content,
+							resourceBundle: content?.resourceBundleData
+						}"
+						[presentation]="banner?.presentation"
+					></mflooring-single-banner>
+				</ng-template>
+			</swiper>
+			<!-- <div class="multi-slide-navigation">
+				<div class="focused-slide-navigation__wrapper">
+					<mflooring-icon-button
+						[presentation]="{
+							size: 'medium',
+
+							iconName: 'left'
+						}"
+						class="banner-slider-prev"
+					></mflooring-icon-button>
+					<div class="slider-focused-slide focused-slide-pagination"></div>
+					<mflooring-icon-button
+						[presentation]="{
+							size: 'medium',
+
+							iconName: 'right'
+						}"
+						class="banner-slider-next"
+					></mflooring-icon-button>
+				</div>
+			</div> -->
+		</div>
+	</section>
+</ng-container>

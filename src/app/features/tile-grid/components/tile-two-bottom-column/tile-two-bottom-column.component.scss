@@ -1,0 +1,109 @@
+@import './src/styles/tools/tools.mediaquery';
+@import './src/styles/tools/tools.typography';
+@import './src/styles/settings/settings.colors';
+@import './src/styles/components/components.rich-text';
+@import './src/styles/components/components.tile-grid';
+@import './src/styles/settings/settings.layout';
+
+$default-column-width-desktop-max: 469px;
+$discover-tile-testimonial-cta-sizes: [15, 20];
+
+:host {
+	display: grid;
+	row-gap: $default-cell-row-gap-mobile;
+	column-gap: $default-cell-column-gap-mobile;
+	grid-template-columns: 100%;
+	grid-auto-rows: auto;
+	grid-template-areas:
+		'first'
+		'second'
+		'third';
+	margin-bottom: 35px;
+
+	@include mq-breakpoint-md() {
+		grid-template-columns: repeat(
+			2,
+			minmax($default-column-width-desktop-min, 100%)
+		);
+		margin-bottom: 45px;
+		// margin-top: 25px;
+		grid-gap: 25px;
+		grid-template-areas:
+			'first first'
+			'second third';
+	}
+}
+
+:host ::ng-deep {
+	mflooring-layout-wrapper {
+		::ng-deep {
+			img,
+			picture {
+				border-radius: 5px;
+			}
+		}
+		.layout-container {
+			&__grid {
+				&__area {
+					border-radius: 5px;
+					background: $color-black-linear-gradient;
+				}
+			}
+		}
+	}
+	@include mq-breakpoint-md() {
+		mflooring-layout-wrapper {
+			.layout-container {
+				&__grid {
+					&__area {
+						border-radius: 5px;
+						background: $color-black-linear-gradient;
+					}
+				}
+			}
+		}
+	}
+	mflooring-tile-item {
+		height: 100%;
+		min-height: 313px;
+
+		@include mq-breakpoint-md() {
+			min-height: 313px;
+		}
+		.text {
+			width: auto;
+			height: auto;
+			text-align: left;
+			color: $secondary-color;
+			opacity: 1;
+			letter-spacing: 0px;
+			h2 {
+				@include font-nunito-bold($size: 26px, $lineheight: 35px);
+			}
+			p {
+				@include font-nunito-regular($size: 16px, $lineheight: 22px);
+			}
+		}
+
+		&:nth-child(1) {
+			grid-area: first;
+			@include mq-breakpoint-md() {
+				min-height: 350px;
+			}
+		}
+
+		&:nth-child(2) {
+			grid-area: second;
+			@include mq-breakpoint-md() {
+				min-height: 435px;
+			}
+		}
+
+		&:nth-child(3) {
+			grid-area: third;
+			@include mq-breakpoint-md() {
+				min-height: 435px;
+			}
+		}
+	}
+}

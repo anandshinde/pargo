@@ -1,0 +1,18 @@
+<section
+	@responseMessage
+	class="message-bar"
+	*ngIf="!!(messages$ | async)?.message "
+>
+	<mflooring-layout-wrapper
+		[content]="{ backgroundColor: (messages$ | async)?.color }"
+		[presentation]="{ isInset: true }"
+	>
+		<div class="message-bar__message">
+			<span>{{ (messages$ | async)?.message }}</span>
+			<button (click)="closeMessageBar()" *ngIf="((messages$ | async)?.autoClose) === false">
+				<span class="icon-">close</span>
+			</button>
+		</div>
+
+	</mflooring-layout-wrapper>
+</section>

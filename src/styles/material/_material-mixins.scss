@@ -1,0 +1,31 @@
+@import '~@angular/material/theming';
+@import 'src/styles/settings/settings.colors';
+@import 'src/styles/settings/settings.typography';
+
+@import './theme-base';
+@import './theme-mflooring';
+
+@include mat-core();
+
+$typography-config: mat-typography-config(
+	$font-family: $font-nunito,
+);
+
+@include angular-material-typography($typography-config);
+@include mat-core($typography-config);
+
+$base-primary: mat-palette($base-palette);
+$base-warn: mat-palette($mat-red);
+$base-theme: mat-light-theme($base-primary, $base-warn);
+
+$app-primary: mat-palette($mat-indigo);
+$app-accent: mat-palette($mat-pink, A200, A100, A400);
+
+// custom theme palettes...
+$base-mflooring: mat-palette($mflooring-palette);
+$mflooring-theme: mat-light-theme($base-mflooring, $base-warn);
+
+// custom theme palettes...
+$base-mflooring-black: mat-palette($mflooring-palette-black);
+$mflooring-theme-black: mat-light-theme($base-mflooring-black,$base-mflooring-black);
+

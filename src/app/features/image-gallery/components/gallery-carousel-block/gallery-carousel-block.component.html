@@ -1,0 +1,19 @@
+<section class="gallery-carousel__action">
+	<a href="javascript:void(0);" (click)="onCloseCarouselBlock()">
+		x
+	</a>
+</section>
+<section class="gallery-carousel__content">
+	<mflooring-carousel-wrapper
+		[content]="null"
+		[presentation]="carouselPresentation"
+	>
+		<mflooring-gallery-carousel-item
+			class="swiper-slide"
+			[content]="item"
+			*ngFor="let item of images"
+		>
+		</mflooring-gallery-carousel-item>
+	</mflooring-carousel-wrapper>
+</section>
+

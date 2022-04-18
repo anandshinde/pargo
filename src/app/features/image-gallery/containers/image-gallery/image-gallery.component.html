@@ -1,0 +1,62 @@
+<ng-container *ngIf="documentIsConfigured; else please_configure">
+	<ng-container [brManageContentButton]="document"></ng-container>
+
+	<mflooring-layout-wrapper [presentation]="{ isInset: true }">
+		<a id="imageGalleryTop"></a>
+		<!-- FILTERS -->
+		<mflooring-gallery-filters
+			[content]="filtersContent?.filterLabel"
+			[hidden]="this.sectionsHidden.includes('filters')"
+		>
+			<mflooring-gallery-filters-desktop
+				[form]="filtersForm"
+				[content]="filtersContent?.filters"
+				*ngIf="!isMobile"
+				desktop
+				(chipRemoved)="onChipRemoved($event)"
+			>
+			</mflooring-gallery-filters-desktop> 
+
+			<mflooring-gallery-filters-mobile mobile
+				[form]="filtersForm"
+				[content]="filtersContent?.filters"
+				*ngIf="!!isMobile"
+				(resetForm)="onResetForm()"
+				(hideSections)="onHideSections($event)"
+			>
+			</mflooring-gallery-filters-mobile>
+		</mflooring-gallery-filters>
+
+		<!-- GALLERY -->
+		<mflooring-gallery-images
+			[content]="imagesPaginated | paginate: paginationConfig"
+			(firstLastOrder)="onFirstLastOrder($event)"
+			(openImage)="onOpenStrategy($event)"
+			[hidden]="this.sectionsHidden.includes('filters')"
+		>
+			<mflooring-gallery-pagination-counter [content]="paginationCounterContent">
+			</mflooring-gallery-pagination-counter>
+		</mflooring-gallery-images>
+
+
+		<!-- PAGINATION -->
+		<mflooring-gallery-pagination
+			(pageChange)="onPageChange($event)"
+			[hidden]="this.sectionsHidden.includes('pagination')"
+		>
+			<mflooring-gallery-pagination-counter [content]="paginationCounterContent">
+			</mflooring-gallery-pagination-counter>
+		</mflooring-gallery-pagination>
+
+		<!-- CAROUSEL VIEW - MOBILE -->
+		<mflooring-gallery-carousel-block
+			*ngIf="!!carouselBlock"
+			[content]="carouselBlock"
+			(closeCarouselBlock)="onCloseCarouselBlock()"
+		></mflooring-gallery-carousel-block>
+	</mflooring-layout-wrapper>
+</ng-container>
+
+<ng-template #please_configure>
+	<mflooring-please-configure [componentName]="name" *ngIf="isPreview"></mflooring-please-configure>
+</ng-template>

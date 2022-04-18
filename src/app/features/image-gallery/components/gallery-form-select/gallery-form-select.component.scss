@@ -1,0 +1,41 @@
+@import './src/styles/settings/settings.colors';
+@import './src/styles/tools/tools.typography';
+@import './src/styles/tools/tools.mediaquery';
+
+$default-container-gap: 15px;
+$default-container-min-width: 172px;
+
+:host {
+	display: grid;
+	grid-template-columns: repeat(
+		auto-fill,
+		minmax($default-container-min-width, 1fr)
+	);
+	gap: $default-container-gap;
+}
+.gallery-images {
+	&__images {
+	}
+}
+::ng-deep {
+	mflooring-select-filter {
+		.select {
+			&__control {
+				max-width: 100% !important;
+				width: 100%;
+				&.mat-menu-trigger {
+					border: solid 1px $color-dark-grey;
+					border-radius: 5px;
+					.select {
+						&__control {
+							&__category {
+								color: $color-black;
+								@include font-nunito-semibold($size: 14px, $lineheight: 19px);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

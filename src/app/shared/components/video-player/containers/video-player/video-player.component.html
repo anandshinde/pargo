@@ -1,0 +1,25 @@
+<section
+	class="video-player {{ widthClass }} {{ positionClass }}"
+	[ngClass]="{ 'is-inset': isInset }"
+	*ngIf="loadVideo"
+>
+	<div class="video-player__transcript" *ngIf="!!transcript">
+		<a [href]="transcript" download>View Transcript</a>
+	</div>
+	<vg-player (onPlayerReady)="onPlaying($event)">
+		<video
+			[vgMedia]="media"
+			#media
+			id="singleVideo"
+			preload="auto"
+			controls
+			controlsList="nodownload"
+			oncontextmenu="return false;"
+			(ended)="onCompleted()"
+			(play)="setPlaying(true)"
+			(pause)="setPlaying(false)"
+		>
+			<source [attr.src]="videoUrl" type="video/mp4" />
+		</video>
+	</vg-player>
+</section>

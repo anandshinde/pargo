@@ -1,0 +1,333 @@
+@import 'src/styles/tools/tools.typography';
+@import 'src/styles/settings/settings.colors';
+@import 'src/styles/elements/elements.themes';
+@import 'src/styles/tools/tools.fonts-units';
+@import 'src/styles/components/components.swiper';
+
+$component-margin-bottom: rem(20);
+$component-margin-top: rem(10);
+
+:host {
+	position: relative;
+	display: block;
+}
+
+.rich-content {
+	// margin-top: $component-margin-top;
+	// margin-bottom: $component-margin-bottom;
+
+	&__content {
+		margin-bottom: $component-margin-bottom;
+
+		&:nth-last-child(1) {
+			margin-bottom: 0;
+		}
+	}
+
+	&.grey-bg {
+		background-color: $color-extra-light-grey;
+		::ng-deep {
+			mflooring-layout-wrapper {
+				mflooring-rich-text-compound {
+					p {
+						margin-bottom: 0;
+						@include font-nunito-regular($size: [15, 16]);
+						color: $mohawk-black;
+					}
+				}
+			}
+		}
+	}
+
+	&__slider {
+		&__title {
+			::ng-deep p {
+				color: $color-grey-light;
+				text-align: left;
+				padding-bottom: rem(20);
+				@include font-nunito-regular($size: 22);
+			}
+		}
+
+		&.sustainability {
+			::ng-deep a {
+				max-height: rem(230);
+				align-items: flex-end !important;
+			}
+
+			::ng-deep .swiper-pagination-bullet {
+				width: 10px !important;
+				height: 10px !important;
+				border: 0 !important;
+				background-color: $color-black !important;
+				opacity: 0.2 !important;
+				// @include basic-pagination-bullet($spacing: 3px);
+
+				&-active {
+					background-color: $color-red-dark !important;
+					opacity: 1 !important;
+				}
+			}
+		}
+	}
+}
+
+::ng-deep {
+	.rich-content-3col {
+		&-pagination {
+			position: relative;
+			display: flex;
+			align-items: flex-start;
+			justify-content: center;
+			width: 100%;
+
+			@include mq-breakpoint-md() {
+				bottom: 0;
+				margin-top: 0;
+			}
+
+			.swiper-pagination-bullet {
+				// @include basic-pagination-bullet($spacing: 5px);
+			}
+		}
+
+		&-navigation {
+			padding: 30px;
+		}
+	}
+}
+
+// .bg-color-padding {
+// 	//   background: $color-grey-white;
+// 	padding: rem(10) 0px rem(10) 10px;
+// }
+
+.bottom-padding {
+	padding-bottom: rem(60);
+	margin: 0;
+}
+
+.extended-inset {
+	@include mq-breakpoint-md {
+		::ng-deep .layout-container__grid.inset {
+			grid-template-columns: calc((100% - 1500px) / 2) auto calc(
+					(100% - 1500px) / 2
+				);
+		}
+	}
+}
+.content-column {
+	display: flex;
+	justify-content: center;
+	padding: 45px 0px;
+	@include mq-breakpoint-md() {
+		padding: 75px 0px;
+	}
+	::ng-deep .two-column-compound__container {
+		grid-template-areas: 'left' 'right';
+		grid-template-columns: auto;
+		gap: 30px;
+		@include mq-breakpoint-sm() {
+			grid-template-areas: 'left right';
+			grid-template-columns: 1fr 1fr;
+			gap: 50px;
+		}
+		@include mq-breakpoint-md() {
+			grid-template-areas: 'left right';
+			grid-template-columns: 1fr 1fr;
+			gap: 50px;
+		}
+	}
+	::ng-deep {
+		.two-column-compound__column {
+			box-shadow: 0px 5px 25px #0000001d;
+			min-width: 300px;
+			min-height: 275px;
+			margin-bottom: 0px;
+			@include mq-breakpoint-md() {
+				min-width: 380px;
+				min-height: 275px;
+				margin-bottom: 33px;
+			}
+			.content-column-next {
+				display: flex;
+				justify-content: center;
+				mflooring-rich-content-component-map {
+					mflooring-image-compound {
+						img {
+							max-height: 55px;
+							margin-top: 35px;
+							margin-bottom: 15px;
+						}
+					}
+					mflooring-rich-text-compound {
+						display: flex;
+						justify-content: center;
+						h2 {
+							justify-content: center;
+							text-align: center;
+							margin-bottom: 30px;
+							@include font-nunito-regular($size: 22, $lineheight: 30px);
+						}
+						p {
+							justify-content: center;
+							text-align: center;
+							max-height: auto;
+							max-width: 320px;
+							margin-bottom: 18px;
+							@include font-nunito-regular($size: [14, 12], $lineheight: 18px);
+						}
+					}
+					mflooring-link-compound {
+						a {
+							justify-content: center;
+							text-decoration: underline;
+							color: $color-teal;
+							margin-bottom: 32px;
+							@include font-nunito-bold($size: 14px, $lineheight: 19px);
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+:host ::ng-deep .two-column-compound {
+	.has-border {
+		& .two-column-compound__column {
+			border: rem(0.5) solid $color-grey-light;
+			border-radius: rem(5);
+			padding: rem(20);
+			box-shadow: 0 rem(5) rem(25) 0 $color-grey-light;
+
+			& h2 {
+				text-transform: none;
+			}
+		}
+
+		& a.link {
+			color: $color-black;
+		}
+	}
+
+	& .two-column-compound__column {
+		p {
+			margin-bottom: rem(15);
+			@include font-nunito-light([16, 12]);
+		}
+
+		h3 {
+			font-weight: 300 !important;
+			@include font-nunito-regular([16]);
+
+			strong {
+				@include font-nunito-regular([20, 16]);
+			}
+		}
+	}
+}
+
+:host ::ng-deep mflooring-three-column-compound {
+	&.sustainability {
+		p {
+			@include font-nunito-bold($size: [30, 32]);
+		}
+
+		a {
+			max-height: rem(230);
+
+			@include mq-breakpoint-md {
+				max-height: rem(360);
+			}
+		}
+	}
+
+	&.sustainabilitythreecolumn {
+		.three-column-compound__title {
+			::ng-deep p {
+				color: $color-grey-light;
+				text-align: left;
+				padding: 0 rem(50);
+			}
+		}
+	}
+}
+
+.video-mohawk {
+	::ng-deep {
+		video {
+			@include mq-breakpoint-md {
+				height: rem(560);
+				object-fit: cover;
+			}
+		}
+	}
+}
+
+.rich-content__content {
+	::ng-deep {
+		.sustainability-page {
+			text-align: center;
+
+			h1 {
+				color: $color-grey-light;
+				margin-bottom: 0;
+				@include font-nunito-regular($size: [30, 40], $lineheight: 40px);
+
+				@include mq-breakpoint-md {
+					line-height: 48px;
+					letter-spacing: 0.9;
+					margin-top: 20px;
+					margin-bottom: 0px;
+				}
+			}
+
+			h3 {
+				color: $color-grey-light;
+				margin-bottom: 0;
+				padding: 20px 0 40px 0;
+				@include font-nunito-regular($size: [24, 30], $lineheight: 35px);
+				@include mq-breakpoint-md {
+					padding: 40px 40px;
+					line-height: 45px;
+				}
+			}
+		}
+
+		.bloglist {
+			.rich-text {
+				p {
+					line-height: rem(26);
+					letter-spacing: rem(0);
+					margin-bottom: 0;
+					text-transform: capitalize;
+					@include mq-breakpoint-md {
+						strong {
+							line-height: rem(48);
+						}
+					}
+				}
+			}
+
+			p {
+				color: $color-red;
+
+				@include font-nunito-regular($size: rem(15));
+				@include mq-breakpoint-md {
+					@include font-nunito-regular($size: rem(18));
+				}
+			}
+
+			p {
+				strong {
+					color: $color-grey-light;
+					@include font-nunito-regular($size: rem(30));
+					@include mq-breakpoint-md {
+						@include font-nunito-regular($size: rem(40));
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,106 @@
+<ng-container *ngIf="trendCollectionContent$ | async as content">
+	<ng-container *ngIf="documentIsConfigured; else please_configure">
+		<div *ngFor="let data of content; let i = index">
+			<div *ngIf="i < trendCount" class="trend-banner">
+				<ng-container [brManageContentButton]="document"></ng-container>
+				<mflooring-layout-wrapper [presentation]="{ isInset: true }">
+					<section id="trendCollection__{{ i + 1 }}" class="trend-collection">
+						<mflooring-rich-text-compound
+							[content]="data.trendIntroduction?.content"
+							[presentation]="data.trendIntroduction?.presentation"
+						>
+						</mflooring-rich-text-compound>
+						<div class="trend-collection__trend">
+							<mflooring-layout-wrapper
+								[content]="{
+									backgroundImage: data?.featureCollectionImage?.content
+								}"
+								[presentation]="{
+									inset: false,
+									hasBackground: true
+								}"
+							>
+								<div class="trend-collection__tile">
+									<div leftColumn class="trend-collection__overlay">
+										<mflooring-rich-text-compound
+											[content]="data.featureCollectionOverlay?.content"
+											[presentation]="
+												data.featureCollectionOverlay?.presentation
+											"
+										>
+										</mflooring-rich-text-compound>
+									</div>
+									<ng-container *ngIf="!isMobile">
+										<div
+											rightColumn
+											class="trend-collection__collection"
+											*ngIf="data?.trendCollectionItems"
+										>
+											<mflooring-two-column-compound
+												[presentation]="twoColumnCompoundPresentation"
+											>
+												<div leftColumn class="leftColumn">
+													<mflooring-trend-collection-item
+														[content]="data?.trendCollectionItems?.leftColumn"
+														*ngIf="!!data?.trendCollectionItems?.leftColumn"
+													></mflooring-trend-collection-item>
+												</div>
+												<div rightColumn>
+													<mflooring-trend-collection-item
+														[content]="data?.trendCollectionItems?.rightColumn"
+														*ngIf="!!data?.trendCollectionItems?.rightColumn"
+													></mflooring-trend-collection-item>
+												</div>
+											</mflooring-two-column-compound>
+										</div>
+									</ng-container>
+								</div>
+							</mflooring-layout-wrapper>
+							<div class="trend_mobile_collections" *ngIf="!!isMobile">
+								<div
+									rightColumn
+									class="trend-collection__collection"
+									*ngIf="data?.trendCollectionItems"
+								>
+									<mflooring-two-column-compound
+										[presentation]="twoColumnCompoundPresentation"
+									>
+										<div leftColumn>
+											<mflooring-trend-collection-item
+												[content]="data?.trendCollectionItems?.leftColumn"
+												*ngIf="!!data?.trendCollectionItems?.leftColumn"
+											></mflooring-trend-collection-item>
+										</div>
+										<div rightColumn>
+											<mflooring-trend-collection-item
+												[content]="data?.trendCollectionItems?.rightColumn"
+												*ngIf="!!data?.trendCollectionItems?.rightColumn"
+											></mflooring-trend-collection-item>
+										</div>
+									</mflooring-two-column-compound>
+								</div>
+							</div>
+						</div>
+					</section>
+				</mflooring-layout-wrapper>
+			</div>
+		</div>
+	</ng-container>
+	<div class="show-more-button" *ngIf="content.length > 3 || toggleItemFlag">
+		<a *ngIf="content.length > trendCount" (click)="loadMore()">
+			View More Styles</a
+		>
+		<a
+			*ngIf="content.length < trendCount || content.length === trendCount"
+			(click)="loadless(); scrollToTop()"
+		>
+			Show Less Styles</a
+		>
+	</div>
+	<ng-template #please_configure>
+		<mflooring-please-configure
+			[componentName]="name"
+			*ngIf="isPreview"
+		></mflooring-please-configure>
+	</ng-template>
+</ng-container>

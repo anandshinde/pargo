@@ -1,0 +1,240 @@
+@import 'src/styles/settings/settings.colors';
+
+@import 'src/styles/settings/settings.containers';
+
+@import 'src/styles/tools/tools.typography';
+
+@import 'src/styles/tools/tools.mediaquery';
+
+@import 'src/styles/components/components.banner';
+
+$carousel-banner-height: 50px;
+$xsmall: 40px 0;
+$small: 80px 0;
+$medium: 120px 0;
+$large: 160px 0;
+$xlarge: 200px 0;
+$xlarge-mobile: 100px 0;
+// $component-margin-bottom: 30px;
+.single-banner-hyperlink {
+	a {
+		text-decoration: none;
+		color: inherit;
+	}
+}
+:host::ng-deep {
+	.rich-text {
+		h1 {
+			strong {
+				@include font-nunito-regular($size: $banner-header-text-font-sizes);
+			}
+		}
+
+		p {
+			line-height: 1.1;
+			@include font-nunito-light($size: $banner-text-font-sizes);
+		}
+	}
+	h2 {
+		@include font-nunito-regular($size: 35px, $lineheight: 50px);
+		@include mq-breakpoint-md() {
+			margin-bottom: 0;
+			@include font-nunito-semibold($size: 45px, $lineheight: 50px);
+		}
+	}
+	.single-banner {
+		&__color-shown {
+			position: absolute;
+			display: flex;
+			align-items: center;
+			left: 5px;
+			bottom: 30px;
+			color: var(--banner-shownColor-color);
+
+			@include mq-breakpoint-md() {
+				left: 35px;
+				bottom: 15px;
+			}
+			.icon- {
+				margin-right: 5px;
+				font-size: var(--banner-shownColor-icon-size);
+			}
+			.label {
+				@include font-nunito-semibold($size: 14px, $lineheight: 19px);
+			}
+		}
+	}
+
+	.link-compound {
+		margin-top: 15px !important;
+	}
+
+	.link-compound.link.left {
+		@include font-nunito-semibold($size: 14px, $lineheight: 19px);
+		text-transform: none;
+	}
+
+	.main_banner_container {
+		h1,
+		h2 {
+			@include font-nunito-regular($size: 35px, $lineheight: 50px);
+		}
+	}
+
+	@include mq-breakpoint-md() {
+		.simple-banner-component h1,
+		.simple-banner-component h2 {
+			margin-bottom: $component-margin-bottom;
+			letter-spacing: 0.45px;
+			@include font-nunito-regular($size: 24px, $lineheight: 30px);
+		}
+		.main_banner_container {
+			h1,
+			h2 {
+				padding-bottom: 15px;
+				@include font-nunito-regular($size: 40px, $lineheight: 50px);
+			}
+			p {
+				margin: 0;
+				// padding-top: 15px;
+				@include font-nunito-regular($size: 16px, $lineheight: 22px);
+			}
+		}
+	}
+
+	@include item-positions();
+	@include item-vertical-positions();
+
+	.layout-container {
+		background-color: rgb(255, 255, 255);
+		position: relative;
+		min-height: $carousel-banner-height;
+		margin-bottom: $component-margin-bottom;
+		height: 100%;
+
+		@include mq-breakpoint-md() {
+			width: $full-width;
+			height: auto;
+		}
+
+		&__background {
+			min-height: $carousel-banner-height;
+			@include mq-breakpoint-md() {
+				height: 100%;
+			}
+		}
+
+		&__grid {
+			min-height: $carousel-banner-height;
+			height: 100%;
+			@include mq-breakpoint-md() {
+				height: auto;
+			}
+
+			&__area {
+				display: block !important;
+				width: $full-width;
+			}
+		}
+	}
+	.main_banner_container {
+		display: $flex;
+		height: $full-height;
+		position: relative;
+
+		@include mq-breakpoint-md() {
+			display: $flex;
+			@include full-width-height();
+		}
+	}
+}
+
+.xsmall {
+	padding: $xsmall;
+}
+.small {
+	padding: $small;
+}
+.medium {
+	padding: $medium;
+}
+.large {
+	padding: $large;
+}
+:host::ng-deep .xlarge {
+	padding: $xlarge-mobile;
+	@include mq-breakpoint-md() {
+		padding: $xlarge;
+		mflooring-link-compound {
+			button {
+				margin-top: 15px !important;
+			}
+		}
+	}
+	h2 {
+		@include font-nunito-bold($size: [40, 50], $lineheight: 35px);
+		margin-bottom: 5px;
+		@include mq-breakpoint-md() {
+			padding-bottom: 15px;
+			margin-bottom: 0px;
+		}
+	}
+	mflooring-link-compound {
+		button {
+			margin-top: 25px !important;
+		}
+	}
+}
+
+artical section {
+	width: 100%;
+	height: 100%;
+}
+.rect__middle__main {
+	display: $flex;
+	background-size: 100% 100%;
+	position: relative;
+	width: 100%;
+	height: 100%;
+
+	&__row {
+		display: $flex;
+		flex-wrap: wrap;
+		position: relative;
+		color: $color-white;
+		justify-content: $center-align;
+		text-align: $center-align;
+		background-color: rgba(0, 0, 0, 0.38);
+		@include font-nunito-regular($size: 25px, $lineheight: 30px);
+		width: 100%;
+		height: 100%;
+		@include mq-breakpoint-md() {
+			@include font-nunito-regular($size: 50px, $lineheight: 48px);
+			background-color: rgba(0, 0, 0, 0.25);
+		}
+	}
+
+	.text {
+		width: 100%;
+		height: 100%;
+		max-width: 700px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		flex-wrap: nowrap;
+		position: relative;
+		padding: 0 20px;
+		@include mq-breakpoint-md() {
+			padding: 0;
+		}
+	}
+}
+
+.contains-description {
+	min-height: auto;
+	display: $flex;
+	@include mq-breakpoint-md() {
+		min-height: $banner-height;
+	}
+}

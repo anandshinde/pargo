@@ -1,0 +1,30 @@
+<section class="star-rating">
+	<div class="rating">
+		<div class="star-rating__base">
+			<span *ngFor="let star of totalStars" class="icon-">star</span>
+		</div>
+		<div
+			class="star-rating__overlay {{ colorClass }}"
+			[ngStyle]="{ width: rating }"
+		>
+			<span *ngFor="let star of totalStars" class="icon-">star</span>
+		</div>
+	</div>
+	<span class="rating-count" *ngIf="!!showRatingNum && content?.rating > 0">
+		{{ content?.rating?.toFixed(1) }}
+	</span>
+	<a
+		class="review-count review-count--link"
+		href="{{ content?.serviceUrl }}"
+		captureClicks
+		*ngIf="!!content?.serviceUrl; else no_link"
+	>
+		({{ content?.totalReviews || 0 }})
+	</a>
+</section>
+
+<ng-template #no_link>
+	<span *ngIf="!hideReviewsNum" class="review-count"
+		>({{ content?.totalReviews || 0 }})</span
+	>
+</ng-template>

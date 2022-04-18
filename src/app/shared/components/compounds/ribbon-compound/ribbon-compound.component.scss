@@ -1,0 +1,31 @@
+@import 'src/styles/settings/settings.colors';
+
+@import 'src/styles/tools/tools.typography';
+
+.cta-ribbon {
+	display: flex;
+	align-items: center;
+	padding: 20px 40px;
+	background-color: $color-brown-light;
+
+	&__item {
+
+		&--image {
+			flex-basis: 100px;
+		}
+
+		&--text {
+			flex: 1;
+			text-align: center;
+
+			::ng-deep .component-cta-ribbon p,
+			::ng-deep .component-cta-ribbon strong {
+				@include font-nunito-regular($size: [14px]);
+			}
+		}
+
+		&--link {
+			flex-basis: 200px;
+		}
+	}
+}

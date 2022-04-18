@@ -1,0 +1,39 @@
+<div class="copyright-section">
+	<div class="footer">
+		<ul class="footer__social-links__list" role="menu">
+			<li role="menuitem" *ngFor="let icon of socialIcons; index as i">
+				<a
+					class="footer__social-links__item {{ themeClass }}"
+					rel="noopener, noreferrer"
+					captureClicks
+					data-link-type="social"
+					[href]="icon.url"
+					[attr.data-link-name]="icon.name"
+				>
+					<mflooring-icon-button
+						id="social_icon-{{ i }}"
+						[presentation]="{
+							size: 'small',
+							type: 'icon-white',
+							iconName: icon?.name,
+							iconUrl: icon?.imgUrl
+						}"
+						class="main-header-search--icon"
+					></mflooring-icon-button>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<div class="copyright">
+		<p *ngIf="!!copyright" id="copyright">
+			{{ copyright }}
+		</p>
+	</div>
+	<div class="footer-links">
+		<a id="terms"> Terms of Use </a>
+		<a captureClicks [href]="privacyPolicy?.url" *ngIf="!!privacyPolicy?.url">
+			{{ privacyPolicy?.label }}
+		</a>
+		<a id="flooring"> All Retails Flooring Stores </a>
+	</div>
+</div>

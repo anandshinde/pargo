@@ -1,0 +1,14 @@
+<mat-radio-group
+	[ngClass]="[orientationClass]"
+	class="radio-group"
+	[formControl]="control"
+>
+	<mat-radio-button
+		class="radio-button"
+		[value]="item?.value"
+		[checked]="item?.value === control.value"
+		*ngFor="let item of content; trackBy: trackBy"
+	>
+		{{ item?.label }}
+	</mat-radio-button>
+</mat-radio-group>

@@ -1,0 +1,66 @@
+@import './theme-base';
+
+@import './theme-mflooring';
+
+@import 'src/styles/settings/settings.typography';
+@import 'src/styles/elements/elements.lists';
+@import 'src/styles/elements/elements.links';
+@import 'src/styles/tools/tools.typography';
+
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+$typography-config: mat-typography-config(
+	$font-family: $font-nunito
+);
+
+@include angular-material-typography($typography-config);
+
+@include mat-core($typography-config);
+
+// primary theme palette...
+$base-primary: mat-palette($base-palette);
+$base-warn: mat-palette($mat-red);
+$base-theme: mat-light-theme($base-primary, $base-warn);
+
+
+// custom theme palettes...
+$base-mflooring: mat-palette($mflooring-palette);
+$mflooring-theme: mat-light-theme($base-mflooring, $base-warn);
+
+// custom theme palettes...
+$base-mflooring-black: mat-palette($mflooring-palette-black);
+$mflooring-theme-black: mat-light-theme($base-mflooring-black, $base-warn);
+
+
+@include angular-material-theme($base-theme);
+
+// CUSTOM THEME CLASS
+// Material components contained in the following classed containers will inherit the custom theme
+
+.theme-mflooring {
+	// Material components will inherit the mflooring material theme
+	@include angular-material-theme($mflooring-theme);
+}
+
+.theme-black {
+	// Material components will inherit the mflooring material theme
+	@include angular-material-theme($mflooring-theme-black);
+}
+
+
+.retailer_filter_dropdown {
+	.mat-option-text{
+		color: $mohawk-black;
+		@include font-nunito-semibold($size: [14, 11], $lineheight: 1.3);
+	}
+	.mat-option.mat-selected:not(.mat-option-multiple){
+		background-color: $color-extra-light-grey;
+	}
+	.mat-option:hover:not(.mat-option-disabled), .mat-option:focus:not(.mat-option-disabled){
+		background-color: $color-grey-light;
+	}
+}

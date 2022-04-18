@@ -1,0 +1,271 @@
+<div class="form-field-close-button">
+	<button class="close" (click)="onNoClick()">
+		<span class="icon-close">close</span>
+	</button>
+</div>
+
+<ng-container *ngIf="newAppointment && (appointmentStatus | async) === false">
+	<div class="intro-header">
+		<span class="intro-header__retailer-name">{{ data?.retailerName }}</span>
+		<span class="intro-header__appointment">Appointment Request</span>
+		<span class="intro-header__stepper"
+			>Step {{ currentStep + 1 }} of {{ totalSteps }}:
+			{{ stepperName[currentStep] }}</span
+		>
+	</div>
+	<div class="step-label">
+		<span
+			[ngClass]="[
+				(leftIconDisabled | async) === true
+					? 'icon-left icon-disable'
+					: 'icon-left icon-enable'
+			]"
+			mwlCalendarPreviousView
+			[view]="view"
+			[(viewDate)]="viewDate"
+			(viewDateChange)="closeOpenMonthViewDayPrev()"
+			*ngIf="currentStep === 0"
+			>left</span
+		>
+		<span class="label-text">
+			{{ currentStep > 0 ? (dateTime | date: 'EEEE, MMMM d') : currentMonthYear
+			}}{{
+				!!dateTime && currentStep > 1
+					? ' at ' + (dateTime | date: 'h:mm a')
+					: ''
+			}}
+		</span>
+		<span
+			[ngClass]="[
+				(rightIconDisabled | async) === true
+					? 'icon-right icon-disable'
+					: 'icon-right icon-enable'
+			]"
+			mwlCalendarNextView
+			[view]="view"
+			[(viewDate)]="viewDate"
+			(viewDateChange)="closeOpenMonthViewDayNext()"
+			*ngIf="currentStep === 0"
+			>right</span
+		>
+	</div>
+
+	<div class="form__stepper">
+		<mat-horizontal-stepper [linear]="true" #stepper>
+			<mat-step label="Choose a Date">
+				<div class="form__date_picker">
+					<mwl-calendar-month-view
+						[viewDate]="viewDate"
+						[refresh]="refresh"
+						(dayClicked)="dayClicked($event.day, $event)"
+						(beforeViewRender)="applyDateSelectionPolicy($event)"
+						weekStartsOn="1"
+					>
+					</mwl-calendar-month-view>
+				</div>
+			</mat-step>
+			<mat-step label="Choose a Time">
+				<div class="time-picker">
+					<ul>
+						<li
+							*ngFor="let hours of workingHours"
+							class="time-picker__container"
+						>
+							<button (click)="timeClicked(hours)" class="time-picker__time">
+								<div>
+									<span class="hours">{{
+										hours === 12 ? 12 : hours % 12
+									}}</span>
+									<span class="am-pm">{{ hours < 12 ? 'AM' : 'PM' }}</span>
+								</div>
+							</button>
+						</li>
+					</ul>
+				</div>
+				<div class="panel-action">
+					<button (click)="prevStepper()" mat-button matStepperPrevious>
+						< Back
+					</button>
+				</div>
+			</mat-step>
+			<mat-step label="Your Information Details">
+				<div class="form__user-details user-details">
+					<form class="user-details__form" [formGroup]="form">
+						<div class="form-field">
+							<mflooring-input-text
+								[control]="firstName"
+								[presentation]="inputTextPresentation"
+								[content]="{
+									placeholder: 'First Name',
+									label: 'First Name*'
+								}"
+							>
+							</mflooring-input-text>
+							<div
+								class="alert alert-danger"
+								*ngIf="
+									firstName.invalid && (firstName.touched || firstName.dirty)
+								"
+							>
+								<div class="text-danger" *ngIf="firstName.errors.required">
+									<span class="form-error"> This is a required field </span>
+								</div>
+								<div
+									class="text-danger"
+									*ngIf="firstName.hasError('maxlength')"
+								>
+									<span class="form-error"> Maximum field limit reached </span>
+								</div>
+							</div>
+						</div>
+						<div class="form-field">
+							<mflooring-input-text
+								[control]="lastName"
+								[presentation]="inputTextPresentation"
+								[content]="{
+									placeholder: 'Last Name',
+									label: 'Last Name*'
+								}"
+							>
+							</mflooring-input-text>
+							<div
+								class="alert alert-danger"
+								*ngIf="lastName.invalid && (lastName.touched || lastName.dirty)"
+							>
+								<div class="text-danger" *ngIf="lastName.errors.required">
+									<span class="form-error"> This is a required field </span>
+								</div>
+								<div class="text-danger" *ngIf="lastName.hasError('maxlength')">
+									<span class="form-error"> Maximum field limit reached </span>
+								</div>
+							</div>
+						</div>
+						<div class="form-field">
+							<mflooring-input-text
+								[control]="email"
+								[presentation]="inputTextPresentation"
+								[content]="{
+									placeholder: 'Email',
+									label: 'Email*'
+								}"
+							>
+							</mflooring-input-text>
+							<div
+								*ngIf="email.invalid && (email.touched || email.dirty)"
+								class="alert alert-danger"
+							>
+								<div class="text-danger" *ngIf="email.errors.required">
+									<span class="form-error">This is a required field</span>
+								</div>
+
+								<div class="text-danger" *ngIf="email.errors.pattern">
+									<span class="form-error">Email is not in proper format</span>
+								</div>
+							</div>
+						</div>
+						<div class="form-field">
+							<mflooring-input-text
+								[control]="phoneNumber"
+								[presentation]="inputTextPresentation"
+								[content]="{
+									placeholder: 'Phone Number',
+									label: 'Phone Number',
+									type: 'tel',
+									maxlength: 14
+								}"
+							>
+							</mflooring-input-text>
+							<div
+								*ngIf="
+									phoneNumber.invalid &&
+									(phoneNumber.touched || phoneNumber.dirty)
+								"
+								class="alert alert-danger"
+							>
+								<div class="text-danger" *ngIf="phoneNumber.errors.pattern">
+									<span class="create-account__error form-error">
+										Phone Number is not in proper format
+									</span>
+								</div>
+								<div
+									class="text-danger"
+									*ngIf="phoneNumber.hasError('maxlength')"
+								>
+									<span class="form-error"> Maximum field limit reached </span>
+								</div>
+							</div>
+						</div>
+						<div class="form-field leave-message">
+							<label for="leaveMessage" class="label_message"> Message</label>
+							<textarea
+								id="leaveMessage"
+								[formControl]="leaveMessage"
+								placeholder="Leave Message"
+								rows="4"
+								cols="87"
+								class="leave__message"
+							></textarea>
+						</div>
+					</form>
+					<div class="user-details__action">
+						<span
+							class="form-error form-error--response"
+							*ngIf="errorResponseMessage | async"
+							>{{ errorResponseMessage | async }}</span
+						>
+
+						<mflooring-link-compound
+							[ngClass]="{ 'is-disabled': !form.valid }"
+							[content]="{
+								text: 'Submit'
+							}"
+							[presentation]="{
+								theme: 'light',
+								buttonType: 'primary',
+								customClass: ''
+							}"
+							(click)="form.valid && onSubmit(form.value)"
+						>
+						</mflooring-link-compound>
+					</div>
+				</div>
+				<div class="panel-action">
+					<button (click)="prevStepper()" mat-button matStepperPrevious>
+						< Back
+					</button>
+				</div>
+			</mat-step>
+		</mat-horizontal-stepper>
+	</div>
+</ng-container>
+
+<ng-container *ngIf="appointmentStatus | async">
+	<div class="message_section">
+		<h3 class="message_section__title">Thank You!</h3>
+		<p class="message_section__response">
+			Your request for an appointment with {{ dealerName }} has been submitted.
+		</p>
+		<div class="message_section__message">
+			<p>
+				The request has been made for
+				<span class="highlight__text"
+					>{{
+						(dateTime | date: 'EEEE, MMMM d') +
+							' at ' +
+							(dateTime | date: 'h:mm a')
+					}}
+					(EST).</span
+				>
+				The team from
+				<span class="highlight__text">{{ dealerName }} </span> will review your
+				request and will contact you to discuss and confirm your appointment
+				shortly.
+			</p>
+		</div>
+		<span class="request-form__goto-home">
+			<button class="request-form__goto-home_link" (click)="goHome($event)">
+				Back to Home
+			</button>
+		</span>
+	</div>
+</ng-container>

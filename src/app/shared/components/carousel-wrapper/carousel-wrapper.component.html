@@ -1,0 +1,24 @@
+<section class="carousel-banner">
+	<div class="carousel-banner__content">
+		<div
+			class="swiper-container"
+			[swiper]="config"
+			[(index)]="index"
+			(indexChange)="getIndex(index)"
+		>
+			<div class="swiper-wrapper">
+				<ng-content></ng-content>
+			</div>
+			<ng-container *ngIf="!!config?.pagination">
+				<div
+					class="swiper-pagination {{ bulletSizeClass }}"
+					[ngClass]="{ 'stack-in-mobile': stackMobile }"
+				></div>
+			</ng-container>
+			<ng-container *ngIf="!!config?.navigation">
+				<div class="swiper-button-prev {{ presentation.theme }}"></div>
+				<div class="swiper-button-next {{ presentation.theme }}"></div>
+			</ng-container>
+		</div>
+	</div>
+</section>

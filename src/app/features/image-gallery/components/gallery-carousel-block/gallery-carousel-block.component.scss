@@ -1,0 +1,88 @@
+@import 'src/styles/tools/tools.typography';
+
+@import 'src/styles/settings/settings.colors';
+
+@import 'src/styles/tools/tools.mediaquery';
+
+@import 'src/styles/elements/elements.links';
+
+$default-container-margin-top: 10px;
+$default-container-margin-bottom: 45px;
+$default-navigation-top: 120px;
+
+:host {
+	display: flex;
+	flex-direction: column;
+	margin-top: $default-container-margin-top;
+	margin-bottom: 0px;
+	@include mq-breakpoint-md() {
+		margin-bottom: $default-container-margin-bottom;
+	}
+}
+
+:host .gallery-carousel__action {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 5px;
+	position: relative;
+	@include font-gotham-light($size: 14px);
+
+	& > a {
+		color: inherit;
+		outline-width: 0;
+		text-decoration: underline;
+	}
+	a {
+		position: absolute;
+		top: -25px;
+		right: 14px;
+		text-decoration: none;
+		color: #767676;
+		@include font-nunito-semibold($size: 22px);
+	}
+}
+
+:host ::ng-deep .carousel-banner__content {
+	.swiper-button-next,
+	.swiper-button-prev {
+		outline: none;
+		color: $color-white;
+		top: $default-navigation-top;
+	}
+
+	.swiper-container {
+		max-width: 414px;
+
+		@include mq-breakpoint-md() {
+			max-width: unset;
+		}
+	}
+}
+::ng-deep mflooring-carousel-wrapper {
+	.carousel-banner {
+		.carousel-banner__content {
+			.swiper-button-next,
+			.swiper-button-prev {
+				&:after {
+					font-size: 25px;
+					text-rendering: auto;
+					font-weight: 600;
+					color: $color-grey;
+					top: 45%;
+				}
+			}
+			.swiper-button-next {
+				right: 5px;
+				@include mq-breakpoint-md() {
+					right: -7px;
+				}
+			}
+			.swiper-button-prev {
+				left: 5px;
+				@include mq-breakpoint-md() {
+					left: -7px;
+				}
+			}
+		}
+	}
+}

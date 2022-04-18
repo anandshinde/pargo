@@ -1,0 +1,41 @@
+<ul class="menu-utility">
+	<li
+		role="menuitem"
+		class="menu-utility__item"
+		*ngFor="let item of menu.siteMenuItems; index as i"
+	>
+		<mflooring-menu-item
+			[class.item__parent]="item.childMenuItems.length"
+			[class.item__parent--opened]="openedMenu === i"
+			[hasChildren]="item.childMenuItems.length"
+			[page]="page"
+			[site]="item?._links?.site"
+			[linkName]="item?.name"
+			(click)="onOpenMenu(i)"
+		>
+			{{ item.name }}
+		</mflooring-menu-item>
+
+		<ul
+			class="menu-utility__submenu"
+			role="menu"
+			[class.menu-utility__submenu--opened]="openedMenu === i"
+			*ngIf="item.childMenuItems.length"
+		>
+			<li
+				class="menu-utility__submenu__item"
+				role="menuitem"
+				*ngFor="let subitem of item.childMenuItems"
+			>
+				<mflooring-menu-item
+					(click)="onCloseMenu()"
+					[page]="page"
+					[site]="subitem?._links?.site"
+					[linkName]="subitem?.name"
+				>
+					{{ subitem.name }}
+				</mflooring-menu-item>
+			</li>
+		</ul>
+	</li>
+</ul>

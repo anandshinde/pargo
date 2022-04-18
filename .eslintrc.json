@@ -1,0 +1,60 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "project": [
+          "tsconfig.json",
+          "e2e/tsconfig.json"
+        ],
+        "createDefaultProgram": true
+      },
+      "extends": [
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ],
+      "rules": {
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "prefix": "mflooring",
+            "style": "kebab-case",
+            "type": "element"
+          }
+        ],
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "style": "camelCase",
+            "type": "attribute"
+          }
+        ],
+        // FUNCTIONALITY
+        "@angular-eslint/contextual-decorator": "warn",
+        "@angular-eslint/contextual-lifecycle": "warn",
+        "@angular-eslint/no-attribute-decorator": "warn",
+        "@angular-eslint/no-lifecycle-call": "warn",
+        "@angular-eslint/no-output-native": "warn",
+        "@angular-eslint/no-pipe-impure": "warn",
+        "@angular-eslint/prefer-on-push-component-change-detection": "warn",
+        "@angular-eslint/use-injectable-provided-in": "warn",
+        "@angular-eslint/use-lifecycle-interface": "warn"
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
+      "rules": {}
+    }
+  ]
+}

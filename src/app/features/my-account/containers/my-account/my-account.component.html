@@ -1,0 +1,495 @@
+<mflooring-layout-wrapper
+	[presentation]="{ isInset: true, hasBackground: true }"
+	[content]="{
+		backgroundImage: {
+			image: {
+				imageDAMUrl:
+					'https://mohawk.scene7.com/is/image/MohawkResidential/LF000786_room_01?scl=2.25&wid=2500&hei=800&op_sharpen=1&align=0,.2'
+			}
+		}
+	}"
+>
+	<form [formGroup]="form">
+		<div class="my-account">
+			<div class="my-account__left" *ngIf="showMenuList">
+				<h3>Welcome <br />First_Last_Name</h3>
+				<div class="list-item">
+					<ul>
+						<li>
+							<a
+								[class.active]="selectedListItem === 'myAccount'"
+								(click)="
+									selectedListItem = 'myAccount';
+									showContent = true;
+									isMobile === true
+										? (showMenuList = false)
+										: (showContent = true)
+								"
+								>My Account</a
+							>
+						</li>
+						<li>
+							<a
+								[class.active]="selectedListItem === 'myOrders'"
+								(click)="
+									selectedListItem = 'myOrders';
+									showContent = true;
+									isMobile === true
+										? (showMenuList = false)
+										: (showContent = true)
+								"
+								>My Orders</a
+							>
+						</li>
+						<li>
+							<a
+								[class.active]="selectedListItem === 'myFavorites'"
+								(click)="
+									selectedListItem = 'myFavorites';
+									showContent = true;
+									isMobile === true
+										? (showMenuList = false)
+										: (showContent = true)
+								"
+								>My Favorites</a
+							>
+						</li>
+						<li>
+							<a
+								[class.active]="selectedListItem === 'myAppointments'"
+								(click)="
+									selectedListItem = 'myAppointments';
+									showContent = true;
+									isMobile === true
+										? (showMenuList = false)
+										: (showContent = true)
+								"
+								>My Appointments Requests</a
+							>
+						</li>
+						<li class="sign-out">
+							<a (click)="onSignOut()">Sign Out Account</a>
+							<!-- <mflooring-link-compound
+								(handleClickAction)="onSignOut()"
+								[content]="{
+									text: 'Sign Out Account',
+									url: '/'
+								}"
+								[presentation]="{
+									theme: 'light',
+									buttonType: 'link',
+									alignment: 'center'
+								}"
+							></mflooring-link-compound> -->
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="my-account__right">
+				<div *ngIf="showContent">
+					<div *ngIf="selectedListItem === 'myAccount'">
+						<div class="my-account__header">
+							<mflooring-icon-button
+								(click)="
+									showMenuList = true;
+									showContent = false;
+									selectedListItem = ''
+								"
+								[presentation]="{
+									size: 'medium',
+									type: '',
+									iconName: 'left'
+								}"
+								class="my-account__header__arrow"
+							></mflooring-icon-button>
+							<h2>My Account</h2>
+						</div>
+						<mflooring-my-account-form
+							[resourceBundleContent]="resourceBundleContent"
+						>
+						</mflooring-my-account-form>
+						<!-- <div class="my-account__form">
+							<div class="my-account__form__left-form">
+								<div class="form-field">
+									<mflooring-input-text
+										[control]="firstName"
+										[presentation]="inputTextPresentation"
+										[content]="{
+											placeholder: 'Type here',
+											label: resourceBundleContent['global.label.first-name']
+										}"
+									></mflooring-input-text>
+									<div
+										*ngIf="
+											firstName.invalid &&
+											(firstName.touched || firstName.dirty)
+										"
+										class="alert alert-danger"
+									>
+										<div class="text-danger" *ngIf="firstName.errors.required">
+											<span class="my-account__error">{{
+												resourceBundleContent['global.error.mandatory']
+											}}</span>
+										</div>
+										<div
+											class="text-danger"
+											*ngIf="firstName.hasError('maxlength')"
+										>
+											<span class="my-account__error">{{
+												resourceBundleContent['global.error.firstname']
+											}}</span>
+										</div>
+									</div>
+								</div>
+								<div class="form-field">
+									<mflooring-input-text
+										[control]="lastName"
+										[presentation]="inputTextPresentation"
+										[content]="{
+											placeholder: 'Type here',
+											label: resourceBundleContent['global.label.last-name']
+										}"
+									></mflooring-input-text>
+									<div
+										*ngIf="
+											lastName.invalid && (lastName.touched || lastName.dirty)
+										"
+										class="alert alert-danger"
+									>
+										<span class="my-account__error">{{
+											resourceBundleContent['global.error.mandatory']
+										}}</span>
+										<div
+											class="text-danger"
+											*ngIf="lastName.hasError('maxlength')"
+										>
+											<span class="my-account__error">{{
+												resourceBundleContent['global.error.lastname']
+											}}</span>
+										</div>
+									</div>
+								</div>
+								<div class="form-field">
+									<mflooring-input-text
+										[control]="uid"
+										[presentation]="inputTextPresentation"
+										[content]="{
+											placeholder: 'Type here',
+											label: resourceBundleContent['global.label.email']
+										}"
+									></mflooring-input-text>
+								</div>
+								<div class="form-field">
+									<mflooring-input-text
+										[control]="uid"
+										[presentation]="inputTextPresentation"
+										[content]="{
+											placeholder: 'Type here',
+											label: 'Password*'
+										}"
+									></mflooring-input-text>
+								</div>
+								<div class="form-field text-right">
+									<button class="change-pwd" (click)="openChangePwd()">
+										{{ resourceBundleContent['global.label.change-password'] }}
+									</button>
+								</div>
+							</div>
+							<div class="my-account__form__right-form">
+								<div class="form-field field">
+									<mflooring-input-text
+										[control]="address"
+										[presentation]="inputTextPresentation"
+										[content]="{
+											placeholder: 'Type here',
+											label: 'Street Address'
+										}"
+									></mflooring-input-text>
+									<div
+										*ngIf="
+											address.invalid && (address.touched || address.dirty)
+										"
+										class="alert alert-danger"
+									>
+										<div class="text-danger" *ngIf="address.errors.required">
+											<span class="my-account__error">{{
+												resourceBundleContent['global.error.mandatory']
+											}}</span>
+										</div>
+									</div>
+								</div>
+								<div class="form-field field">
+									<mflooring-input-text
+										[control]="city"
+										[presentation]="inputTextPresentation"
+										[content]="{
+											placeholder: 'Type here',
+											label: resourceBundleContent['global.label.city']
+										}"
+									></mflooring-input-text>
+									<div
+										*ngIf="city.invalid && (city.touched || city.dirty)"
+										class="alert alert-danger"
+									>
+										<div class="text-danger" *ngIf="city.errors.required">
+											<span class="my-account__error">{{
+												resourceBundleContent['global.error.mandatory']
+											}}</span>
+										</div>
+									</div>
+								</div>
+								<div class="form-box">
+									<div class="form-box__state">
+										<div class="form-field">
+											<mflooring-input-text
+												[control]="state"
+												[presentation]="inputTextPresentation"
+												[content]="{
+													placeholder: 'Type here',
+													label: resourceBundleContent['global.label.state']
+												}"
+											></mflooring-input-text>
+											<div
+												*ngIf="state.invalid && (state.touched || state.dirty)"
+												class="alert alert-danger"
+											>
+												<div class="text-danger" *ngIf="state.errors.required">
+													<span class="my-account__error">{{
+														resourceBundleContent['global.error.mandatory']
+													}}</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="form-box__zip">
+										<div class="form-field">
+											<mflooring-input-text
+												[control]="zipCode"
+												[presentation]="inputTextPresentation"
+												[content]="{
+													placeholder: 'Type here',
+													maxlength: 5,
+													label: resourceBundleContent['global.label.zip']
+												}"
+											></mflooring-input-text>
+											<div
+												*ngIf="
+													zipCode.invalid && (zipCode.touched || zipCode.dirty)
+												"
+												class="alert alert-danger"
+											>
+												<div
+													class="text-danger"
+													*ngIf="zipCode.errors.required"
+												>
+													<span class="my-account__error">{{
+														resourceBundleContent['global.error.mandatory']
+													}}</span>
+												</div>
+												<div
+													class="text-danger"
+													*ngIf="zipCode.hasError('pattern')"
+												>
+													<span class="my-account__error">{{
+														resourceBundleContent['global.error.zip']
+													}}</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-field field">
+									<mflooring-input-text
+										[control]="country"
+										[presentation]="inputTextPresentation"
+										[content]="{
+											placeholder: 'Type here',
+											label: 'Country'
+										}"
+									></mflooring-input-text>
+								</div>
+							</div>
+						</div>
+						<div class="bottom-btn">
+							<mflooring-link-compound
+								(handleClickAction)="form.valid && onSubmit(form.value)"
+								[content]="submitButtonContentProps"
+								[presentation]="submitButtonPresentationProps"
+								class="my-account__action"
+								[ngClass]="{ 'is-disabled': !form.valid }"
+							></mflooring-link-compound>
+						</div> -->
+					</div>
+				</div>
+				<div *ngIf="selectedListItem === 'myOrders'">
+					<div class="my-account__header">
+						<mflooring-icon-button
+							(click)="
+								showMenuList = true; showContent = false; selectedListItem = ''
+							"
+							[presentation]="{
+								size: 'medium',
+								type: '',
+								iconName: 'left'
+							}"
+							class="my-account__header__arrow"
+						></mflooring-icon-button>
+						<h2>My Orders</h2>
+					</div>
+					<div class="my-account__form">
+						<mflooring-my-account-order-history class="order-tab">
+						</mflooring-my-account-order-history>
+					</div>
+				</div>
+				<div *ngIf="selectedListItem === 'myFavorites'">
+					<div class="my-account__header">
+						<mflooring-icon-button
+							(click)="
+								showMenuList = true; showContent = false; selectedListItem = ''
+							"
+							[presentation]="{
+								size: 'medium',
+								type: '',
+								iconName: 'left'
+							}"
+							class="my-account__header__arrow"
+						></mflooring-icon-button>
+						<h2>My Favorites</h2>
+					</div>
+					<div class="my-account__form">
+						<mflooring-my-account-favorites
+							[collections]="resourceBundleContent['mflooring.collections']"
+							[content]="{
+								favorites: favorites$ | async,
+								uid: emailId
+							}"
+						></mflooring-my-account-favorites>
+					</div>
+				</div>
+				<div *ngIf="selectedListItem === 'myAppointments'">
+					<div class="my-account__header">
+						<mflooring-icon-button
+							(click)="
+								showMenuList = true; showContent = false; selectedListItem = ''
+							"
+							[presentation]="{
+								size: 'medium',
+								type: '',
+								iconName: 'left'
+							}"
+							class="my-account__header__arrow"
+						></mflooring-icon-button>
+						<h2>My Appointments Requests</h2>
+					</div>
+					<div class="my-account__form">
+						<div class="myappointment-container">
+							<ng-container>
+								<ng-container *ngIf="!isMobile">
+									<div class="table-grid">
+										<table cellspacing="0" cellpadding="0">
+											<thead>
+												<tr>
+													<th class="table-header name">NAME</th>
+													<th class="table-header location">LOCATION</th>
+													<th class="table-header date">DATE &#38; TIME</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td class="table-data name">Appointment Request</td>
+													<td class="table-data location">
+														<strong>Bob's flooring</strong><br /><br />
+														123 Main Street Smithtown, GA 32192 888-888-8888
+													</td>
+													<td class="table-data date">
+														July 23, 2011 <br />
+														<br />1:00pm <br /><a href="#">Get Directions</a>
+													</td>
+												</tr>
+												<tr>
+													<td class="table-data name">Appointment Request</td>
+													<td class="table-data location">
+														<strong>Elite Coverings</strong><br /><br />
+														4433 East Dockers Cartersville, GA 33911
+														888-888-8888
+													</td>
+													<td class="table-data date">
+														July 28, 2011 <br />
+														<br />2:00pm <br /><a href="#">Get Directions</a>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<div class="bottom-section">
+										<div class="bottom-section__left">
+											Showing 2 of 2 Appointments
+										</div>
+										<div class="bottom-section__right">
+											Don’t see your order? Visit <a href="">Customer Care</a>
+										</div>
+									</div>
+								</ng-container>
+								<ng-container *ngIf="isMobile">
+									<div class="myappointment-mobile-view">
+										<div class="myappointment-mobile-view__card">
+											<div class="card-title">Appointment Request</div>
+											<div class="mobile-table-grid">
+												<div class="data-grid">
+													<ul>
+														<li>
+															<div class="head">Requested Date</div>
+															<div class="sub-head">Jan 12, 2020</div>
+														</li>
+														<li>
+															<div class="head">Requested Time</div>
+															<div class="sub-head">3:00PM</div>
+														</li>
+														<li>
+															<div class="head">Dealer Name</div>
+															<div class="sub-head">
+																Bob’s Flooring 123 Main Street Smithtown, GA
+															</div>
+														</li>
+														<li>
+															<div class="head">Contact</div>
+															<div class="sub-head">888-888-8888</div>
+														</li>
+													</ul>
+													<div class="bottom-link">
+														<a href="#">Get Directions</a>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="bottom-btn">
+											<button
+												class="
+													link-compound
+													icon_left
+													theme-light
+													primary
+													width-normal
+													align-center
+													color-black
+												"
+											>
+												SUBMIT
+											</button>
+										</div>
+									</div>
+								</ng-container>
+								<div
+									class="message__order-history"
+									*ngIf="!isLoading && orders?.length < 0"
+								>
+									No Appointments
+								</div>
+							</ng-container>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</mflooring-layout-wrapper>

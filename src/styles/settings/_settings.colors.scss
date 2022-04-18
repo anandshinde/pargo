@@ -1,0 +1,80 @@
+/* ==========================================================================
+   #COLOR-VARIABLES
+   ========================================================================== */
+
+// Base Colors...
+$color-white: #fff;
+$mohawk-black: #151515;
+$color-black: $mohawk-black;
+// $mohawk-red: #ce0e2d;
+$mohawk-red: #ff2f51;
+$primary-color: $mohawk-black;
+$secondary-color: $color-white;
+
+$color-dark-grey: #54565b;
+$color-grey: #767676;
+$color-grey-light: #e2e2e2;
+$color-extra-light-grey: #f8f8f8;
+$color-teal: #61a3db;
+
+$color-red-light: #ff0000;
+$color-green: #37af13;
+$color-brown-medium: $color-dark-grey;
+$color-brown-light: $color-grey;
+$color-red: $mohawk-red;
+$color-red-dark: $mohawk-red;
+
+$color-black-linear-gradient: transparent
+	linear-gradient(180deg, #00000000 60%, #0000004e 90%, #000000 150%) 0% 0%
+	no-repeat padding-box;
+
+$color-top-header-bg: $color-grey-light;
+$color-top-text: $color-white;
+$color-logo-menu-bg: $color-black;
+$color-body-text: $color-brown-medium;
+$color-accordion-bg: $color-grey-light;
+$color-header-menu-hover: $color-grey-light;
+$color-icon-bg: $color-teal;
+$color-text-dark-text: $color-white;
+$color-text-dark-border: $color-brown-light;
+$color-swiper-navigation: $color-grey-light;
+$color-message-success: $color-green;
+$color-message-error: $color-red;
+$color-coupon: $color-red-dark;
+$color-light-blue: #e8e8e8;
+// RGB
+$color-black-rgb: 0, 0, 0;
+$color-brown-light-rgb: 66, 57, 57;
+
+$material-grey-palette: (
+	50: #fff,
+	100: #7c7c7c,
+	200: #6e6e6e,
+	300: #606060,
+	400: #535353,
+	500: #454545,
+	600: #373737,
+	700: #292929,
+	800: #1c1c1c,
+	900: #0e0e0e,
+	A100: #ffffff,
+	A200: #5a5a5a,
+	A400: #292929,
+	A700: #222222,
+	contrast: (
+		50: #0e0e0e,
+		100: #0e0e0e,
+		200: #0e0e0e,
+		300: #0e0e0e,
+		400: #0e0e0e,
+		500: #ffffff,
+		600: #ffffff,
+		700: #ffffff,
+		800: #ffffff,
+		900: #ffffff,
+		A100: #222222,
+		A200: #222222,
+		A400: #ffffff,
+		A700: #ffffff,
+	),
+);

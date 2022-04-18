@@ -1,0 +1,9 @@
+<ng-container *ngIf="config$ | async as config">
+	<!-- <a href="{{config?.iconName}}"> -->
+		<button [ngClass]="[config.typeClass, config.sizeClass, config.dirClass, config.backgroundClass]">
+			<span class="icon-" id="{{ config.iconName }}">{{
+				config.iconName
+			}}</span>
+		</button>
+	<!-- </a> -->
+</ng-container>

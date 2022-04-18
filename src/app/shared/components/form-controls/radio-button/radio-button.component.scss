@@ -1,0 +1,33 @@
+@import 'src/styles/tools/tools.typography';
+
+@import 'src/styles/settings/settings.colors';
+
+:host ::ng-deep .radio-group {
+	display: flex;
+	height: auto;
+
+	& .mat-radio-label-content {
+		color: $color-black;
+		@include font-nunito-regular($size: 14px);
+	}
+
+	& .mat-radio-outer-circle {
+		border-color: $color-brown-medium !important;
+		border-width: 1px !important;
+	}
+
+	& .mat-radio-button.mat-accent .mat-radio-inner-circle,
+	&
+		.mat-radio-button.mat-accent
+		.mat-radio-ripple
+		.mat-ripple-element:not(.mat-radio-persistent-ripple),
+	& .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple,
+	& .mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
+		background-color: $color-teal !important;
+	}
+}
+
+:host ::ng-deep .radio-group--column {
+	row-gap: 10px;
+	flex-direction: column;
+}

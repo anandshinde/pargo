@@ -1,0 +1,72 @@
+@import 'src/styles/elements/elements.please-configure';
+
+@import 'src/styles/settings/settings.containers';
+
+@import 'src/styles/tools/tools.mediaquery';
+@import 'src/styles/settings/settings.colors';
+
+$component-margin-bottom: 20px;
+
+:host {
+	margin: 0 $content-mobile-width-gap
+		var(--component-margin-bottom, #{$component-margin-bottom});
+	display: block;
+	position: relative;
+
+	@include mq-breakpoint-md() {
+		margin: 0 0 var(--component-margin-bottom, #{$component-margin-bottom});
+	}
+}
+
+@include please-configure();
+
+.search {
+	position: relative;
+	padding: 15px 0px;
+
+	@include mq-breakpoint-md {
+		padding: unset;
+		max-width: 500px;
+		margin: 0 auto;
+	}
+	input {
+		border: 0.5px solid $color-grey;
+		padding: 15px;
+		border-radius: 5px;
+		padding-left: 25px;
+		width: 100%;
+		margin: auto;
+		@include font-nunito-regular($size: 16px, $lineheight: 22px);
+		color: $color-grey;
+	}
+	.icon_search {
+		color: $color-grey;
+		position: absolute;
+		padding: 0 10px;
+		top: 22px;
+		right: 0;
+		@include mq-breakpoint-md {
+			top: 6px;
+		}
+		::ng-deep button {
+			.icon- {
+				color: $color-grey;
+			}
+		}
+	}
+	.icon_close {
+		color: $color-grey;
+		position: absolute;
+		padding: 0 10px;
+		right: 0;
+		top: 22px;
+		@include mq-breakpoint-md {
+			top: 6px;
+		}
+		::ng-deep button {
+			.icon- {
+				color: $color-grey;
+			}
+		}
+	}
+}

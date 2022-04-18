@@ -1,0 +1,40 @@
+@import 'src/styles/settings/settings.breakpoints';
+
+@import 'src/styles/settings/settings.containers';
+
+@mixin mq-breakpoint-xs() {
+	@media (min-width: #{$screen-xs-min}) {
+		@content;
+	}
+}
+
+@mixin mq-breakpoint-sm() {
+	@media (min-width: #{$screen-sm-min}) {
+		@content;
+	}
+}
+
+@mixin mq-breakpoint-md() {
+	@media (min-width: #{$screen-md-min}) {
+		@content;
+	}
+}
+
+@mixin mq-breakpoint-lg() {
+	@media (min-width: #{$screen-lg-min}) {
+		@content;
+	}
+}
+
+@mixin mq-breakpoint-xl() {
+	@media (min-width: #{$screen-xl-min}) {
+		@content;
+	}
+}
+
+
+@mixin mq-content-width() {
+	@media (min-width: #{$content-max-width}) {
+		@content;
+	}
+}

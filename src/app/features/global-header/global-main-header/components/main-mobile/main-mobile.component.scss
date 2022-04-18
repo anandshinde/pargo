@@ -1,0 +1,137 @@
+@import 'src/styles/tools/tools.mediaquery';
+
+@import 'src/styles/tools/tools.typography';
+
+@import 'src/styles/settings/settings.colors';
+
+@import 'src/styles/settings/settings.containers';
+
+@import 'src/styles/settings/settings.z-layers';
+
+@import 'src/styles/elements/elements.links';
+
+@import 'src/styles/elements/elements.lists';
+
+$default-padding-x: 15px;
+$default-padding-y: 12px;
+$default-logo-width: 110px;
+$default-nav-height: 70px;
+
+ul {
+	@include reset-list();
+}
+::ng-deep {
+	.menu-mobile__menu {
+		width: 100vw !important;
+		max-width: 100% !important;
+		border-radius: 0 !important;
+		margin-top: 24px;
+	}
+	.mat-menu-content:not(:empty) {
+		// padding-top: 0 !important;
+	}
+	// .menu-mobile__menu {
+	// 	.menu-utility {
+	// 		&__icon {
+	// 			position: absolute;
+	// 			right: 30px;
+	// 			top: 5px;
+	// 		}
+	// 	}
+	// }
+}
+:host ::ng-deep {
+	display: flex;
+	background-color: $color-white;
+
+	@include mq-breakpoint-md() {
+		display: none;
+	}
+
+	.menu-mobile {
+		display: grid;
+		width: 100%;
+		height: $default-nav-height;
+		grid-template-columns: 1fr $default-logo-width 1fr;
+		align-items: center;
+		//padding-left: $default-padding-x;
+		padding-right: 0;
+		color: $color-black;
+	}
+	.menu-mobile__hamburger {
+		padding-left: $default-padding-x;
+	}
+
+	.menu-mobile__hamburger,
+	.menu-mobile__logo {
+		display: flex;
+		align-items: center;
+		position: relative;
+		font-size: 1.2em;
+	}
+	.menu-mobile__hamburger {
+		margin-top: 0px;
+	}
+
+	.menu-mobile__logo {
+		margin-bottom: 10px;
+	}
+
+	a {
+		@include font-nunito-light(14);
+
+		@include reset-link();
+	}
+
+	.mobile-icons {
+		display: flex;
+		justify-content: flex-end;
+		@include font-nunito-light(17);
+		align-items: flex-end;
+		margin-right: 5px;
+		margin-top: 5px;
+		div {
+			padding: 0;
+			@include mq-breakpoint-md() {
+				padding: 0 10px;
+			}
+		}
+		.main-header-search {
+			text-align: right;
+			span {
+				color: $color-black;
+				@include font-nunito-light(17);
+				@include mq-breakpoint-md() {
+					@include font-nunito-light(17);
+				}
+			}
+		}
+		a {
+			@include font-nunito-light(17);
+		}
+		button {
+			border: 0;
+			// width: auto;
+			background: none;
+			padding: 18px;
+			span.icon- {
+				font-size: 15px;
+				color: $color-black;
+			}
+		}
+	}
+
+	.menu-mobile__menu {
+		margin-left: 0px !important;
+		max-width: none !important;
+		width: 100vw;
+		box-shadow: none;
+		border-radius: unset !important;
+
+		& > .mat-menu-content {
+			padding: 0 !important;
+			width: 100%;
+			display: block;
+		}
+	}
+}

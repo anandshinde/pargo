@@ -1,0 +1,59 @@
+@import 'src/styles/tools/tools.typography';
+
+@import 'src/styles/settings/settings.colors';
+
+:host {
+}
+
+.video-player {
+	max-width: 100%;
+
+	&.is-inset {
+		padding: 20px;
+	}
+
+	&.width-half {
+		max-width: 50%;
+	}
+
+	&.width-thumb {
+		max-width: 25%;
+	}
+
+	&.position-left {
+		margin: 0 auto 0 0;
+	}
+
+	&.position-right {
+		margin: 0 0 0 auto;
+	}
+
+	&.position-center {
+		margin: 0 auto;
+	}
+
+	&__transcript {
+		width: 100%;
+		padding: 5px 10px;
+		text-align: right;
+		background: $color-grey;
+
+		@include font-nunito-regular($size: 14px);
+
+		a {
+			text-decoration: none;
+			color: $color-black;
+		}
+	}
+
+	vg-player {
+		// Safari doesn't work well with flex
+		display: block;
+
+		@include font-nunito-regular($size: 14px);
+
+		video {
+			width: 100%;
+		}
+	}
+}

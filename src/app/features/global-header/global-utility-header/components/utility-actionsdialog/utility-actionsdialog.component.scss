@@ -1,0 +1,147 @@
+@import 'src/styles/elements/elements.links';
+@import 'src/styles/tools/tools.typography';
+@import 'src/styles/settings/settings.colors';
+
+::ng-deep {
+	.find-retailer-modal .mat-dialog-container {
+		border-radius: 5px;
+		padding: 10px;
+		width: 85%;
+		@include mq-breakpoint-md() {
+			margin-right: 10px;
+			width: auto;
+		}
+	}
+	.cdk-overlay-pane.custom-modalbox {
+		margin-top: 125px !important;
+		max-width: 100% !important;
+		width: 100%;
+		justify-content: center;
+		@include mq-breakpoint-md() {
+			margin-top: 50px !important;
+			max-width: 80% !important;
+			width: 100% !important;
+			justify-content: inherit;
+		}
+	}
+	.mat-dialog-content {
+		overflow: hidden;
+		margin: 0;
+		padding: 0;
+	}
+	.input-text {
+		display: flex;
+		flex-direction: column;
+		position: relative;
+		&__control {
+			border-radius: 5px !important;
+			border-color: $color-grey-light !important;
+		}
+		&.icon-first {
+			button {
+				left: 5px;
+				right: auto;
+			}
+			.input-text__control {
+				padding: 10px !important;
+			}
+		}
+		&__border {
+			background: none !important;
+		}
+	}
+}
+// ::ng-deep .cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+// 	opacity: 0;
+// }
+.find-retailer-search {
+	::ng-deep button {
+		width: 100%;
+		justify-content: center;
+		@include reset-button();
+	}
+
+	&__dialog {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: column;
+		color: $color-body-text;
+		@include font-nunito-light(12px);
+
+		width: 85%;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		margin: auto;
+		@include mq-breakpoint-md() {
+			width: 100%;
+		}
+
+		h3 {
+			font-weight: bold;
+			margin-top: 15px;
+			@include font-nunito-light(12px);
+			display: block;
+			@include mq-breakpoint-md() {
+				display: none;
+			}
+		}
+	}
+
+	&__input {
+		margin: 0 0 10px 0;
+		width: 100%;
+
+		button {
+			z-index: 1;
+			position: absolute;
+			height: 100%;
+			width: 35px;
+			cursor: pointer;
+			border-right: 1px solid $color-black;
+
+			span {
+				display: block;
+			}
+		}
+	}
+
+	mflooring-input-text {
+		width: 100%;
+	}
+
+	::ng-deep mflooring-input-text .input-text__control {
+		margin: 0;
+	}
+
+	::ng-deep
+		mflooring-input-text
+		.input-text__control:focus
+		+ .input-text__border {
+		display: inline-block;
+	}
+
+	&__submit {
+		border-top-left-radius: 3px;
+		border-bottom-left-radius: 3px;
+		width: 100%;
+	}
+
+	&__geolocation {
+		text-align: center;
+
+		button {
+			cursor: pointer;
+
+			@include font-nunito-light(12px);
+
+			&:hover {
+				text-decoration: underline;
+			}
+
+			&[disabled] {
+				pointer-events: none;
+			}
+		}
+	}
+}

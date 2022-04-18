@@ -1,0 +1,28 @@
+<div class="sqft-calculator">
+	<input
+		class="sqft-calculator__control"
+		type="text"
+		placeholder="Room Length"
+		[(ngModel)]="length"
+		name="length"
+		mflooringTwoDigitDecimal
+	/>
+	<span class="span-text__control">x</span>
+	<input
+		class="sqft-calculator__control"
+		type="text"
+		placeholder="Room Width"
+		[(ngModel)]="width"
+		name="width"
+		mflooringTwoDigitDecimal
+	/>
+	<div class="sqft_calculate">
+		<button type="submit" (click)="calculateResult()">
+			<span *ngIf="resultFlag===true" class="label">{{result | number}}</span>
+			<span *ngIf="resultFlag===false" class="label">{{resultName}}</span>
+		</button>
+		<div class="sqft_clear">
+			<button type="reset" (click)="clearInfo()">Clear Info</button>
+		</div>
+	</div>
+</div>

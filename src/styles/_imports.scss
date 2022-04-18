@@ -1,0 +1,37 @@
+// ITCSS structure
+// Original post by Harry Roberts https://www.creativebloq.com/web-design/manage-large-css-projects-itcss-101517528
+// 01. Settings
+@import './settings/settings.config';
+
+@import './settings/settings.animations';
+
+@import './settings/settings.breakpoints';
+
+@import './settings/settings.colors';
+
+@import './settings/settings.typography';
+
+@import './settings/settings.z-layers';
+
+// 02. Tools
+@import './tools/tools.animations';
+
+@import './tools/tools.clearfix';
+
+@import './tools/tools.hidden';
+
+@import './tools/tools.on-event';
+
+@import './tools/tools.placeholder';
+
+@import './tools/tools.mediaquery';
+
+@import './tools/tools.typography';
+// 03. Generic
+
+// 04. Elements
+@import './elements/elements.links';
+
+@import './elements/elements.lists';
+
+@import 'src/styles/elements/elements.themes';

@@ -1,0 +1,60 @@
+<section class="cart" mat-dialog-content *ngIf="cartInfo$ | async as cartInfo">
+	<div class="cart__dialog">
+		<div class="form-field-close-button">
+			<button class="close" (click)="closeDialog()">
+				<span class="icon-close">close</span>
+			</button>
+		</div>
+		<h3>{{ textContent.title }}</h3>
+		<div class="cart__content new-sample-added" *ngIf="!!cartInfo.newItem">
+			<div class="cart__check">
+				<span class="icon-">checked</span>
+			</div>
+			<div class="cart__info">{{ textContent.add }}</div>
+		</div>
+		<div class="cart__items">
+			<div class="cart__item">
+				<div class="cart__item-title">{{ textContent.product }}</div>
+				<div>{{ cartInfo.totalItems }}</div>
+			</div>
+			<hr />
+			<div class="cart__item">
+				<div>{{ textContent.total }}</div>
+				<div>{{ cartInfo.totalPrice | currency: 'USD':'symbol':'1.2-2' }}</div>
+			</div>
+		</div>
+		<div class="cart__navigate" *ngIf="cartInfo.totalItems > 0">
+			<mflooring-link-compound
+				[content]="{
+					text: textContent.navigate,
+					target: '',
+					url: '/my-cart'
+				}"
+				[presentation]="{
+					buttonType: 'primary',
+					buttonWidth: 'full',
+					theme: 'dark'
+				}"
+				(click)="closeDialog()"
+			></mflooring-link-compound>
+			<div class="cart__checkout">
+				<mflooring-link-compound
+					[content]="{
+						text: 'Checkout',
+						url: ''
+					}"
+					[presentation]="{
+						buttonType: 'primary',
+						buttonWidth: 'full',
+						buttonAction: 'link'
+					}"
+					(click)="checkUserLoggedIn()"
+				></mflooring-link-compound>
+			</div>
+		</div>
+		<!-- <p *ngIf="!cartInfo.totalItems">
+			Use the <span class="icon-">cart</span> icon under a product to add
+			samples to your bag.
+		</p> -->
+	</div>
+</section>

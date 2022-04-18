@@ -1,0 +1,31 @@
+<ng-container *ngIf="blogCardData$ | async as data">
+	<article inViewNotifier (isVisible)="isInViewport($event)">
+		<section class="card">
+			<div>
+				<div class="card-img">
+					<img [src]="data?.image?.imageDAMUrl" alt="" />
+				</div>
+				<div class="card-heading">
+					<div>
+						<h3>{{ data?.title }}</h3>
+					</div>
+				</div>
+				<div class="card-details">
+					<div class="para" [innerHTML]="data?.shortDescription"></div>
+				</div>
+				<div class="read-more">
+					<div>
+						<mflooring-link-compound
+							[content]="data?.link?.content"
+							[presentation]="data?.link?.presentation"
+						></mflooring-link-compound>
+					</div>
+
+					<div>
+						<h6>{{ data?.date | date: 'MMM d,yyyy' }}</h6>
+					</div>
+				</div>
+			</div>
+		</section>
+	</article>
+</ng-container>

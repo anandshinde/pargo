@@ -1,0 +1,13 @@
+<section class="two-column-compound {{ vertMarginClass }}">
+	<div
+		class="two-column-compound__container {{ columnRatioClass }}"
+		[ngClass]="{ 'has-border': hasBorder }"
+	>
+		<div class="two-column-compound__column two-column-compound__left">
+			<ng-content select="[leftColumn]"></ng-content>
+		</div>
+		<div class="two-column-compound__column two-column-compound__right">
+			<ng-content select="[rightColumn]"></ng-content>
+		</div>
+	</div>
+</section>

@@ -1,0 +1,71 @@
+@import './src/styles/settings/settings.colors';
+
+@import './src/styles/tools/tools.typography';
+
+@import './src/styles/tools/tools.animations';
+
+$default-bottom-space: 15px;
+
+.footer__input-label {
+	display: block;
+	padding: 10px 10px 20px 10px;
+	color: $color-white;
+	@include font-nunito-semibold($size: [13]);
+
+	@include mq-breakpoint-md() {
+		padding: 0;
+		margin-bottom: $default-bottom-space;
+	}
+}
+
+// .footer__input {
+// 	display: block;
+// 	position: relative;
+// }
+.footer__input {
+	display: flex;
+	margin: auto;
+	width: 80%;
+	@include mq-breakpoint-md() {
+		width: 100%;
+	}
+
+	button {
+		text-align: center;
+		padding: 10px 23px;
+		background: $color-dark-grey;
+		color: $color-white;
+		border: 1px solid $color-grey;
+		border-left: none;
+		border-radius: 0 5px 5px 0px;
+		@include font-nunito-regular($size: [15, 12]);
+		cursor: pointer;
+		transition: 0.3s ease-in-out;
+		/* transition: .5s ease-in-out; [0.5 seconds] */
+
+		&:after {
+			content: '';
+			clear: both;
+			display: table;
+		}
+		&:hover {
+			background: $color-grey;
+			color: $color-white;
+		}
+	}
+}
+.footer__input-control {
+	border: 0;
+	outline: none;
+	padding: 10px 10px 10px 15px;
+	width: 100%;
+	background: $color-white;
+	border-radius: 5px 0 0 5px;
+	border: 1px solid $color-grey;
+	@include font-nunito-regular($size: [15, 12]);
+
+	&:focus {
+		background-color: $color-white;
+		transition: all 1s;
+	}
+}

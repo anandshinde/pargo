@@ -1,0 +1,23 @@
+@import 'src/styles/settings/settings.colors';
+
+@import 'src/styles/tools/tools.typography';
+
+@import 'src/styles/elements/elements.links';
+
+:host {
+	display: inline-block;
+}
+
+button {
+	color: var(--color-text-primary, #{$color-black});
+	text-decoration: none;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	@include reset-button();
+	@include font-nunito-regular($size: 14px);
+
+	.download-icon {
+		margin-right: 10px;
+	}
+}

@@ -1,0 +1,145 @@
+@import 'src/styles/settings/settings.containers';
+
+@import 'src/styles/tools/tools.mediaquery';
+
+@import './src/styles/settings/settings.colors';
+
+@import 'src/styles/tools/tools.typography';
+
+@import 'src/styles/elements/elements.links';
+
+:host {
+	display: block;
+	position: relative;
+}
+
+.my-account__title {
+	align-items: center;
+	display: flex;
+	padding-top: 8px;
+	justify-content: center;
+	margin-bottom: 10px;
+	color: $mohawk-black;
+	@include font-gotham-medium($size: 22px);
+	@include mq-breakpoint-md() {
+		align-items: center;
+		justify-content: center;
+		@include font-gotham-medium($size: 21px);
+	}
+}
+
+.my-account__error {
+	color: $color-red;
+	@include font-gotham-light(14);
+}
+
+.my-account__spantitle {
+	align-items: center;
+	display: none;
+	padding-top: 10px;
+	justify-content: center;
+	color: $mohawk-black;
+	//margin-bottom: 10px;
+	@include font-gotham-light($size: 16px);
+
+	@include mq-breakpoint-md() {
+		display: flex;
+	}
+}
+
+.my-account__input {
+	width: auto;
+	margin-top: 10px;
+	align-items: center;
+	text-align: left;
+	display: block;
+	color: $mohawk-black;
+	@include font-gotham-book($size: 17px);
+	@include mq-breakpoint-md() {
+		@include font-gotham-book($size: 13px);
+	}
+}
+
+.close {
+	position: absolute;
+	top: -13px;
+	right: -15px;
+	cursor: pointer;
+
+	@include reset-button();
+	@include mq-breakpoint-md() {
+		top: -10px;
+		right: -10px;
+	}
+}
+
+.my-account-static-span {
+	margin-top: 40px;
+	display: grid;
+	align-items: center;
+	text-align: left;
+
+	@include font-gotham-book(17);
+
+	@include mq-breakpoint-md() {
+		justify-content: center;
+		@include font-gotham-book(13);
+	}
+}
+
+.my-account__action {
+	padding: 35px 0;
+
+	@include mq-breakpoint-md() {
+		display: flex;
+		justify-content: center;
+		grid-column: span 2;
+		padding: 15px 0 25px 0;
+	}
+}
+
+.my-account__staticPassword {
+	padding: 25px 0px;
+
+	@include font-gotham-book(17);
+
+	@include mq-breakpoint-md() {
+		@include font-gotham-book(13);
+	}
+}
+
+.text-success {
+	color: $color-green;
+}
+
+.login-forgot__span {
+	display: flex;
+	text-align: left;
+	color: $mohawk-black;
+	display: block;
+
+	@include font-gotham-book(17);
+	@include mq-breakpoint-md() {
+		padding-right: 150px;
+		@include font-gotham-book(13);
+	}
+}
+
+li {
+	text-align: left;
+	color: $mohawk-black;
+	@include font-gotham-book(17);
+	@include mq-breakpoint-md() {
+		@include font-gotham-book(13);
+	}
+}
+
+ul {
+	list-style-type: ' ';
+	margin: 10px 0 0 0;
+	padding-left: 10px;
+}
+
+.material-icons {
+	font-size: 17px;
+}

@@ -1,0 +1,103 @@
+<ng-container *ngIf="mapIsLoaded$ | async">
+	<section class="map" [ngClass]="{ 'is-loaded': showMap }">
+		<google-map
+			[width]="'100%'"
+			[height]="'100%'"
+			[zoom]="zoomLevel"
+			[center]="mapCenter | async"
+			[options]="{ mapTypeControl: false }"
+		>
+			<map-marker
+				#marker="mapMarker"
+				[position]="pin"
+				[label]="{ text: (i + 1).toString(), color: 'white', fontSize: '12px' }"
+				[options]="{
+					icon: { url: pin?.marker }
+				}"
+				(mapClick)="onMarkerClick(marker, pin)"
+				*ngFor="let pin of content?.markers; index as i; trackBy: trackBy"
+			></map-marker>
+
+			<map-info-window *ngIf="!content?.isDetail">
+				<div class="info-content">
+					<h3>
+						<a href="{{ getRetailerInfoURL() }}">{{
+							infoContent?.storeName
+						}}</a>
+					</h3>
+					<p>{{ infoContent?.address1 }}</p>
+					<p>{{ infoContent?.address2 }}</p>
+					<p>{{ infoContent?.address3 }}</p>
+					<p>
+						{{ infoContent?.city }} {{ infoContent?.state }}
+						{{ infoContent?.zip }}
+					</p>
+					<p class="phone" *ngIf="infoContent?.phone">
+						<a href="tel:+{{ infoContent?.clickToCallPhone }}"
+								><span class="icon-">phone</span> {{ getDisplayPhone() }}</a
+							>
+					</p>
+					<!--<ng-container *ngIf="infoContent?.dealerEmail">
+						<p
+							class="dealer-email"
+							*ngFor="let email of retailerEmails; index as i"
+						>
+							<span class="icon-" *ngIf="i === 0">email</span>
+							<a [attr.href]="'mailto:+' + email">{{ email }}</a>
+						</p>
+					</ng-container>-->
+					<div *ngIf="infoContent?.currentHours?.from" class="hours">
+						<!-- <span
+							[ngClass]="{
+								'is-open': hoursOfOperation.status === 'Open:',
+								'is-closed': hoursOfOperation.status === 'Closed'
+							}"
+							class="open-text"
+							>{{ hoursOfOperation.status }}</span
+						> -->
+						<span>Hours: </span>
+						<span>
+							{{ infoContent?.currentHours?.from }} -
+							{{ infoContent?.currentHours?.to }}
+						</span>
+					</div>
+					<div class="actions">
+						<!-- <div class="col">
+							<div class="link">
+								<a captureClicks [href]="getRetailerInfoURL()">View Retailer</a>
+							</div>
+							<div class="link" *ngIf="infoContent?.independent">
+							
+							</div>
+						</div> -->
+						<div class="col">
+							<div class="link">
+								<a captureClicks [href]="getRetailerInfoURL()">View Retailer</a>
+							</div>
+							<div class="link" *ngIf="infoContent?.independent">
+								<button
+									*ngIf="infoContent?.operatingHours !== ['']"
+									(click)="openAppointmentModal('appt')"
+								>
+									Request an Appointment
+								</button>
+							</div>
+						</div>
+						<div class="col">
+							<div class="link">
+								<a captureClicks [href]="infoContent?.directions"
+									>Get Directions</a
+								>
+							</div>
+							<div class="link" *ngIf="infoContent?.independent">
+								<button (click)="openModal('quote')">Request a Quote</button>
+							</div>
+							
+						</div>
+						
+					</div>
+				</div>
+			</map-info-window>
+		</google-map>
+	</section>
+</ng-container>

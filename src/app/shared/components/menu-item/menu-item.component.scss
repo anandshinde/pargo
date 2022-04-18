@@ -1,0 +1,27 @@
+@import './src/styles/settings/settings.colors';
+
+@import './src/styles/tools/tools.typography';
+
+@import './src/styles/tools/tools.mediaquery';
+
+@import 'src/styles/elements/elements.links';
+
+:host {
+	width: 100%;
+}
+
+.menu-button {
+	@include reset-button();
+}
+
+a {
+	width: 100%;
+	display: block;
+	cursor: pointer;
+
+	@include reset-link();
+}
+
+button.menu-button {
+	@include font-nunito-bold($size: [10, 11]);
+}

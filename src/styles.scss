@@ -1,0 +1,36 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'styles/tools/tools.typography';
+@import 'styles/tools/tools.colors';
+@import 'styles/settings/settings.colors';
+@import 'styles/components/components.calendar';
+@import '~swiper/swiper-bundle.min.css';
+
+html,
+body {
+	height: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+* {
+	box-sizing: border-box;
+	outline: none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	-webkit-tap-highlight-color: transparent;
+}
+
+@include iconFontClass();
+
+html,
+body {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	font-family: 'nunito', 'Helvetica Neue', sans-serif;
+}
+
+.w-100 {
+	width: 100% !important;
+}

@@ -1,0 +1,75 @@
+@import 'src/styles/tools/tools.mediaquery';
+
+@import 'src/styles/settings/settings.colors';
+
+$default-img-width: 200px;
+$default-container-mobile-grid-gap: 5px;
+$default-container-desktop-grid-gap: 20px;
+$default-container-desktop-padding-y: 40px;
+$default-container-mobile-padding-y: 5px;
+$default-image-compound-border-radious: 5px;
+@mixin max-breakpoint-sm() {
+	@media (max-width: #{$screen-md-min}) {
+		@content;
+	}
+}
+:host .gallery-images__images {
+	display: grid;
+	grid-template-columns: repeat(1, 1fr);
+	grid-gap: $default-container-mobile-grid-gap;
+	padding: 0;
+
+	@include mq-breakpoint-md() {
+		padding: 25px 0 0;
+		grid-template-columns: repeat(3, minmax($default-img-width, 1fr));
+		grid-gap: $default-container-desktop-grid-gap;
+	}
+}
+
+:host .gallery-images__counter {
+	display: flex;
+	justify-content: flex-end;
+	display: none;
+	@include mq-breakpoint-md() {
+		display: none;
+	}
+}
+
+:host mflooring-image-compound {
+	cursor: pointer;
+}
+
+:host mflooring-image-compound ::ng-deep img {
+	border-radius: $default-image-compound-border-radious;
+}
+@include max-breakpoint-sm() {
+	:host {
+		.gallery-images {
+			&__images {
+				padding: 0 var(--horizontal-margins, 20px);
+				grid-gap: 20px;
+			}
+		}
+	}
+}
+:host .gallery-images__images mflooring-image-compound ::ng-deep {
+	picture {
+		position: relative;
+		&:after {
+			content: '';
+			background: rgba(0, 0, 0, 0.7);
+			height: 100%;
+			width: 100%;
+			position: absolute;
+			top: 0;
+			opacity: 0;
+			transition-duration: 0.5s;
+			border-radius: 5px;
+		}
+		&:hover {
+			&:after {
+				opacity: 1;
+			}
+		}
+	}
+}

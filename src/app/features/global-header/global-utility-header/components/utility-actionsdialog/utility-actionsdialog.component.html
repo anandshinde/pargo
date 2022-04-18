@@ -1,0 +1,42 @@
+<!-- <section class="gallery-carousel__action" mat-dialog-title>
+     <a href="javascript:void(0);" mat-dialog-close>< Back to Image Gallery</a>
+
+
+</section> -->
+<section class="find-retailer-search" mat-dialog-content>
+	<div class="find-retailer-search__dialog">
+		<h3 id="inputLabel">{{ textContent.instructions }}</h3>
+		<div class="find-retailer-search__input">
+			<!-- <button (click)="clearRetailerSearchInput()">
+				<span class="icon-">close</span>
+			</button> -->
+			<mflooring-input-text id="input"
+				[content]="searchContent"
+				[presentation]="searchPresentation"
+				[control]="search"
+				(keypress)="validateZipCode($event)"
+				(keyup)="handleInputKeyUp($event)"
+				#retailerSupport
+			></mflooring-input-text>
+		</div>
+		<div class="find-retailer-search__submit">
+			<mflooring-link-compound id="linkCompound"
+				[content]="{ text: textContent.submit, target: '', url: null }"
+				[presentation]="{
+					buttonType: 'primary',
+					buttonWidth: 'full',
+					theme: 'light'
+				}"
+				(click)="closeDialog()"
+			></mflooring-link-compound>
+		</div>
+		<!-- <div class="find-retailer-search__geolocation">
+			<button
+				[disabled]="isLocating ? true : null"
+				(click)="setCurrentLocation()"
+			>
+				<span>{{ textContent.geolocatorLabel }}</span>
+			</button>
+		</div> -->
+	</div>
+</section>

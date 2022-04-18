@@ -1,0 +1,12 @@
+@import 'src/styles/tools/tools.mediaquery';
+
+.single-page-container {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+
+	.main-body {
+		width: 100%;
+		flex: 1;
+	}
+}

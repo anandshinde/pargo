@@ -1,0 +1,59 @@
+<!-- <section
+	class="layout-container"
+	[style.backgroundColor]="backgroundColorStyle"
+>
+	<div
+		class="layout-container__grid"
+		[ngClass]="{
+			inset: contentIsInset,
+			'stack-in-mobile': stackInMobile
+		}"
+	>
+		<div
+			class="layout-container__background {{ backgroundAlignmentClass }}"
+			[ngClass]="{ wide: isWideAspect }"
+			*ngIf="hasBackground"
+		>
+			<mflooring-image-compound
+				[content]="{
+					mobile: content.mobileImage,
+					desktop: content.desktopImage
+				}"
+				[presentation]="{
+					isBackground: true
+				}"
+			>testsk</mflooring-image-compound>
+		</div>
+		<div class="layout-container__grid__area">
+			<ng-content></ng-content>
+		</div>
+	</div>
+</section> -->
+<section
+	class="layout-container"
+	[style]="{ 'background-color': data.content?.backgroundColor }"
+	*ngIf="{
+		content: layoutContent$ | async,
+		presentation: layoutPresentation$ | async
+	} as data"
+>
+	<div
+		class="layout-container__grid"
+		[ngClass]="{
+			inset: data.presentation?.isInset,
+			'full-width-mobile': data.presentation?.mobileFullWidth
+		}"
+	>
+		<div
+			class="layout-container__background"
+			*ngIf="data.presentation?.hasBackground"
+		>
+			<mflooring-image-compound
+				[content]="data.content?.backgroundImage"
+			></mflooring-image-compound>
+		</div>
+		<div class="layout-container__grid__area">
+			<ng-content></ng-content>
+		</div>
+	</div>
+</section>

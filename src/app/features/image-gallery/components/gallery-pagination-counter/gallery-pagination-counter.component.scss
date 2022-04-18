@@ -1,0 +1,22 @@
+@import 'src/styles/tools/tools.typography';
+
+@import 'src/styles/settings/settings.colors';
+$color-brown-medium-count: #54565b;
+@mixin max-breakpoint-sm() {
+	@media (max-width: #{$screen-md-min}) {
+		@content;
+	}
+}
+:host {
+	color: $color-brown-medium-count;
+	@include font-gotham-light($size: 16px);
+	padding-top: 5px;
+	@include max-breakpoint-sm() {
+		p {
+			padding-left: 20px;
+			color: $color-brown-medium-count;
+			@include font-gotham-light($size: 16px);
+			padding-top: 5px;
+		}
+	}
+}

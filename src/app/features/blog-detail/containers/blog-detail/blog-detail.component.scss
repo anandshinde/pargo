@@ -1,0 +1,10 @@
+@import 'src/styles/tools/tools.mediaquery';
+@import 'src/styles/settings/settings.typography';
+@import 'src/styles/tools/tools.typography';
+
+.blog-detail-content{
+    margin: rem(10) 0 rem(20);
+	@include mq-breakpoint-md() {
+		margin: rem(10) 0 rem(30);
+	}
+}

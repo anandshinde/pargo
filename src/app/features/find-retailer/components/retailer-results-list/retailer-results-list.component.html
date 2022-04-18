@@ -1,0 +1,21 @@
+<div class="retailer-results-list">
+	<ng-container *ngIf="!!results.length; else other_content">
+		<ul>
+			<li *ngFor="let result of results; index as i">
+				<mflooring-retailer-result
+					[content]="{ result: result, index: i }"
+				></mflooring-retailer-result>
+			</li>
+		</ul>
+	</ng-container>
+
+	<mflooring-loading *ngIf="isLoading"></mflooring-loading>
+</div>
+
+<ng-template #other_content>
+	<div class="no-results" *ngIf="!isLoading && !!content.zip">
+		<div>
+			No results found for zip: <span>{{ content.zip }}</span>
+		</div>
+	</div>
+</ng-template>

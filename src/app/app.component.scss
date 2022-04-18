@@ -1,0 +1,15 @@
+@import 'src/styles/settings/settings.colors';
+@import 'src/styles/tools/tools.typography';
+@import 'src/styles/tools/tools.mediaquery';
+@import 'src/styles/components/components.banner';
+
+a:focus,
+a:visited,
+a:active {
+	outline: none;
+}
+.alternating-overlay-component {
+	border: solid 2px $color-black;
+	width: 100px;
+	float: left;
+}

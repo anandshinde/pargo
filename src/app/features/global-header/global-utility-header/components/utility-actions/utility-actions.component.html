@@ -1,0 +1,32 @@
+<ul class="menu-utility__actions" role="menu">
+	<li class="menu-utility__actions__item" role="menuitem" *ngIf="findRetailer">
+		<button
+			class="menu-button"
+			[class.active]="isFindRetailerDialogOpen"
+			(click)="openFindRetailerDialog()"
+		>
+			<!-- <span class="menu-utility__icon icon-">{{ findRetailer?.icon }}</span> -->
+			<mflooring-icon-button
+					[presentation]="{
+						size: 'small',
+						type: '',
+						iconName: 'map-pin'
+					}"
+					class="menu-utility__icon custom-map-icon"
+				></mflooring-icon-button>
+			<span class="menu-utility__text">
+				{{ myRetailer$ | async }}
+			</span>
+		</button>
+	</li>
+	<!-- <li class="menu-utility__actions__item" role="menuitem" *ngIf="visitor?.icon">
+		<a captureClicks href="/login">
+			<span class="menu-utility__icon icon-">{{ visitor?.icon }}</span>
+		</a>
+	</li>
+	<li class="menu-utility__actions__item" role="menuitem" *ngIf="cart?.icon">
+		<button class="menu-button" (click)="openCart()">
+			<span class="menu-utility__icon icon-">{{ cart?.icon }}</span>
+		</button>
+	</li> -->
+</ul>

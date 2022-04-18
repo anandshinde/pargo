@@ -1,0 +1,14 @@
+<section class="gallery-filters__filters">
+	<mflooring-gallery-form-select [form]="form" [content]="content">
+	</mflooring-gallery-form-select>
+</section>
+<section
+	class="gallery-filters__chips"
+	[hidden]="!form.get('chips').value.length"
+>
+	<mflooring-gallery-form-chips
+		(chipRemoved)="onChipRemoved($event)"
+		[control]="form.get('chips')"
+	>
+	</mflooring-gallery-form-chips>
+</section>

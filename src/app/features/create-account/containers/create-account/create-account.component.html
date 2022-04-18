@@ -1,0 +1,302 @@
+<mflooring-layout-wrapper [presentation]="{ isInset: true }">
+	<div class="is-background">
+		<img
+			src="https://mohawk.scene7.com/is/image/MohawkResidential/LF000786_room_02?scl=2.25&wid=2500&hei=800&op_sharpen=1&align=0,.2"
+		/>
+	</div>
+
+	<div class="create-account-container">
+		<div class="create-account-container__account-container">
+			<div class="create-account__title" *ngIf="!emailTrigger">
+				<h2>{{ resourceBundleData['global.title.create-account'] }}</h2>
+				<p class="create-account-container__text-display">
+					{{ resourceBundleData['global.create.account.content'] }}
+				</p>
+			</div>
+			<div class="create-account-container__register-container">
+				<p *ngIf="!emailTrigger">
+					Please enter your email address to create an account.
+				</p>
+				<form class="email-verify__form" [formGroup]="formEmailVerify">
+					<div class="form-field" *ngIf="!emailTrigger">
+						<mflooring-input-text
+							[control]="email"
+							[presentation]="inputTextPresentation"
+							[content]="{
+								placeholder: 'Type here',
+								label: resourceBundleData['global.label.email']
+							}"
+						></mflooring-input-text>
+						<div
+							*ngIf="email.invalid && (email.touched || email.dirty)"
+							class="alert alert-danger"
+						>
+							<div class="text-danger" *ngIf="email.errors.required">
+								<span class="create-account__error">{{
+									resourceBundleData['global.error.mandatory']
+								}}</span>
+							</div>
+
+							<div class="text-danger" *ngIf="email.errors.pattern">
+								<span class="create-account__error">{{
+									resourceBundleData['global.error.email']
+								}}</span>
+							</div>
+
+							<div class="text-danger" *ngIf="email.hasError('userExists')">
+								<span class="create-account__error">{{
+									resourceBundleData['global.error.duplicate']
+								}}</span>
+							</div>
+						</div>
+					</div>
+					<!-- <div class="form-field padding-left verified-success">
+						<span class="label"> Verified </span>
+						<mflooring-icon-button
+							[presentation]="{
+								size: 'medium',
+								type: '',
+								iconName: 'checked'
+							}"
+							class="checked__icon"
+						></mflooring-icon-button>
+					</div> -->						
+					<ng-container *ngIf="emailVerifyButton">
+						<div class="form-field padding-left" *ngIf="!emailTrigger">
+							<mflooring-link-compound
+								(handleClickAction)="
+									formEmailVerify.valid && onSubmitVerify(formEmailVerify.value)
+								"
+								[content]="{
+									text: 'Verify'
+								}"
+								[presentation]="{
+									theme: 'light',
+									buttonType: 'primary',
+									buttonWidth: 'normal',
+									buttonAction: 'submit',
+									alignment: 'center',
+									isDisabled: !formEmailVerify.valid
+								}"
+							></mflooring-link-compound>
+						</div>
+					</ng-container>
+
+					<div class="email-verify__content" *ngIf="emailTrigger">
+						<div class="email-verify__content__icon">&#160;</div>
+
+						<h3>{{ resourceBundleData['global.email.sent'] }}</h3>
+						<p>{{ resourceBundleData['mf.email.sent.content'] }}</p>
+						<div class="form-field">
+							<mflooring-link-compound
+								(handleClickAction)="
+									formEmailVerify.valid && onSubmitVerify(formEmailVerify.value)
+								"
+								[content]="{
+									text: 'RESEND EMAIL'
+								}"
+								[presentation]="{
+									theme: 'light',
+									buttonType: 'primary',
+									buttonWidth: 'normal',
+									buttonAction: 'submit',
+									alignment: 'center',
+									isDisabled: !formEmailVerify.valid
+								}"
+							></mflooring-link-compound>
+						</div>
+					</div>
+				</form>
+
+				<form
+					class="create-account__form"
+					[formGroup]="form"
+					*ngIf="!emailTrigger && !emailVerifyButton"
+				>
+					<div class="form-field">
+						<mflooring-input-text
+							[control]="firstName"
+							[presentation]="inputTextPresentation"
+							[content]="{
+								placeholder: 'Type here',
+								label: resourceBundleData['global.label.first-name']
+							}"
+						></mflooring-input-text>
+						<div
+							*ngIf="
+								firstName.invalid && (firstName.touched || firstName.dirty)
+							"
+							class="alert alert-danger"
+						>
+							<div class="text-danger" *ngIf="firstName.errors.required">
+								<span class="create-account__error">{{
+									resourceBundleData['global.error.mandatory']
+								}}</span>
+							</div>
+							<div class="text-danger" *ngIf="firstName.hasError('maxlength')">
+								<span class="create-account__error">{{
+									resourceBundleData['global.error.firstname']
+								}}</span>
+							</div>
+						</div>
+					</div>
+					<div class="form-field">
+						<mflooring-input-text
+							[control]="lastName"
+							[presentation]="inputTextPresentation"
+							[content]="{
+								placeholder: 'Type here',
+								label: resourceBundleData['global.label.last-name']
+							}"
+						></mflooring-input-text>
+						<div
+							*ngIf="lastName.invalid && (lastName.touched || lastName.dirty)"
+							class="alert alert-danger"
+						>
+							<div class="text-danger" *ngIf="lastName.errors.required">
+								<span class="create-account__error">{{
+									resourceBundleData['global.error.mandatory']
+								}}</span>
+							</div>
+							<div class="text-danger" *ngIf="lastName.hasError('maxlength')">
+								<span class="create-account__error">{{
+									resourceBundleData['global.error.lastname']
+								}}</span>
+							</div>
+						</div>
+					</div>
+					<div class="form-field passwordReq">
+						<div class="input-text input-text--form">
+							<label class="input-text__label" for="password-req-input"
+								>{{ resourceBundleData['global.label.password'] }}
+							</label>
+							<input
+								id="password-req-input"
+								class="input-text__control"
+								type="password"
+								placeholder="Type here"
+								[formControl]="password"
+								(focus)="emailPattern = true"
+								(blur)="emailPattern = false"
+							/>
+						</div>
+						<div
+							*ngIf="password.invalid && (password.touched || password.dirty)"
+							class="alert alert-danger"
+						>
+							<div class="text-danger" *ngIf="password.errors.required">
+								<span class="create-account__error">{{
+									resourceBundleData['global.error.mandatory']
+								}}</span>
+							</div>
+							<div class="text-danger" *ngIf="password.errors.pattern">
+								<span
+									class="create-account__error focus-hide"
+									*ngIf="!emailPattern"
+									>{{ resourceBundleData['global.error.password'] }}</span
+								>
+
+								<mflooring-password-requirements
+									class="tooltip focus-show"
+									*ngIf="emailPattern"
+									[content]="{
+										case:
+											!password.hasError('required') &&
+											!password.hasError('hasCapitalCase') &&
+											!password.hasError('hasSmallCase'),
+										length:
+											!password.hasError('required') &&
+											!password.hasError('minlength') &&
+											!password.hasError('maxLength'),
+										special:
+											!password.hasError('required') &&
+											!password.hasError('hasSpecialCharacters'),
+										numeric:
+											!password.hasError('required') &&
+											!password.hasError('hasNumber')
+									}"
+								></mflooring-password-requirements>
+							</div>
+						</div>
+					</div>
+					<div class="form-field">
+						<mflooring-input-text
+							[control]="confirmPassword"
+							[presentation]="inputTextPresentation"
+							[content]="{
+								placeholder: 'Type here',
+								label: resourceBundleData['global.label.confirm-password'],
+								type: 'password'
+							}"
+						></mflooring-input-text>
+						<div
+							*ngIf="
+								confirmPassword.invalid &&
+								(confirmPassword.touched || confirmPassword.dirty)
+							"
+							class="alert alert-danger"
+						>
+							<div class="text-danger" *ngIf="confirmPassword.errors.required">
+								<span class="create-account__error">{{
+									resourceBundleData['global.error.mandatory']
+								}}</span>
+							</div>
+							<div class="text-danger" *ngIf="confirmPassword.errors.pattern">
+								<span class="create-account__error">{{
+									resourceBundleData['global.error.password']
+								}}</span>
+							</div>
+							<div
+								class="text-danger"
+								*ngIf="confirmPassword.hasError('not_same_password')"
+							>
+								<span class="create-account__error">{{
+									resourceBundleData['global.error.confirmpassword']
+								}}</span>
+							</div>
+						</div>
+					</div>
+					<div class="create-account__mailing">
+						<span class="create-account__mailing__label"></span>
+						<mflooring-checkbox [control]="mailingList">
+							<span class="create-account__mailing__label">
+								Subscribe to Mohawk Flooring Email List *
+							</span>
+						</mflooring-checkbox>
+					</div>
+					<div class="create-account__action">
+						<mflooring-link-compound
+							(handleClickAction)="form.valid && onSubmit(form.value)"
+							[content]="{
+								text: resourceBundleData['global.button.submit.label']
+							}"
+							[presentation]="{
+								theme: 'light',
+								buttonType: 'primary',
+								buttonWidth: 'normal',
+								buttonAction: 'submit',
+								alignment: 'center',
+								isDisabled: !form.valid
+							}"
+						></mflooring-link-compound>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="create-account-container__footer">
+			<div class="create-account-container__footer__division">OR</div>
+			<div class="create-account-container__footer__text">
+				Already have an account?
+			</div>
+			<div class="create-account-container__footer__text">
+				<button
+					[routerLink]="['/login']"
+					type="button"
+					class="create-button create-account-container__forgot-pwd__label"
+				>
+					Sign In here
+				</button>
+			</div>
+		</div>
+	</div>
+</mflooring-layout-wrapper>

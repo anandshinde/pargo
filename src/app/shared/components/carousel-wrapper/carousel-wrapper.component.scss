@@ -1,0 +1,75 @@
+@import 'src/styles/settings/settings.colors';
+
+@import 'src/styles/tools/tools.mediaquery';
+
+@import '~swiper/swiper';
+
+// LOCAL STYLING DEFAULTS
+$carousel-bullet-size-small: 14px;
+$carousel-bullet-size-large: 18px;
+$carousel-bullet-border-size: 2px;
+$carousel-bullet-border-color: $color-white;
+$carousel-bullet-background: transparent;
+$carousel-bullet-background-active: rgba(255, 255, 255, 0.5);
+
+/* Common Styles */
+.swiper-pagination-fraction,
+.swiper-pagination-custom,
+.swiper-container-horizontal > .swiper-pagination-bullets {
+	bottom: 1px;
+	left: 0;
+	width: 100%;
+	position: absolute;
+	z-index: 10;
+	text-align: center;
+
+	@include mq-breakpoint-sm() {
+		bottom: 10px;
+	}
+}
+
+.swiper-pagination-bullet {
+	width: var(
+		--carousel-bullet-size-small,
+		#{$carousel-bullet-size-small}
+	) !important;
+	height: var(
+		--carousel-bullet-size-small,
+		#{$carousel-bullet-size-small}
+	) !important;
+	display: inline-block;
+	border: var(--carousel-bullet-border-size, #{$carousel-bullet-border-size})
+		solid var(--carousel-bullet-border-color, #{$carousel-bullet-border-color}) !important;
+	border-radius: 100%;
+	background: var(
+		--carousel-bullet-background,
+		#{$carousel-bullet-background}
+	) !important;
+	margin-right: 5px;
+	padding: 0;
+	opacity: 1 !important;
+	box-shadow: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+
+	&.bullet-large {
+		width: var(
+			--carousel-bullet-size-large,
+			#{$carousel-bullet-size-large}
+		) !important;
+		height: var(
+			--carousel-bullet-size-large,
+			#{$carousel-bullet-size-large}
+		) !important;
+	}
+
+	&-active {
+		opacity: 1;
+		background: var(
+			--carousel-bullet-background-active,
+			#{$carousel-bullet-background-active}
+		) !important;
+		border: 0;
+	}
+}

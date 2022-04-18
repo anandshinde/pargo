@@ -1,0 +1,93 @@
+@import 'src/styles/settings/settings.containers';
+
+@import 'src/styles/tools/tools.mediaquery';
+
+@import './src/styles/settings/settings.colors';
+
+@import 'src/styles/tools/tools.typography';
+
+@import 'src/styles/elements/elements.links';
+
+:host {
+	display: block;
+	position: relative;
+}
+::ng-deep {
+	.mat-dialog-container {
+		box-shadow: none;
+		background: none;
+		color: rgba(0, 0, 0, 0.87);
+		@include mq-breakpoint-md() {
+			padding: 0;
+		}
+	}
+}
+.mflooring-login-forgot {
+	padding: 30px;
+	box-shadow: 0px 11px 15px -7px rgb(0 0 0 / 20%),
+		0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%);
+	background: white;
+	border-radius: 5px;
+	@include mq-breakpoint-md() {
+		padding: 40px;
+	}
+	::ng-deep button {
+		width: 100%;
+		justify-content: center;
+		cursor: pointer;
+		@include mq-breakpoint-md() {
+			width: inherit;
+		}
+	}
+	.close {
+		position: absolute;
+		top: 15px;
+		right: 10px;
+		width: auto !important;
+		@include reset-button();
+	}
+}
+
+.login-forgot {
+	&__input {
+		width: auto;
+		margin-top: 25px;
+		margin-bottom: 25px;
+		align-items: center;
+		text-align: left;
+		display: block;
+		color: $color-brown-light-rgb;
+		@include font-gotham-book($size: 17px);
+
+		@include mq-breakpoint-md() {
+			@include font-gotham-book($size: 13px);
+		}
+	}
+	&__title {
+		align-items: center;
+		display: flex;
+		justify-content: center;
+		margin-bottom: 15px;
+		color: $color-brown-light-rgb;
+		@include font-nunito-bold($size: 18px, $lineheight: 24px);
+		@include mq-breakpoint-md() {
+			@include font-nunito-bold($size: 18px, $lineheight: 24px);
+		}
+	}
+
+	&__span {
+		align-items: center;
+		display: flex;
+		text-align: center;
+		color: $color-brown-light-rgb;
+		padding: 0 0px;
+		@include font-nunito-regular($size: 14px, $lineheight: 19px);
+		@include mq-breakpoint-md() {
+			padding: 0 20px;
+		}
+	}
+}
+.is-disabled {
+	pointer-events: none;
+	opacity: 0.25;
+}

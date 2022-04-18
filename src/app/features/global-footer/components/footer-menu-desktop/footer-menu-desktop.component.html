@@ -1,0 +1,58 @@
+<section class="footer">
+	<div class="footer__menu">
+		<div class="footer__logo">
+			<mflooring-logo-footer
+				[content]="logoContent"
+				[presentation]="logoPresentation"
+			>
+			</mflooring-logo-footer>
+		</div>
+		<nav
+			class="footer__menu__item"
+			[attr.aria-label]="item.name"
+			*ngFor="let item of menu?.siteMenuItems; index as i; trackBy: trackBy"
+		>
+			<p class="footer__menu__title">{{ item.name }}</p>
+			<ul
+				class="footer__menu__list"
+				role="menu"
+				*ngIf="!!item.childMenuItems.length"
+			>
+				<li
+					*ngFor="
+						let subitem of item?.childMenuItems;
+						index as j;
+						trackBy: trackBy
+					"
+					role="menuitem"
+				>
+					<mflooring-menu-item
+						id="subMenuItem-{{ i }}-{{ j }}"
+						[site]="subitem?._links?.site"
+						[page]="page"
+						[hasChildren]="subitem.childMenuItems.length"
+					>
+						{{ subitem.name }}
+					</mflooring-menu-item>
+				</li>
+			</ul>
+		</nav>
+		<div class="footer__menu__search-box">
+			<!-- <p class="footer__search-box__title">Find a Retailer</p> -->
+
+			<div class="footer__menu__search-box__search-container">
+				<mflooring-footer-input-text
+					label="FIND A RETAILER"
+					placeholder=" Enter Zip Code"
+					[footerData]="footerData"
+					[id]="'zip-code-desktop'"
+				></mflooring-footer-input-text>
+			</div>
+
+			<!-- <form>
+					<input type="text" placeholder="Search.." name="">
+					<button type="submit">Search</button>
+				  </form> -->
+		</div>
+	</div>
+</section>

@@ -1,0 +1,49 @@
+<section class="gallery-pagination__counter">
+	<ng-content></ng-content>
+</section>
+
+<pagination-template #p="paginationApi" (pageChange)="onPageChange($event)">
+	<!-- DESKTOP -->
+	<ul class="gallery-pagination__list" [class.hidden]="p.pages.length === 1">
+		<li *ngIf="!p.isFirstPage()" class="gallery-pagination__item">
+			<a href="javascript:void(0)" (click)="p.previous()">Prev</a>
+		</li>
+		<li *ngFor="let page of p.pages" class="gallery-pagination__item">
+			<a
+				href="javascript:void(0)"
+				(click)="p.setCurrent(page.value)"
+				*ngIf="p.getCurrent() !== page.value"
+			>
+				<span>{{ page.label }}</span>
+			</a>
+			<span
+				class="gallery-pagination__item--current-page"
+				*ngIf="p.getCurrent() === page.value"
+			>
+				{{ page.label }}
+			</span>
+		</li>
+		<li *ngIf="!p.isLastPage()" class="gallery-pagination__item">
+			<a href="javascript:void(0)" (click)="p.next()">Next</a>
+		</li>
+	</ul>
+
+	<!-- MOBILE -->
+	<div class="gallery-pagination__button" [class.hidden]="p.pages.length === 1">
+		<mflooring-link-compound
+			*ngIf="!p.isFirstPage()"
+			[content]="{ text: 'Previous Page' }"
+			[presentation]="linkPresentation"
+			(click)="p.previous()"
+			class="prev"
+		>
+		</mflooring-link-compound>
+		<mflooring-link-compound
+			*ngIf="!p.isLastPage()"
+			[content]="{ text: 'Next Page' }"
+			[presentation]="linkPresentation"
+			(click)="p.next()"
+		>
+		</mflooring-link-compound>
+	</div>
+</pagination-template>

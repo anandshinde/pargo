@@ -1,0 +1,120 @@
+<!-- <ng-container *ngIf="!!linkUrl; else button_link">
+	<a
+		class="link-compound"
+		captureClicks
+		[ngClass]="[
+			linkClassName,
+			themeClassName,
+			linkWidthClassName,
+			buttonAlignment
+		]"
+		[href]="linkUrl"
+	>
+		<span class="label" [ngClass]="{ 'no-wrap': nowrap }">{{ linkText }}</span>
+		<span class="icon-" *ngIf="hasArrow">link</span>
+	</a>
+</ng-container>
+
+<ng-template #button_link>
+	<button
+		class="link-compound"
+		[ngClass]="[
+			linkClassName,
+			themeClassName,
+			linkWidthClassName,
+			buttonAlignment
+		]"
+		[disabled]="disableButton"
+		(click)="buttonClick(linkUrl, linkTarget)"
+		(keydown.enter)="buttonClick(linkUrl, linkTarget)"
+	>
+		<span class="label" [ngClass]="{ 'no-wrap': nowrap }">{{ linkText }}</span>
+		<span class="icon-" *ngIf="hasArrow">link</span>
+	</button>
+</ng-template> -->
+
+<ng-container
+	*ngIf="{
+		content: linkContent$ | async,
+		presentation: linkPresentation$ | async
+	} as data"
+>
+	<a
+		class="link-compound text-link"
+		[class.standard-font]="!data.presentation?.inheritFont"
+		*ngIf="data?.presentation?.buttonType === 'link'; else button"
+		captureClicks
+		[ngClass]="[
+			data?.presentation?.themeClass,
+			data?.presentation?.widthClass,
+			data?.presentation?.alignmentClass,
+			data?.presentation?.colorClass,
+			data?.presentation?.iconPositionClass
+		]"
+		[href]="data.content?.url"
+	>
+		<span class="label" [ngClass]="{ 'no-wrap': !data.presentation?.wrap }">{{
+			data?.content?.text
+		}}</span>
+		<div class="link-compound__icon" *ngIf="!!data?.presentation?.showIcon">
+			<mflooring-icon-button
+				[presentation]="{
+					type: data?.content?.iconType,
+					size: data?.presentation?.iconSize,
+					iconName: data?.content?.iconName
+				}"
+				*ngIf="data?.presentation?.iconType !== 'link'; else font_icon"
+			></mflooring-icon-button>
+			<ng-template #font_icon>
+				<span class="icon-">{{ data.presentation?.iconType }}</span>
+			</ng-template>
+		</div>
+	</a>
+
+	<ng-template #button>
+		<button
+			*ngIf="data?.content?.text !== ''"
+			class="link-compound"
+			(click)="buttonClick(linkUrl, linkTarget)"
+			(keydown.enter)="buttonClick(linkUrl, linkTarget)"
+			[ngClass]="[
+				data?.presentation?.iconPositionClass,
+				data?.presentation?.themeClass,
+				data?.presentation?.typeClass,
+				data?.presentation?.widthClass,
+				data?.presentation?.alignmentClass,
+				data?.presentation?.colorClass
+			]"
+			[disabled]="data.presentation?.isDisabled"
+		>
+			<span
+				class="label"
+				[class.standard-font]="
+					data?.presentation?.inheritFont === null
+						? false
+						: !data?.presentation?.inheritFont
+				"
+				[ngClass]="{
+					'no-wrap':
+						data?.presentation?.wrap === null
+							? false
+							: !data?.presentation?.wrap
+				}"
+				>{{ data?.content?.text }}</span
+			>
+			<span class="link-compound__icon" *ngIf="!!data?.presentation?.showIcon">
+				<mflooring-icon-button
+					(handleClickAction)="onSubmit(form.value)"
+					[presentation]="{
+						type: data?.presentation?.iconType,
+						size: data.presentation?.iconSize
+					}"
+					*ngIf="data?.presentation?.iconType !== 'link'; else font_icon"
+				></mflooring-icon-button>
+				<ng-template #font_icon>
+					<span class="icon-">{{ data.presentation?.iconType }}</span>
+				</ng-template>
+			</span>
+		</button>
+	</ng-template>
+</ng-container>

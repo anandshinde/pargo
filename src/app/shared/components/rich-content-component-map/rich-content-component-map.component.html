@@ -1,0 +1,53 @@
+<mflooring-image-compound
+	*ngIf="data?.type === types.image"
+	[content]="data?.value?.content"
+	[presentation]="data?.value?.presentation"
+>
+</mflooring-image-compound>
+
+<mflooring-rich-text-compound
+	*ngIf="data?.type === types.richText"
+	[content]="data?.value?.content"
+	[presentation]="data?.value?.presentation"
+>
+</mflooring-rich-text-compound>
+
+<mflooring-link-compound
+	*ngIf="data?.type === types.link"
+	[content]="data?.value?.content"
+	[presentation]="data?.value?.presentation"
+>
+</mflooring-link-compound>
+
+<mflooring-pdf-compound
+	*ngIf="data?.type === types.pdfDownload"
+	[content]="data?.value?.content"
+	[presentation]="data?.value?.presentation"
+>
+</mflooring-pdf-compound>
+
+<mflooring-icon-text-compound
+	*ngIf="data?.type === types.iconText"
+	[content]="data?.value?.content"
+	[presentation]="data?.value?.presentation"
+>
+</mflooring-icon-text-compound>
+
+<mflooring-video-player
+	*ngIf="data?.type === types.video"
+	[content]="data?.value?.content"
+	[presentation]="data?.value?.presentation"
+>
+</mflooring-video-player>
+
+<mflooring-tile-text-compound
+	*ngIf="data?.type === types.tileText"
+	[content]="data?.value?.content"
+	[presentation]="data?.value?.presentation"
+></mflooring-tile-text-compound>
+
+<mflooring-ribbon-compound
+	*ngIf="data?.type === types.ctaRibbon"
+	[content]="data?.value?.content"
+	[presentation]="data?.value?.presentation"
+></mflooring-ribbon-compound>

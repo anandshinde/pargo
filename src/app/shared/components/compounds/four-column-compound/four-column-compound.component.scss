@@ -1,0 +1,70 @@
+@import 'src/styles/tools/tools.mediaquery';
+@import 'src/styles/tools/tools.typography';
+
+$content-margin-bottom-small: 25px;
+$content-margin-bottom-large: 50px;
+
+:host {
+}
+
+.four-column-compound {
+
+	&.margin-large {
+		margin: 0 0 var(--compound-margin-bottom, #{$content-margin-bottom-large});
+	}
+
+	&.margin-small {
+		margin: 0 0 var(--compound-margin-bottom-small, #{$content-margin-bottom-small});
+	}
+
+
+	&__title {
+		margin-bottom: 20px;
+	}
+
+	&__title,
+	&__desc {
+		text-align: center;
+		@include font-nunito-regular(22);
+	}
+
+
+	&__container {
+		margin-bottom: 20px;
+
+		display: grid;
+		grid-template-rows: auto;
+		grid-template-areas: 'first'
+			'second'
+			'third'
+			'fourth';
+		grid-template-columns: auto;
+		gap: 40px;
+
+		@include mq-breakpoint-sm() {
+			grid-template-areas: 'first second'
+				'third fourth';
+			gap: 20px;
+		}
+
+		@include mq-breakpoint-md() {
+			grid-template-areas: 'first second third fourth';
+		}
+	}
+
+	&__first {
+		grid-area: first;
+	}
+
+	&__second {
+		grid-area: second;
+	}
+
+	&__third {
+		grid-area: third;
+	}
+
+	&__fourth {
+		grid-area: fourth;
+	}
+}

@@ -1,0 +1,107 @@
+@import 'src/styles/settings/settings.colors';
+
+@import 'src/styles/tools/tools.typography';
+
+@import 'src/styles/tools/tools.mediaquery';
+
+$default-actions-gap: 10px;
+//$default-actions-margin: 15px 0;
+$default-actions-min-weight: 100px;
+$default-content-margin-bottom: 10px;
+$noColor: #fff0;
+:host {
+	display: block;
+
+	@include mq-breakpoint-md() {
+		display: none;
+	}
+}
+:host {
+	.filters-mobile__actions {
+		display: grid;
+		grid-template-columns: repeat(2, minmax($default-actions-min-weight, 1fr));
+		gap: $default-actions-gap;
+		//margin: $default-actions-margin;
+		margin-left: 20px;
+		margin-right: 20px;
+		& ::ng-deep {
+			button.secondary .label,
+			button.primary .label {
+				text-transform: none;
+			}
+			.text-link {
+				.label {
+					@include font-nunito-semibold($size: 18px, $lineheight: 24px);
+				}
+			}
+		}
+	}
+}
+
+:host .filters-mobile__content {
+	margin-bottom: $default-content-margin-bottom;
+}
+
+:host {
+	background-color: $color-extra-light-grey;
+	margin-bottom: 20px;
+	.filters-mobile {
+		&__content {
+			::ng-deep {
+				mflooring-gallery-form-expansion {
+					mat-accordion {
+						padding: 0 20px 25px;
+						mat-expansion-panel {
+							border-radius: 0px !important;
+							box-shadow: none;
+							border-bottom: 0.5px solid $color-grey;
+							border-left: none;
+							border-right: none;
+							border-top: none;
+							background: $noColor;
+							padding-bottom: 5px;
+							.mat-expansion-panel-header:not(.mat-expanded),
+							.mat-expansion-panel-header:not(.mat-expanded):hover {
+								background-color: $noColor !important;
+							}
+							.mat-expansion-panel-body {
+								padding: 0 0 15px;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	.filters-mobile__actions {
+		::ng-deep {
+			mflooring-link-compound {
+				.link-compound {
+					text-decoration: none;
+					.link-compound__icon {
+						span.icon- {
+							color: $mohawk-black;
+						}
+					}
+
+					&.primary {
+						margin-bottom: 50px;
+						justify-content: center;
+						width: 100%;
+					}
+					&.primary.theme-dark {
+						border: 0.5px solid $mohawk-black;
+					}
+					&.text-link {
+						position: relative;
+						left: -10px;
+						.label {
+							color: $color-black;
+							@include font-nunito-semibold($size: 18px, $lineheight: 24px);
+						}
+					}
+				}
+			}
+		}
+	}
+}

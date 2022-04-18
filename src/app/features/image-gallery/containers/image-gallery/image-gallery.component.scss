@@ -1,0 +1,73 @@
+@import 'src/styles/elements/elements.please-configure';
+
+@import 'src/styles/tools/tools.mediaquery';
+
+@import 'src/styles/settings/settings.colors';
+
+$content-margin-bottom-small: 25px;
+$content-margin-bottom-large: 50px;
+@mixin max-breakpoint-sm() {
+	@media (max-width: #{$screen-md-min}) {
+		@content;
+	}
+}
+:host {
+	display: block;
+	position: relative;
+	margin: 0 0 var(--component-margin-bottom, #{$content-margin-bottom-large});
+
+	@include mq-breakpoint-md() {
+	}
+}
+
+[hidden] {
+	display: none !important;
+}
+
+@include please-configure();
+
+@include max-breakpoint-sm() {
+	:host {
+		::ng-deep {
+			mflooring-layout-wrapper {
+				.layout-container {
+					&__grid {
+						&.inset {
+							padding: 0 var(--horizontal-margins, 0px) !important;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+:host ::ng-deep mflooring-gallery-pagination-counter {
+	p {
+		color: $mohawk-black !important;
+	}
+}
+mflooring-gallery-filters {
+	::ng-deep mflooring-gallery-filters-desktop {
+		row-gap: 25px;
+		mflooring-gallery-form-select {
+			mflooring-select-filter {
+				a {
+					span {
+						color: $mohawk-black !important;
+					}
+				}
+			}
+		}
+	}
+	::ng-deep mflooring-gallery-filters-mobile {
+		mflooring-gallery-form-expansion {
+			.mat-accordion {
+				.mat-expansion-panel {
+					.gallery-expansion__title__icon {
+						width: 25px;
+					}
+				}
+			}
+		}
+	}
+}

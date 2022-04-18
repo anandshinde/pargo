@@ -1,0 +1,47 @@
+:host {
+}
+
+.icon-text {
+	$self: &;
+	display: grid;
+	grid-gap: 10px;
+	align-items: center;
+	pointer-events: none;
+
+	&.has-link {
+		pointer-events: all;
+		cursor: pointer;
+		outline: none;
+	}
+
+	&.position-top {
+		justify-content: center;
+		text-align: center;
+		grid-template-columns: 100%;
+		grid-template-areas: 'image'
+			'text';
+
+		#{$self}__image {
+			padding: 20px;
+
+			::ng-deep img {
+				margin-left: auto;
+				margin-right: auto;
+			}
+		}
+	}
+
+	&.position-left {
+		justify-content: flex-start;
+		grid-template-columns: 50px auto;
+		grid-template-areas: 'image text';
+	}
+
+	&__image {
+		grid-area: image;
+	}
+
+	&__text {
+		grid-area: text;
+	}
+}

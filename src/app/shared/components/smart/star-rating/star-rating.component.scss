@@ -1,0 +1,68 @@
+@import 'src/styles/settings/settings.colors';
+
+@import 'src/styles/tools/tools.typography';
+
+.star-rating {
+	display: flex;
+	align-items: center;
+	color: $mohawk-black;
+	margin: auto;
+	@include font-nunito-light($size: [14, 14], $lineheight: 1);
+
+	@include mq-breakpoint-md() {
+		margin: 0;
+	}
+
+	.rating {
+		position: relative;
+		margin-right: 5px;
+	}
+
+	&__base {
+
+		span {
+			color:$color-grey-light;
+		}
+	}
+
+	&__overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		overflow: hidden;
+
+		&.color-gold {
+			color: gold;
+		}
+
+		&.color-black {
+			color: $color-grey;
+		}
+	}
+
+	.review-count {
+		color: $mohawk-black;
+		margin-left: 5px;
+		@include font-nunito-light($size: [12, 12], $lineheight: 1);
+
+		@include mq-breakpoint-md() {
+			color: $mohawk-black;
+		}
+
+		&--link {
+			text-decoration: underline;
+			cursor: pointer;
+		}
+
+	}
+
+	.rating-count {
+		color: $mohawk-black;
+		margin-left: 5px;
+		@include font-nunito-light($size: [12, 12], $lineheight: 1);
+
+		@include mq-breakpoint-md() {
+			color: $mohawk-black;
+		}
+	}
+}

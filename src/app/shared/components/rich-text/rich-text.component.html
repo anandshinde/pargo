@@ -1,0 +1,25 @@
+<ng-container *ngIf="showEllipsis; else noEllipsis">
+	<div class="rich-text__wrapper" [style.height]="heightLimit">
+		<section
+			captureClicks
+			class="rich-text"
+			[ngClass]="[themeClass, typeClass, componentClass]"
+			[innerHTML]="richText | safe: 'html'"
+		></section>
+	</div>
+
+	<div class="rich-text__read-more">
+		<button *ngIf="isLimitedContent" (click)="expandContent($event)">
+			Read more
+		</button>
+	</div>
+</ng-container>
+
+<ng-template #noEllipsis>
+	<section
+		captureClicks
+		class="rich-text"
+		[ngClass]="[themeClass, typeClass, componentClass]"
+		[innerHTML]="richText | safe: 'html'"
+	></section>
+</ng-template>

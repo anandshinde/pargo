@@ -1,0 +1,21 @@
+<section class="type-toggle theme-white">
+	<div class="type-toggle__mobile">
+		<mat-form-field>
+			<mat-select
+				#matSelect
+				[value]="selectedRetailer"
+				(selectionChange)="filterListByRetailer($event.value)"
+				panelClass="retailer_filter_dropdown"
+			>
+				<mat-option
+					*ngFor="let retailer of allRetailers"
+					[value]="retailer.value"
+					[disabled]="retailer.count === 0"
+				>
+					{{ retailer.label }}
+				</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</div>
+</section>
+

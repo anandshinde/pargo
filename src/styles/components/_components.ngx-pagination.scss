@@ -1,0 +1,28 @@
+@import 'src/styles/tools/tools.typography';
+@import 'src/styles/settings/settings.colors';
+
+@mixin ngx-pagination() {
+	padding: 0;
+
+	li {
+		border-right: 1px solid $color-grey-light;
+		line-height: 1;
+
+		&:last-child {
+			border-right: 0;
+		}
+	}
+
+	a {
+		@include font-nunito-semibold($size: [14], $lineheight: 1);
+
+		&:hover {
+			background: transparent;
+		}
+	}
+
+	.current {
+		background: transparent;
+		color: $color-red-dark;
+	}
+}

@@ -1,0 +1,120 @@
+@import 'src/styles/elements/elements.links';
+
+@import 'src/styles/tools/tools.typography';
+
+@import 'src/styles/tools/tools.mediaquery';
+
+@import 'src/styles/elements/elements.lists';
+
+$default-space-x: 10px;
+$default-gap-x: 7px;
+$color-top-finder-header-bg: $color-dark-grey;
+$default-padding-x: 25px;
+
+ul {
+	@include reset-list();
+}
+
+:host {
+	display: flex;
+	align-items: flex-start;
+	background: $color-top-finder-header-bg;
+
+	.menu-utility__actions {
+		display: flex;
+		align-items: center;
+		margin: 0;
+	}
+
+	.menu-utility__actions__item {
+		@include font-nunito-light(15);
+
+		@include mq-breakpoint-md() {
+			&:last-child {
+				// margin-right: $default-space-x;
+			}
+		}
+
+		&:last-child > * {
+			margin-right: 0;
+		}
+	}
+
+	.menu-utility__text {
+		display: none;
+
+		@include mq-breakpoint-md() {
+			display: inline;
+		}
+	}
+
+	.menu-utility__actions__item:first-of-type {
+		.menu-button {
+			display: flex;
+			align-items: center;
+			color: $color-white;
+			padding: 0px $default-padding-x;
+			height: 40px;
+			&.active {
+				color: $color-grey;
+				background: $mohawk-black;
+			}
+		}
+
+		.menu-utility__text {
+			max-width: 100px;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			overflow: hidden;
+
+			@include font-nunito-bold($size: [10, 11], $lineheight: 15px);
+			text-transform: uppercase;
+
+			@include mq-breakpoint-xs() {
+				max-width: 150px;
+			}
+
+			@include mq-breakpoint-sm() {
+				max-width: 200px;
+			}
+
+			@include mq-breakpoint-md() {
+				max-width: 300px;
+			}
+
+			@include mq-breakpoint-lg() {
+				max-width: 300px;
+			}
+
+			@include mq-breakpoint-xl {
+				max-width: none;
+			}
+		}
+	}
+
+	.menu-utility__actions__item > * {
+		padding: 0 $default-space-x;
+		column-gap: $default-gap-x;
+
+		.menu-utility__text,
+		.menu-utility__icon {
+			display: inline-block;
+		}
+
+		.menu-utility__icon {
+			margin-right: 5px;
+		}
+	}
+
+	a {
+		@include reset-link();
+	}
+	::ng-deep {
+		.custom-map-icon {
+			button {
+				color: $color-white;
+				width: auto !important;
+			}
+		}
+	}
+}

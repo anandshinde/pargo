@@ -1,0 +1,9 @@
+@import 'src/styles/elements/elements.themes';
+
+@import 'node_modules/modern-css-reset/dist/reset.min';
+
+:root {
+	@include theme-color-root();
+	@include theme-sizes-root();
+	@include theme-animation-root();
+}

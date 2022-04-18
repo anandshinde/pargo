@@ -1,0 +1,9 @@
+<ng-container
+	*ngIf="{
+		category: categoryListingContent$ | async,
+		resourceBundleData: resourceBundle$ | async
+	} as content">
+    <!-- {{content | json}} -->
+    <mflooring-shop-by-category [content]="content.category"></mflooring-shop-by-category>
+</ng-container>
+

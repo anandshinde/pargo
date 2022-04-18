@@ -1,0 +1,31 @@
+<mflooring-layout-wrapper [presentation]="{ isInset: true }">
+	<ng-container
+	*ngIf="{
+		content: blogDetailContent$ | async,
+		presentation: blogDetailParams$ | async
+	} as data"
+>
+	<section class="blog-detail-content">
+		<div class="blog-detail-content__container">
+			<mflooring-blog-header
+				[content]="data?.content"
+				[presentation]="data?.presentation"
+			></mflooring-blog-header>
+			<mflooring-blog-content
+				[content]="data?.content"
+				[presentation]="data?.presentation"
+			></mflooring-blog-content>
+			<!-- <mflooring-blog-social
+				*ngIf="data?.content?.socialShare"
+				[content]="data?.content"
+				[presentation]="data?.presentation"
+			></mflooring-blog-social> -->
+			<mflooring-blog-page-list
+				*ngIf="data?.content?.blogList?.length > 0"
+				[content]="data?.content"
+				[presentation]="data?.presentation"
+			></mflooring-blog-page-list>
+		</div>
+	</section>
+</ng-container>
+</mflooring-layout-wrapper>

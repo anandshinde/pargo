@@ -1,0 +1,124 @@
+<ng-container *ngIf="shopByCategoryData$ | async as data">
+	<!-- data?.categorySlideCompound[activeCategory]
+							.categorySlideItemCompound[activeBottomCat].heroImage.imageDAM -->
+	<mflooring-layout-wrapper
+		id="layoutWrapper"
+		[presentation]="{
+			isInset: true
+		}"
+	>
+		<section class="heading">{{ data?.displayName }}</section>
+		<section class="shopby-category">
+			<div class="image-container">
+				<img
+					id="image"
+					[src]="
+						activeBottomCat === -1
+							? data?.categorySlideCompound[activeCategory]?.tabImage.imageDAM
+							: data?.categorySlideCompound[activeCategory]
+									?.categorySlideItemCompound[activeBottomCat].heroImage
+									.imageDAM
+					"
+				/>
+			</div>
+			<div class="category-nav">
+				<div
+					class="item"
+					*ngFor="let category of data?.categorySlideCompound; index as i"
+				>
+					<a
+						id="categoryTabTitle-{{ i }}"
+						(click)="activeCategory = i; activeBottomCat = -1"
+						[ngClass]="{ active: activeCategory === i }"
+						>{{ category.tabTitle }}</a
+					>
+				</div>
+			</div>
+			<div
+				class="category-container"
+				[ngClass]="{ 'active-category': activeCategory === j }"
+				*ngFor="let item of data?.categorySlideCompound; index as j"
+			>
+				<div class="title">{{ item.description }}</div>
+				<div
+					class="bottom-section"
+					[class.product-line-section]="item.verticalStack"
+				>
+					<ng-container *ngIf="!isMobile">
+						<div
+							class="item"
+							*ngFor="
+								let bottomItem of item?.categorySlideItemCompound;
+								index as k
+							"
+							(mouseover)="activeBottomCat = k"
+							(mouseout)="activeBottomCat = -1"
+						>
+							<mflooring-image-compound
+								[content]="{
+									image: bottomItem?.iconImage
+								}"
+							></mflooring-image-compound>
+							<div class="tab-content">
+								<div class="title">{{ bottomItem?.title }}</div>
+								<div class="sub-content">
+									{{ bottomItem?.description }}
+								</div>
+								<mflooring-link-compound
+									id="linkCompound"
+									[content]="bottomItem?.linkCompound"
+									[presentation]="{
+										theme: 'dark',
+										buttonType: bottomItem?.linkCompound?.button
+									}"
+								></mflooring-link-compound>
+							</div>
+						</div>
+					</ng-container>
+					<ng-container *ngIf="isMobile && j === activeCategory">
+						<swiper
+							id="swiper"
+							(indexChange)="
+								activeBottomCat =
+									item?.categorySlideItemCompound.length > 1 ? $event : 0
+							"
+							#subTabCarousel
+							[config]="baseConfig"
+							(swiper)="onSwiper($event)"
+							(breakpoint)="update($event)"
+							[navigation]="item?.categorySlideItemCompound.length > 1"
+						>
+							<ng-template
+								swiperSlide
+								*ngFor="let bottomItem of item?.categorySlideItemCompound"
+							>
+								<div class="item">
+									<mflooring-image-compound
+										[content]="{
+											image: bottomItem?.iconImage
+										}"
+									></mflooring-image-compound>
+									<div class="tab-content">
+										<div class="title">{{ bottomItem?.title }}</div>
+										<div class="sub-content">
+											{{ bottomItem?.description }}
+										</div>
+										<mflooring-link-compound
+											id="linkCompound"
+											[content]="bottomItem?.linkCompound"
+											[presentation]="{
+												theme: 'dark',
+												buttonType: bottomItem?.linkCompound?.button
+											}"
+										></mflooring-link-compound>
+									</div>
+								</div>
+							</ng-template>
+							<!-- </ng-template> -->
+						</swiper>
+					</ng-container>
+				</div>
+			</div>
+		</section>
+	</mflooring-layout-wrapper>
+</ng-container>

@@ -1,0 +1,24 @@
+@import 'src/styles/settings/settings.colors';
+
+:host {
+	display: block;
+	position: relative;
+	border-radius: 5px;
+	overflow: hidden;
+}
+
+.mflooring-tile-text {
+	cursor: pointer;
+
+	&__content {
+		height: 0;
+		padding-bottom: 100%;
+
+		mflooring-rich-text {
+			position: absolute;
+			padding: 20px;
+			width: 100%;
+			bottom: 0;
+		}
+	}
+}

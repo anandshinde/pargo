@@ -1,0 +1,31 @@
+<ng-container
+	*ngIf="{
+		content: blogCardContent$ | async,
+		presentation: blogCardPresentation$ | async
+	} as data"
+>
+	<section class="blog-card">
+		<div class="blog-card__container">
+			<div class="blog-card__imageContent">
+				<mflooring-image-compound
+				class="blog-card__image"
+				[content]="{
+					image: data?.content?.image
+				}"
+			></mflooring-image-compound>
+			</div>
+			<div class="blog-card__header">
+				<div class="blog-card__header__title">
+					<h2>{{ data?.content?.title }}</h2>
+					<p>{{ data?.content?.date }}</p>
+				</div>
+				<div class="blog-card__readMore">
+					<mflooring-link-compound
+					[content]="data?.content?.link?.value?.content"
+					[presentation]="data?.content?.link?.value?.presentation"
+				></mflooring-link-compound>
+				</div>
+			</div>
+		</div>
+	</section>
+</ng-container>

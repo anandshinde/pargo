@@ -1,0 +1,57 @@
+<section class="filters-mobile__actions">
+	<ng-container>
+		<mflooring-link-compound
+			[content]="{
+				text: 'Filter',
+				target: '',
+				url: null,
+				iconName: 'mobile-expand'
+			}"
+			[presentation]="{
+				buttonType: 'link',
+				buttonWidth: 'full',
+				theme: 'light',
+				showIcon: true,
+				iconSize: 'large'
+			}"
+			(click)="onOpenFilters()"
+		></mflooring-link-compound>
+	</ng-container>
+</section>
+<section class="filters-mobile__content" *ngIf="isFiltersOpened">
+	<mflooring-gallery-form-expansion [form]="form" [content]="content">
+	</mflooring-gallery-form-expansion>
+</section>
+<section class="filters-mobile__actions">
+	<!-- <ng-container *ngIf="!isFiltersOpened">
+		<mflooring-link-compound
+			[content]="{ text: 'Filters', target: '', url: null }"
+			[presentation]="{
+				buttonType: 'secondary',
+				buttonWidth: 'full',
+				theme: 'dark'
+			}"
+			(click)="onOpenFilters()"
+		></mflooring-link-compound>
+	</ng-container> -->
+	<ng-container *ngIf="isFiltersOpened">
+		<mflooring-link-compound
+			[content]="{ text: 'Reset', target: '', url: null }"
+			[presentation]="{
+				buttonType: 'primary',
+				buttonWidth: 'full',
+				theme: 'dark'
+			}"
+			(click)="onResetForm()"
+		></mflooring-link-compound>
+		<mflooring-link-compound
+			[content]="{ text: 'Show Results', target: '', url: null }"
+			[presentation]="{
+				buttonType: 'primary',
+				buttonWidth: 'full',
+				theme: 'light'
+			}"
+			(click)="onCloseFilters()"
+		></mflooring-link-compound>
+	</ng-container>
+</section>

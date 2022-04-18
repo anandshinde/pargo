@@ -1,0 +1,67 @@
+<ul class="menu-desktop__accordion">
+	<li
+		class="menu-desktop__accordion__item"
+		*ngFor="let item of items; index as i; trackBy: trackBy"
+	>
+		<ng-container
+			[ngTemplateOutlet]="
+				!item.childMenuItems.length ? renderItem : renderAccordion
+			"
+			[ngTemplateOutletContext]="{ item: item, page: page }"
+		>
+		</ng-container>
+	</li>
+</ul>
+
+<ng-template #renderItem let-item="item" let-page="page">
+	<mflooring-menu-item
+		class="menu-desktop__accordion__link"
+		[linkName]="item.name"
+		[linkContainer]="item.container"
+		[site]="item?._links?.site"
+		[page]="page"
+		(click)="onCloseMenu()"
+	>
+		{{ item.name }}
+	</mflooring-menu-item>
+</ng-template>
+
+<ng-template #renderAccordion let-items="item">
+	<mat-accordion displayMode="flat">
+		<mat-expansion-panel
+			hideToggle
+			*ngFor="let item of [items]; index as i; trackBy: trackBy"
+		>
+			<mat-expansion-panel-header collapsedHeight="45px" expandedHeight="45px">
+				<mat-panel-title><mflooring-menu-item
+					class="menu-desktop__accordion__link"
+					[linkName]="item.name"
+					[linkContainer]="item.container"
+					[site]="item?._links?.site"
+					[page]="page"
+					(click)="onCloseMenu()"
+				>
+					{{ item.name }}
+				</mflooring-menu-item></mat-panel-title>
+			</mat-expansion-panel-header>
+			<ul class="expansion-panel__menu">
+				<li
+					class="expansion-panel__item"
+					*ngFor="let subitem of item.childMenuItems; trackBy: trackBy"
+					role="menuitem"
+				>
+					<mflooring-menu-item
+						[site]="subitem?._links?.site"
+						[page]="page"
+						class="menu-desktop__accordion__link"
+						[linkName]="subitem.name"
+						[linkContainer]="subitem.container"
+						(click)="onCloseMenu()"
+					>
+						{{ subitem.name }}
+					</mflooring-menu-item>
+				</li>
+			</ul>
+		</mat-expansion-panel>
+	</mat-accordion>
+</ng-template>

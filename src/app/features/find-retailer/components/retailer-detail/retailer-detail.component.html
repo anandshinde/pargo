@@ -1,0 +1,386 @@
+<section class="retailer_detail">
+	<mflooring-layout-wrapper [content]="" [presentation]="{ isInset: true }"  *ngIf='retailer?.storeName'>
+		<article
+			class="detail"
+			itemscope
+			itemtype="https://schema.org/LocalBusiness"
+		>
+			<div class="detail__grid">
+				<div class="left">
+					<div class="top">
+						<div class="detail__store-info store-info">
+							<header itemprop="name">
+								<span class="detail__title">{{ retailer?.storeName }}</span>
+								<div
+									class="detail__logistics__address"
+									itemprop="address"
+									itemscope
+									itemtype="https://schema.org/PostalAddress"
+								>
+									<span class="streetAddress" itemprop="streetAddress"
+										>{{ retailer?.address1 }}
+									</span>
+									<span itemprop="addressLocality">{{ retailer?.city }}</span
+									>,
+									<span itemprop="addressRegion">{{ retailer?.state }}</span>
+									<span itemprop="postalCode"> {{ retailer?.zip }}</span>
+								</div>
+							</header>
+							<span class="detail__rating">
+							 <mflooring-star-rating
+									[content]="{
+										rating: retailer?.averageRating,
+										totalReviews: retailer?.reviewCount
+									}"
+									[presentation]="{
+										color: 'black'
+									}"
+									*ngIf="!!retailer?.averageRating"
+								></mflooring-star-rating> 
+							</span>
+							<div class="detail__myretailer">
+								<div class="detail__myretailer__radio-button">
+									<mat-radio-group aria-label="My Retailer">
+										<mat-radio-button
+											[value]="{
+												id: retailer?.dealerID,
+												name: retailer?.storeName,
+												latitude: retailer?.latitude,
+												longitude: retailer?.longitude,
+												affiliation: retailer?.affiliation,
+												address: retailer?.address1,
+												zip: retailer?.zip
+											}"
+											[checked]="
+												(mySelectedRetailer$ | async) === (retailerID$ | async)
+											"
+											(change)="selectMyRetailer($event)"
+											>{{ getRetailerSelectionLabel() }}</mat-radio-button
+										>
+									</mat-radio-group>
+								</div>								
+								<p *ngIf="!!edgePremier" class="detail__selection">
+									<mflooring-icon-button
+										[presentation]="{
+											size: 'medium',
+											type: '',
+											iconName: 'badge'
+										}"
+										class="badge__icon"
+									></mflooring-icon-button>
+									 Best Selection
+								</p>
+							</div>
+							<div class="detail__contact__desktop">
+								<div
+									class="detail__logistics__phone phone"
+									itemprop="telephone"
+									*ngIf="!!retailer?.phone"
+								>
+									<div class="heading">Phone Number</div>
+									<a [attr.href]="'tel:+' + webPhone">{{ displayPhone }}</a>
+								</div>
+									<div
+									class="detail__logistics__email email"
+									itemprop="email"
+									*ngIf="retailerEmails?.length"
+								>
+									<div class="heading">
+										{{
+											retailerEmails?.length > 1
+												? 'Email Addresses'
+												: 'Email Address'
+										}}
+									</div>
+									<div class="detail__logistics-emails">
+										<a
+											*ngFor="let email of retailerEmails"
+											[attr.href]="'mailto:+' + email"
+											>{{ email }}</a
+										>
+									</div>
+								</div>
+							</div>
+							<div class="detail__contact__mobile">
+								<div
+									class="detail__logistics__phone phone"
+									itemprop="telephone"
+									*ngIf="!!retailer?.phone"
+								>
+									<a [attr.href]="'tel:+' + webPhone">
+										<mflooring-icon-button
+										[presentation]="{
+											size: 'medium',
+											type: '',
+											iconName: 'phone'
+										}"
+										class="phone__icon"
+									></mflooring-icon-button>
+										<p>Call Store</p>
+									</a>
+								</div>
+								<div class="detail__logistics__directions">
+									<a [attr.href]="retailer?.directions">
+										<mflooring-icon-button
+										[presentation]="{
+											size: 'medium',
+											type: '',
+											iconName: 'pin'
+										}"
+										class="pin__icon"
+									></mflooring-icon-button>
+										<p>Directions</p>
+									</a>
+								</div>
+								<div *ngIf="!!edgePremier" class="detail__logistics__coupon">
+									<button (click)="openCouponModal('coupon')">
+										<mflooring-icon-button
+										[presentation]="{
+											size: 'medium',
+											type: '',
+											iconName: 'coupon'
+										}"
+										class="coupon__icon"
+									></mflooring-icon-button>
+										<p>Coupon</p>
+									</button>
+									
+				
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="bottom">
+						<div
+							class="detail__logistics__hours hours"
+							itemprop="openingHoursSpecification"
+							itemscope
+							itemtype="https://schema.org/OpeningHoursSpecification"
+							*ngIf="!!hoursOfOperation && hoursOfOperation?.length"
+						>
+							<mat-accordion>
+								<mat-expansion-panel
+									[expanded]="isExpanded"
+									[disabled]="isDisabled"
+								>
+									<mat-expansion-panel-header>
+										<mat-panel-title>
+											<div class="heading">Store Hours</div>
+										</mat-panel-title>
+									</mat-expansion-panel-header>
+									<div class="detail__hoursOfOperation">
+										<table>
+											<tr *ngFor="let day of hoursOfOperation">
+												<td class="detail__days">
+													<p>{{ day?.dayOfWeek }}</p>
+												</td>
+												<td class="detail__hours">
+													<p>
+														<time itemprop="opens">{{ day?.from }}</time>
+														<span *ngIf="day.to !== 'Closed'">
+															-
+															<time itemprop="closes">{{ day?.to }}</time>
+														</span>
+														<span *ngIf="day.to !== 'Closed'"> EST</span>
+													</p>
+												</td>
+											</tr>
+										</table>
+									</div>
+								</mat-expansion-panel>
+							</mat-accordion>
+						</div>
+
+						<div *ngIf="isIndependentRetailer" class="services">
+							<mat-accordion>
+								<mat-expansion-panel
+									[expanded]="isExpanded"
+									[disabled]="isDisabled"
+								>
+									<mat-expansion-panel-header>
+										<mat-panel-title>
+											<div class="heading">Services</div>
+										</mat-panel-title>
+									</mat-expansion-panel-header>
+									<div class="detail__details">
+										<button
+											*ngIf="isIndependentRetailer"
+											(click)="openModal('quote')"
+										>
+											Request a Quote
+										</button>
+										<button
+											*ngIf="!!hoursOfOperation && hoursOfOperation?.length"
+											(click)="openAppointmentModal('appt')"
+										>
+											Request an Appointment
+										</button>		
+									</div>
+								</mat-expansion-panel>
+							</mat-accordion>
+						</div>
+						<div class="collections">
+							<mat-accordion>
+								<mat-expansion-panel
+									[expanded]="isExpanded"
+									[disabled]="isDisabled"
+								>
+									<mat-expansion-panel-header>
+										<mat-panel-title>
+											<div class="heading">Collections We Offer</div>
+										</mat-panel-title>
+									</mat-expansion-panel-header>
+									<div class="detail__offerings">
+										<ul>
+											<li *ngFor="let collection of collections | async">
+												<a
+													[attr.href]="collection.url + '&tab=collection'"
+													captureClicks
+													>{{ collection.label }}</a
+												>
+											</li>
+										</ul>
+									</div>
+								</mat-expansion-panel>
+							</mat-accordion>
+						</div>
+					</div>
+				</div>
+				<div class="right">
+					<div class="map">
+						<div class="detail__map__wrapper">
+							<mflooring-link-compound
+								[content]="{
+									text: 'Get Directions',
+									url: retailer?.directions
+								}"
+								[presentation]="{
+									buttonAction: 'link',
+									buttonWidth: 'normal',
+									buttonType: 'link',
+									noWrap: true
+								}"
+							></mflooring-link-compound>
+							<span class="detail__distance">{{ distance }}</span>
+						</div>
+						<mflooring-mapping
+							[content]="{
+								markers: !!retailer ? [retailer] : [],
+								center: zipcode,
+								isDetail: true
+							}"
+							*ngIf="!!zipcode"
+						></mflooring-mapping>
+					</div>
+					<div *ngIf="!!edgePremier" class="detail__coupon">
+						<p class="detail__coupon__heading">Save up to $500</p>
+						<p class="detail__coupon__description">
+							on Mohawk RevWood Styles
+						</p>
+						<button
+							class="detail__coupon__button"
+							(click)="openCouponModal('coupon')"
+						>
+							Get Coupon
+						</button>
+					</div>
+				</div>
+			</div>
+		</article>
+	</mflooring-layout-wrapper>
+
+	<mflooring-loading *ngIf='!retailer?.storeName'></mflooring-loading>
+</section>
+<mflooring-layout-wrapper [content]="" [presentation]="{ isInset: true }">
+	<div
+	*ngIf="!!reviews"
+	class="detail__reviews"
+	itemscope
+	itemtype="https://schema.org/Review"
+>
+	<h1 class="detail__reviews__title">
+		Here's What Our Customers Have To Say!
+	</h1>
+	<div *ngFor="let review of reviews" class="detail__reviews__wrapper">
+		<div class="detail__reviews__author">
+			<div>
+				<p class="capitalize" itemprop="author" itemscope itemtype="https://schema.org/Person">
+					<span itemprop="name">{{ review?.reviewer?.nickName }}</span>
+				</p>
+				<span class="mobile__show published__text">Published {{ review?.reviewDate }}</span>
+			</div>
+			
+			<diV>
+				<span
+					itemprop="reviewRating"
+					itemscope
+					itemtype="https://schema.org/Organization"
+					class="mobile__show"
+				>
+				
+					<mflooring-star-rating
+						[content]="{
+							rating: review?.rating
+						}"
+						[presentation]="null"
+						*ngIf="!!review?.rating"
+					></mflooring-star-rating>
+				</span>
+			<p
+				class="publisher"
+				itemprop="publisher"
+				itemscope
+				itemtype="https://schema.org/Organization"
+			>
+				<meta itemprop="name" content="{{ review?.publisher }}" />
+				<span>Posted on {{ review?.sourceType }}</span>
+			</p>
+			</diV>
+			
+		</div>
+		<div class="detail__reviews__body">
+			<div class="detail__reviews__body-top">
+				<span
+					itemprop="reviewRating"
+					itemscope
+					itemtype="https://schema.org/Organization"
+					class="mobile__hide"
+				>
+				
+					<mflooring-star-rating 
+						[content]="{
+							rating: review?.rating
+						}"
+						[presentation]="null"
+						*ngIf="!!review?.rating"
+					></mflooring-star-rating>
+				</span>
+				<meta
+					itemprop="datePublished"
+					content="{{ review?.reviewDate }}"
+				/><span class="mobile__hide">Published {{ review?.reviewDate }}</span>
+			</div>
+			<div class="detail__reviews__body-bottom" itemprop="reviewBody">
+				<span itemprop="reviewBody">{{ review?.comments }}</span>
+			</div>
+		</div>
+	</div>
+	<div class="detail__reviews__viewMore" *ngIf="reviews.length === 3">
+		<mflooring-link-compound
+			*ngIf="!!reviewUrl"
+			[content]="{
+				text: 'VIEW MORE REVIEWS',
+				url: reviewUrl
+			}"
+			[presentation]="{
+				buttonAction: 'link',
+				buttonWidth: 'normal',
+				buttonType: 'link',
+				noWrap: true
+			}"
+		></mflooring-link-compound>
+	</div>
+</div>
+</mflooring-layout-wrapper>
+
+

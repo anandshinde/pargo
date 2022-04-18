@@ -1,0 +1,132 @@
+<mflooring-layout-wrapper [presentation]="{ isInset: true }">
+	<div class="is-background">
+		<img
+			src="https://mohawk.scene7.com/is/image/MohawkResidential/LF000786_room_01?scl=2.25&wid=2500&hei=800&op_sharpen=1&align=0,.2"
+		/>
+	</div>
+
+	<form [formGroup]="form">
+		<div class="login">
+			<div class="login__login-container">
+				<h2>Welcome to My Account</h2>
+				<div class="login__form">
+					<div class="login_header__title">
+						{{ resourceBundleData['global.label.signin'] }}
+					</div>
+					<div class="form-field" *ngIf="errorSubmitted$ | async">
+						<span class="login__error">{{
+							resourceBundleData['global.label.credentials.error.invalid']
+						}}</span>
+					</div>
+					<div class="form-field">
+						<mflooring-input-text
+							[control]="this.form.get('uid')"
+							[presentation]="inputTextPresentation"
+							[content]="{
+								placeholder: 'Type here',
+								label: resourceBundleData['global.label.email']
+							}"
+						></mflooring-input-text>
+						<div
+							*ngIf="
+								form.controls['uid'].invalid &&
+								(form.controls['uid'].touched || form.controls['uid'].dirty)
+							"
+							class="alert alert-danger"
+						>
+							<div
+								class="text-danger"
+								*ngIf="form.controls['uid'].errors.required"
+							>
+								<span class="login__error">{{
+									resourceBundleData['global.error.mandatory']
+								}}</span>
+							</div>
+
+							<div
+								class="text-danger"
+								*ngIf="form.controls['uid'].errors.pattern"
+							>
+								<span class="login__error">{{
+									resourceBundleData['global.error.email-pattern']
+								}}</span>
+							</div>
+						</div>
+					</div>
+					<div class="form-field">
+						<mflooring-input-text
+							[control]="this.form.get('password')"
+							[presentation]="inputTextPresentation"
+							[content]="{
+								placeholder: 'Type here',
+								label: resourceBundleData['global.label.password'],
+								type: 'password'
+							}"
+						></mflooring-input-text>
+						<div
+							*ngIf="
+								form.controls['password'].invalid &&
+								(form.controls['password'].touched ||
+									form.controls['password'].dirty)
+							"
+							class="alert alert-danger"
+						>
+							<div
+								class="text-danger"
+								*ngIf="form.controls['password'].errors.required"
+							>
+								<span class="login__error">{{
+									resourceBundleData['global.error.mandatory']
+								}}</span>
+							</div>
+						</div>
+					</div>
+					<div class="login__remember">
+						<mflooring-checkbox [control]="this.form.get('remPassword')">
+							<span class="login__remember__label">
+								{{ resourceBundleData['global.label.remember-me'] }}
+							</span>
+						</mflooring-checkbox>
+
+						<button
+							type="button"
+							class="menu-button login__forgot-pwd__label"
+							(click)="openForgot()"
+						>
+							{{ resourceBundleData['global.link.forgot-password.text'] }}
+						</button>
+					</div>
+					<div class="login__action" [ngClass]="{ 'is-disabled': !form.valid }">
+						<mflooring-link-compound
+							(handleClickAction)="onSubmit(form.value)"
+							[content]="{
+								text: resourceBundleData['global.button.submit.label']
+							}"
+							[presentation]="{
+								theme: 'light',
+								buttonType: 'primary',
+								buttonWidth: 'normal',
+								buttonAction: 'submit',
+								alignment: 'center',
+								isDisabled: !form.valid
+							}"
+						></mflooring-link-compound>
+					</div>
+				</div>
+			</div>
+			<div class="login__footer">
+				<div class="login__footer__division">OR</div>
+				<div class="login__footer__text">Don’t have an account?</div>
+				<div class="login__footer__text">
+					<button
+						type="button"
+						class="create-button login__forgot-pwd__label"
+						(click)="navigateToRegister()"
+					>
+						Create an Account
+					</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</mflooring-layout-wrapper>

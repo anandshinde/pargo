@@ -1,0 +1,78 @@
+@import 'src/styles/tools/tools.fonts-units';
+@import 'src/styles/tools/tools.mediaquery';
+@import 'src/styles/settings/settings.colors';
+@import 'src/styles/settings/settings.typography';
+@import 'src/styles/tools/tools.typography';
+@import 'src/styles/elements/elements.containers';
+
+.product-image {
+	margin: rem(15) 0 0 0;
+
+	&__img {
+		margin-bottom: 10px;
+
+		@include mq-breakpoint-sm() {
+			margin-bottom: 20px;
+		}
+		mflooring-image-compound {
+			display: block;
+
+			::ng-deep {
+				picture {
+					display: flex;
+					justify-content: center;
+				}
+				img {
+					width: rem(400);
+					height: rem(250);
+					@include mq-breakpoint-sm() {
+						border-radius: rem(5);
+						overflow: hidden;
+						width: rem(747);
+						height: rem(435);
+					}
+				}
+			}
+		}
+	}
+
+	&__wrapper {
+		@include mq-breakpoint-sm() {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 10px;
+		}
+
+		mflooring-link-compound {
+			display: block;
+			::ng-deep button {
+				border-radius: var(--button-border-radius, 5px);
+				background: $color-dark-grey;
+				border-color: $color-dark-grey;
+				width: 100%;
+				justify-content: center;
+			}
+		}
+	}
+	&__content {
+		p {
+			display: block;
+			margin-right: 0px;
+			margin-bottom: 15px;
+			color: $mohawk-black;
+
+			@include font-nunito-regular($size: [15, 18], $lineheight: 1.3);
+
+			@include mq-breakpoint-sm() {
+				display: inline-block;
+				margin-right: 20px;
+				margin-bottom: 0px;
+			}
+			span {
+				color: $color-dark-grey;
+				@include font-nunito-bold($size: [15, 18], $lineheight: 1.3);
+			}
+		}
+	}
+}

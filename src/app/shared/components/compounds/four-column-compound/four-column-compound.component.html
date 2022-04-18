@@ -1,0 +1,28 @@
+<section class="four-column-compound {{ vertMarginClass }}">
+	<div class="four-column-compound__title" *ngIf="title">
+		<mflooring-rich-text
+			[content]="title"
+			[presentation]="presentation"
+		></mflooring-rich-text>
+	</div>
+	<div class="four-column-compound__container">
+		<div class="four-column-compound__first">
+			<ng-content select="[firstColumn]"></ng-content>
+		</div>
+		<div class="four-column-compound__second">
+			<ng-content select="[secondColumn]"></ng-content>
+		</div>
+		<div class="four-column-compound__third">
+			<ng-content select="[thirdColumn]"></ng-content>
+		</div>
+		<div class="four-column-compound__fourth">
+			<ng-content select="[fourthColumn]"></ng-content>
+		</div>
+	</div>
+	<div class="four-column-compound__desc" *ngIf="description">
+		<mflooring-rich-text
+			[content]="description"
+			[presentation]="presentation"
+		></mflooring-rich-text>
+	</div>
+</section>

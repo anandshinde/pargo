@@ -1,0 +1,19 @@
+<label class="footer__input-label" for="{{ id }}" id="{{ id }}_label">{{
+	label
+}}</label>
+<div class="footer__input">
+	<input
+		id="{{ id }}"
+		type="text"
+		name="{{ id }}"
+		class="footer__input-control"
+		[placeholder]="placeholder"
+		maxlength="5"
+		[(ngModel)]="zipCode"
+		(keypress)="validateInput($event)"
+	/>
+	<button type="submit" id="submitButton" (click)="findRetailer()">
+		Search
+		<!-- <span class="icon-">{{ !!footerData && footerData['search']['logo'] }}</span> -->
+	</button>
+</div>

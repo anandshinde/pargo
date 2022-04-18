@@ -1,0 +1,100 @@
+@import 'src/styles/elements/elements.links';
+@import 'src/styles/tools/tools.mediaquery';
+@import 'src/styles/tools/tools.typography';
+@import 'src/styles/settings/settings.colors';
+
+.form-field-close-button {
+	position: absolute;
+	right: 10px;
+}
+
+.close {
+	position: absolute;
+	float: right;
+	top: -10px;
+	right: -20px;
+	cursor: pointer;
+	@include reset-button();
+}
+
+.icon-close {
+	color: #{$color-black} !important;
+}
+
+.cart {
+	position: relative;
+	width: 300px;
+	max-width: 100%;
+
+	&__dialog {
+		display: flex;
+		flex-direction: column;
+		color: $color-body-text;
+		@include font-nunito-light(12px);
+
+		p {
+			text-align: center;
+		}
+	}
+
+	&__content {
+		flex: 1;
+		margin-top: 30px;
+	}
+
+	h3 {
+		text-align: center;
+		@include font-nunito-regular(20px);
+	}
+
+	&__check {
+		text-align: center;
+		font-size: 3rem;
+	}
+
+	&__info {
+		text-align: center;
+		text-transform: uppercase;
+		margin-top: 10px;
+		@include font-nunito-regular(16px);
+	}
+
+	&__items {
+		text-transform: uppercase;
+		margin: 50px 0;
+		@include font-nunito-regular(18px);
+	}
+
+	&__item {
+		display: flex;
+
+		div:first-child {
+			flex: 1;
+		}
+
+		div:last-child {
+			text-align: right;
+			margin-left: 20px;
+		}
+	}
+
+	&__item-title {
+		@include font-nunito-light(18px);
+	}
+
+	&__checkout {
+		margin-top: 10px;
+
+		@include mq-breakpoint-md() {
+			display: none;
+		}
+	}
+}
+.new-sample-added {
+	display: none;
+}
+::ng-deep .sample-added {
+	.new-sample-added {
+		display: block;
+	}
+}

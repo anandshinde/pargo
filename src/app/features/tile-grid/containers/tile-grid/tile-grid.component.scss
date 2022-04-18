@@ -1,0 +1,121 @@
+@import './src/styles/tools/tools.mediaquery';
+@import './src/styles/tools/tools.typography';
+@import './src/styles/components/components.tile-grid';
+@import './src/styles/settings/settings.colors';
+
+$default-column-width-desktop-max: 469px;
+
+.toggle-items {
+	.show-more-items {
+		width: 100%;
+		padding: 0px 0px 35px 0px;
+
+		cursor: pointer;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-decoration: underline;
+		text-transform: uppercase;
+		color: $color-grey;
+		font: normal normal bold 13px/18px Nunito;
+	}
+	.show-less-items {
+		padding: 0px 0px 35px 0px;
+		cursor: pointer;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-decoration: underline;
+		text-transform: uppercase;
+		color: $color-grey;
+		font: normal normal bold 13px/18px Nunito;
+	}
+}
+@include mq-breakpoint-md() {
+	.toggle-items {
+		.show-more-items {
+			padding: 0px 0px 50px 0px;
+			cursor: pointer;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			text-decoration: underline;
+			text-transform: uppercase;
+			color: $color-grey;
+			font: normal normal bold 13px/18px Nunito;
+		}
+		.show-less-items {
+			padding: 0px 0px 50px 0px;
+			cursor: pointer;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			text-decoration: underline;
+			text-transform: uppercase;
+			color: $color-grey;
+			font: normal normal bold 13px/18px Nunito;
+		}
+	}
+}
+:host ::ng-deep .flipped {
+	margin-top: 25px;
+	grid-template-areas:
+		'first'
+		'second'
+		'third'
+		'fourth'
+		'fifth'
+		'sixth';
+	@include mq-breakpoint-md() {
+		grid-template-columns: repeat(
+			2,
+			minmax(
+				$default-column-width-desktop-min,
+				100%
+			)
+		);
+		grid-template-areas:
+			'first second'
+			'first third'
+			'fourth fourth'
+			'fifth sixth';
+	}
+	mflooring-tile-item {
+		&:nth-child(1) {
+			grid-area: first;
+			@include mq-breakpoint-md() {
+				min-height: 475px;
+			}
+		}
+		&:nth-child(2) {
+			grid-area: second;
+			@include mq-breakpoint-md() {
+				min-height: 250px;
+			}
+		}
+		&:nth-child(3) {
+			grid-area: third;
+			@include mq-breakpoint-md() {
+				min-height: 205px;
+			}
+		}
+		&:nth-child(4) {
+			grid-area: fourth;
+			@include mq-breakpoint-md() {
+				min-height: 250px;
+			}
+		}
+		&:nth-child(5) {
+			grid-area: fifth;
+			@include mq-breakpoint-md() {
+				min-height: 430px;
+			}
+		}
+		&:nth-child(6) {
+			grid-area: sixth;
+			@include mq-breakpoint-md() {
+				min-height: 430px;
+			}
+		}
+	}
+}

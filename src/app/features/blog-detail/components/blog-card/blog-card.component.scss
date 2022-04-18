@@ -1,0 +1,83 @@
+@import 'src/styles/tools/tools.fonts-units';
+@import 'src/styles/tools/tools.mediaquery';
+@import 'src/styles/settings/settings.colors';
+@import 'src/styles/settings/settings.typography';
+@import 'src/styles/tools/tools.typography';
+@import 'src/styles/elements/elements.containers';
+
+.blog-card {
+
+	&__container {
+		overflow: hidden;
+		display: flex;
+	}
+
+	mflooring-image-compound {
+		display: block;
+		width: rem(118);
+		height: rem(118);
+
+		@include mq-breakpoint-sm() {				
+			width: rem(124);
+			height: rem(124);
+		}
+
+		::ng-deep {
+			picture {
+				display: flex;
+				justify-content: center;
+			}
+			img {
+
+				width: rem(118);
+				height: rem(118);
+				border-radius: rem(5);
+
+				@include mq-breakpoint-sm() {				
+					overflow: hidden;
+					width: rem(124);
+					height: rem(124);
+				}
+			}
+		}
+	}
+
+	&__header {
+		padding:0  rem(10);
+		background-color: $color-white;
+		display: flex;
+    	flex-direction: column;
+
+		&__title {
+			margin-bottom: auto;
+			h2 {
+				@include font-nunito-light($size: [14, 16], $lineheight: 1.3);
+				font-weight: 600;
+				margin-bottom: 3px;
+    			overflow: hidden;
+				max-height: 55px;
+				@include mq-breakpoint-sm() {	
+					max-height: 62px;
+				}
+
+			}
+			p{
+				@include font-nunito-light($size: [12, 12], $lineheight: 1.3);
+				color:$color-grey;
+			}
+		}
+
+	}
+	&__readMore{
+		margin-top: rem(10);
+		padding-bottom: rem(8);
+		mflooring-link-compound {
+			::ng-deep a{
+				text-decoration: underline;
+				@include font-nunito-bold($size: [14, 14], $lineheight: 1.3);
+				color: $color-grey;
+			}
+		}
+		
+	}
+}

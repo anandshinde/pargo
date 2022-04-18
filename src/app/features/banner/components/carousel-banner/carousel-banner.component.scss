@@ -1,0 +1,72 @@
+@import 'src/styles/settings/settings.colors';
+
+@import 'src/styles/tools/tools.typography';
+
+@import 'src/styles/tools/tools.mediaquery';
+
+:host ::ng-deep {
+	.swiper-slide {
+		height: auto;
+		@include mq-breakpoint-md() {
+			height: 100%;
+		}
+	}
+	swiper {
+		.swiper-button-next,
+		.swiper-button-prev {
+			&::after {
+				color: $color-white;
+				font-weight: 600;
+				font-size: 20px;
+			}
+		}
+		.swiper-pagination-bullet-active {
+			background-color: $color-grey;
+
+			@include mq-breakpoint-md() {
+				background-color: $color-white;
+			}
+		}
+		.rect__middle__main {
+			&__row {
+				background-color: rgba(0, 0, 0, 0.25);
+				@include mq-breakpoint-md() {
+					@include font-nunito-regular($size: 50px, $lineheight: 48px);
+				}
+				.text {
+					padding: 0 40px !important;
+					@include mq-breakpoint-md() {
+						padding: 0 30px;
+					}
+				}
+			}
+		}
+		.main_banner_container {
+			h2 {
+				padding-bottom: 0px;
+				margin-bottom: 0;
+			}
+			p {
+				padding-top: 10px;
+			}
+		}
+		.link-compound {
+			margin-top: 20px;
+		}
+
+		.swiper-pagination-bullets .swiper-pagination-bullet {
+			border: 2px solid $color-white;
+			opacity: 1;
+			background: transparent;
+			width: 12px;
+			height: 12px;
+			@include mq-breakpoint-md() {
+				width: 8px;
+				height: 8px;
+			}
+		}
+		.swiper-pagination-bullet-active {
+			background: $color-white !important;
+		}
+	}
+}

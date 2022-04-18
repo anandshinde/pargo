@@ -1,0 +1,42 @@
+<mat-accordion displayMode="flat" multi>
+	<mat-expansion-panel
+		hideToggle
+		[expanded]="openMenu === i"
+		(opened)="setOpened(i)"
+		*ngFor="let item of items; index as i; trackBy: trackBy"
+		[disabled]="!hasChildren(item)"
+		[class.is-submenu]="hasChildren(item)"
+	>
+		<mat-expansion-panel-header
+			[collapsedHeight]="panelHeaderHeight"
+			[expandedHeight]="panelHeaderHeight"
+			(click)="hasChildren(item) && $event.stopPropagation()"
+		>
+			<mat-panel-title [class.has-children]="hasChildren(item)">
+				<mflooring-menu-item
+					[site]="item?._links?.site"
+					[page]="page"
+					[linkName]="item?.name"
+					[linkContainer]="item?.container"
+				>
+					{{ item.name }}
+					<!-- <mflooring-icon-button
+						*ngIf="item.childMenuItems.length > 0"
+						[presentation]="{
+							size: 'xsmall',
+							type: '',
+							iconName: 'down'
+						}"
+						class="menu-utility__icon"
+					></mflooring-icon-button> -->
+				</mflooring-menu-item>
+			</mat-panel-title>
+		</mat-expansion-panel-header>
+		<mflooring-expansion-menu-mobile
+			class="submenu-mobile"
+			*ngIf="!!item.childMenuItems.length"
+			[page]="page"
+			[items]="item.childMenuItems"
+		></mflooring-expansion-menu-mobile>
+	</mat-expansion-panel>
+</mat-accordion>

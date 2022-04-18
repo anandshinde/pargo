@@ -1,0 +1,686 @@
+@import 'src/styles/settings/settings.colors';
+@import 'src/styles/tools/tools.typography';
+@import 'src/styles/tools/tools.mediaquery';
+@import 'src/styles/elements/elements.lists';
+@import 'src/styles/elements/elements.links';
+
+$text-size-body: 14px;
+
+::ng-deep .star-rating {
+	&__overlay {
+		color: $color-grey !important;
+	}
+}
+.retailer_detail {
+	position: relative;
+
+	@include mq-breakpoint-md() {
+		background-color: $color-extra-light-grey;
+		padding: 20px 0 40px;
+	}
+}
+
+.left {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: minmax(0, min-content);
+	gap: 0 0;
+	grid-template-areas:
+		'top'
+		'bottom';
+	grid-area: left;
+
+	@include mq-breakpoint-md() {
+		gap: 20px 0;
+		width: rem(392);
+	}
+}
+
+.top {
+	grid-area: top;
+}
+
+.bottom {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-auto-rows: minmax(0, min-content);
+	gap: 0 0;
+	grid-template-areas:
+		'hours hours hours'
+		'services services services'
+		'collections collections collections';
+	grid-area: bottom;
+	margin-top: 40px;
+
+	@include mq-breakpoint-md() {
+		grid-template-columns: 1fr 1fr;
+		grid-template-areas:
+			'services services'
+			'hours hours'
+			'collections collections';
+		margin-top: 0;
+	}
+
+	::ng-deep mat-expansion-panel {
+		border: 1px solid $color-grey-light;
+		border-radius: 0;
+		box-shadow: none;
+		margin-bottom: 15px;
+
+		& mat-expansion-panel-header {
+			background-color: $color-extra-light-grey;
+
+			@include mq-breakpoint-md() {
+				background-color: transparent;
+			}
+		}
+
+		@include mq-breakpoint-md() {
+			border: 0;
+
+			& mat-expansion-panel-header {
+				border-bottom: 0;
+				background-color: transparent;
+			}
+		}
+
+		&.mat-expanded {
+			margin-bottom: 15px;
+
+			& .mat-expansion-panel-body {
+				@include mq-breakpoint-md() {
+					padding: 0;
+				}
+			}
+		}
+
+		& mat-expansion-panel-header.mat-expanded {
+			border-bottom: 1px solid $color-grey;
+			border-radius: 0;
+			box-shadow: none;
+			height: 48px;
+
+			@include mq-breakpoint-md() {
+				border-bottom: 0;
+				padding: 0;
+				height: 25px;
+			}
+		}
+
+		& .mat-expansion-panel-body {
+			padding-top: 15px;
+		}
+	}
+}
+
+.hours {
+	grid-area: hours;
+	grid-template-areas: 'hours hours .';
+}
+
+.services {
+	grid-area: services;
+}
+
+.collections {
+	grid-area: collections;
+}
+
+.right {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: minmax(0, min-content);
+	gap: 0 0;
+	grid-template-areas:
+		'map'
+		'map'
+		'coupon';
+	grid-area: right;
+}
+
+.map {
+	.detail__map__wrapper {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-top: 10px;
+
+		::ng-deep button,
+		::ng-deep a.link-compound {
+			text-decoration: underline;
+			padding: 0;
+			@include font-nunito-bold($size: [16, 14], $lineheight: 1.3);
+			@include reset-button();
+		}
+
+		@include mq-breakpoint-md() {
+			margin-top: 0px;
+		}
+	}
+
+	::ng-deep .map {
+		margin: 10px 0;
+		height: rem(250) !important;
+	}
+}
+
+.detail {
+	margin-top: 20px;
+	padding: 0;
+	margin-bottom: 5px;
+
+	.heading {
+		color: $mohawk-black;
+		@include font-nunito-bold($size: [16, 18], $lineheight: 1.3);
+	}
+
+	&__grid {
+		background: #ffffff;
+		padding: 20px 0;
+		border-radius: 5px;
+
+		@include mq-breakpoint-md() {
+			display: grid;
+			// grid-template-columns: 2fr 1fr;
+			grid-template-rows: 1fr 1fr;
+			gap: 0 120px;
+			grid-template-areas:
+				'left right'
+				'left right';
+			padding: 50px 90px;
+		}
+	}
+
+	&__store-info {
+		grid-area: store-info;
+	}
+
+	&__title {
+		text-align: center;
+		color: $mohawk-black;
+		margin-bottom: 5px;
+		@include font-nunito-bold($size: [26, 30], $lineheight: 1);
+
+		@include mq-breakpoint-md() {
+			margin-bottom: 5px;
+			text-align: left;
+		}
+	}
+
+	&__myretailer {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: flex-start;
+		margin: 30px auto 10px;
+		padding-bottom: 10px;
+		@include font-nunito-light($size: [14, 16], $lineheight: 1.3);
+
+		@include mq-breakpoint-md() {
+			margin: 25px auto 10px;
+			flex-direction: row;
+			align-items: initial;
+			border-bottom: 1px solid $color-grey-light;
+		}
+
+		&__radio-button {
+			@include mq-breakpoint-md() {
+				flex: 0 0 200px;
+			}
+		}
+
+		::ng-deep {
+			.mat-radio-inner-circle,
+			.mat-ripple-element {
+				background-color: $color-teal !important;
+			}
+
+			.mat-radio-outer-circle {
+				border-color: $color-grey !important;
+			}
+		}
+	}
+
+	&__selection {
+		text-transform: uppercase;
+		color: $mohawk-black;
+		margin-top: 10px;
+		@include font-nunito-bold($size: [14, 14], $lineheight: 1.3);
+
+		.badge__icon {
+			::ng-deep button {
+				height: 14px;
+				width: 14px;
+				vertical-align: super;
+
+				span {
+					color: $color-red-dark;
+				}
+			}
+		}
+
+		span {
+			color: $color-red-dark;
+		}
+
+		@include mq-breakpoint-md() {
+			margin-top: 0;
+			margin-bottom: 10px;
+		}
+	}
+
+	&__contact__desktop {
+		display: none;
+		@include mq-breakpoint-md() {
+			display: flex;
+			justify-content: flex-start;
+			margin-top: rem(20);
+		}
+	}
+
+	&__contact__mobile {
+		display: flex;
+		align-items: center;
+		justify-content: space-evenly;
+
+		@include mq-breakpoint-md() {
+			display: none;
+		}
+
+		& div {
+			text-align: center;
+			width: 30%;
+			padding: 20px 0;
+			border: 1px solid $color-grey-light;
+			border-radius: 5px;
+		}
+
+		.icon- {
+			color: $mohawk-black;
+			margin: 0;
+			font-size: rem(25);
+		}
+
+		p {
+			font-weight: 600;
+			text-transform: uppercase;
+			@include font-nunito-bold($size: [11, $text-size-body], $lineheight: 1.3);
+		}
+	}
+
+	&__distance-rating {
+		text-align: left;
+		display: flex;
+		flex-direction: column;
+
+		@include mq-breakpoint-sm() {
+			text-align: right;
+		}
+	}
+
+	&__distance {
+		color: $mohawk-black;
+		@include font-nunito-bold($size: [14, 16], $lineheight: 1);
+	}
+
+	&__rating {
+		@include font-nunito-regular($size: [14, 16], $lineheight: 1.3);
+
+		::ng-deep .star-rating {
+			justify-content: center;
+
+			@include mq-breakpoint-md() {
+				justify-content: left;
+			}
+		}
+	}
+
+	&__logistics {
+		grid-area: logistics;
+
+		&__address {
+			display: block;
+			text-align: center;
+			margin: 10px 0 3px;
+			color: $mohawk-black;
+			@include font-nunito-semibold($size: [18, 14], $lineheight: 1.3);
+
+			@include mq-breakpoint-md() {
+				text-align: left;
+			}
+
+			& .streetAddress {
+				display: block;
+
+				@include mq-breakpoint-md() {
+					display: inline;
+				}
+			}
+		}
+
+		&-emails {
+			display: flex;
+			flex-direction: column;
+		}
+
+		&__phone,
+		&__email,
+		&__directions {
+			span {
+				margin-right: 10px;
+			}
+
+			a {
+				text-decoration: none;
+				color: $mohawk-black;
+				@include font-nunito-regular($size: [15, 14], $lineheight: 1.3);
+			}
+		}
+
+		&__hours {
+			color: $mohawk-black;
+			@include font-nunito-regular($size: [15, 14], $lineheight: 1.3);
+
+			p {
+				margin-bottom: 0px;
+				color: $mohawk-black;
+			}
+		}
+
+		&__coupon button {
+			cursor: pointer;
+			color: $mohawk-black;
+			@include reset-button();
+		}
+
+		&__phone {
+			@include mq-breakpoint-md() {
+				flex: 0 0 200px;
+			}
+		}
+	}
+
+	&__days {
+		margin-right: 20px;
+		color: $mohawk-black;
+
+		@include font-nunito-regular($size: [15, 14], $lineheight: 1.3);
+
+		& p {
+			color: $mohawk-black;
+			font-weight: 700;
+		}
+
+		@include mq-breakpoint-md() {
+			width: rem(197);
+		}
+	}
+
+	&__hours {
+		padding-left: 10px;
+		color: $mohawk-black;
+		@include font-nunito-regular($size: [15, 14], $lineheight: 1.3);
+
+		@include mq-breakpoint-md() {
+			padding-left: 0px;
+		}
+	}
+
+	&__hoursOfOperation {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	&__offerings {
+		grid-area: collections;
+		text-align: left;
+		margin-bottom: 0px;
+		color: $mohawk-black;
+
+		ul {
+			margin: 0;
+			column-count: 2;
+			@include reset-list();
+
+			li {
+				margin-bottom: 20px;
+
+				@include mq-breakpoint-md() {
+					margin-bottom: 5px;
+				}
+			}
+		}
+
+		a {
+			color: $mohawk-black;
+			text-decoration: underline;
+			@include font-nunito-light($size: [14, 14], $lineheight: 1.3);
+
+			&:visited,
+			&:hover {
+				color: $mohawk-black;
+			}
+		}
+	}
+
+	&__details {
+		grid-area: services;
+		display: grid;
+		grid-template-columns: auto auto;
+
+		@include mq-breakpoint-md() {
+			grid-template-columns: rem(200) auto;
+		}
+
+		button {
+			cursor: pointer;
+			text-decoration: underline;
+			padding: 0px 0 10px;
+			text-align: left;
+			@include reset-button();
+			@include font-nunito-bold($size: [14, 14], $lineheight: 1.3);
+		}
+	}
+
+	&__coupon {
+		display: none;
+
+		@include mq-breakpoint-md() {
+			margin-top: 20px;
+			display: block;
+			background-color: $mohawk-red;
+			padding: 20px 20px;
+			border-radius: rem(5);
+			height: fit-content;
+
+			&__heading,
+			&__description,
+			&__button {
+				color: $color-white;
+				text-align: center;
+			}
+
+			&__heading {
+				@include font-nunito-bold($size: [16, 20], $lineheight: 1.3);
+			}
+
+			&__description {
+				margin: 10px 0;
+				@include font-nunito-semibold($size: [14, 14], $lineheight: 1.3);
+			}
+
+			&__button {
+				display: block;
+				text-decoration: underline;
+				margin: auto;
+				cursor: pointer;
+				@include reset-button();
+				@include font-nunito-bold($size: [15, 16], $lineheight: 1.3);
+			}
+		}
+	}
+
+	&__reviews {
+		color: $mohawk-black;
+		padding: 50px 0;
+		@include font-nunito-light($size: [14, $text-size-body], $lineheight: 1.3);
+
+		@include mq-breakpoint-md() {
+			padding: 70px 0;
+		}
+
+		&__body-top {
+			margin-top: 0;
+		}
+
+		&__title {
+			text-align: center;
+			max-width: 80%;
+			margin: auto;
+			@include font-nunito-light($size: [22, 26], $lineheight: 1.3);
+
+			@include mq-breakpoint-md() {
+				text-align: left;
+				max-width: 100%;
+				margin-bottom: 20px;
+			}
+		}
+
+		&__wrapper {
+			display: flex;
+			padding: 25px 0;
+			flex-direction: column;
+			@include mq-breakpoint-md() {
+				flex-direction: row;
+			}
+		}
+
+		&__viewMore {
+			width: fit-content;
+			margin: auto;
+			color: $color-grey;
+
+			::ng-deep mflooring-link-compound {
+				a {
+					color: $color-grey !important;
+					text-decoration: underline;
+					@include font-nunito-regular($size: [14, 15], $lineheight: 1.3);
+				}
+			}
+		}
+
+		&__author {
+			width: 100%;
+			color: $mohawk-black;
+			display: flex;
+			justify-content: space-between;
+
+			@include font-nunito-bold($size: [20, 18], $lineheight: 1.3);
+
+			@include mq-breakpoint-md() {
+				display: block;
+				justify-content: space-between;
+				width: 25%;
+			}
+
+			& p {
+				display: inline;
+				color: $mohawk-black;
+				margin-bottom: 0;
+				@include mq-breakpoint-md() {
+					display: block;
+				}
+			}
+
+			.publisher {
+				float: right;
+				color: $mohawk-black;
+				@include font-nunito-regular($size: [14, 14], $lineheight: 1.3);
+
+				@include mq-breakpoint-md() {
+					float: inherit;
+				}
+			}
+		}
+
+		&__body {
+			width: 100%;
+			@include mq-breakpoint-md() {
+				width: 75%;
+			}
+
+			&-top {
+				display: flex;
+				flex-direction: row;
+				justify-content: flex-start;
+				align-items: center;
+				margin: 0 0 10px;
+				@include font-nunito-light($size: [14, 14], $lineheight: 1.3);
+
+				@include mq-breakpoint-md() {
+					margin: 10px 0;
+					justify-content: space-between;
+				}
+			}
+			&-bottom {
+				@include mq-breakpoint-md() {
+					max-width: 70%;
+				}
+
+				@include font-nunito-regular($size: [14, 13], $lineheight: 1.3);
+			}
+		}
+
+		::ng-deep button {
+			margin: auto;
+		}
+
+		::ng-deep .star-rating {
+			margin: auto;
+			justify-content: center;
+
+			.review-count {
+				display: none;
+			}
+		}
+	}
+}
+
+header {
+	grid-area: top;
+	display: flex;
+	flex-direction: column;
+}
+
+.mobile__hide {
+	display: none;
+
+	@include mq-breakpoint-md() {
+		display: block;
+	}
+}
+
+.mobile__show {
+	display: block;
+
+	@include mq-breakpoint-md() {
+		display: none;
+	}
+}
+
+.published__text {
+	@include font-nunito-light($size: [14, 14], $lineheight: 1.3);
+}
+
+.phone__icon,
+.pin__icon,
+.coupon__icon {
+	::ng-deep button {
+		color: $mohawk-black;
+		font-size: rem(25);
+	}
+}
+
+.capitalize {
+	text-transform: capitalize;
+}

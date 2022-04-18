@@ -1,0 +1,65 @@
+@import './src/styles/settings/settings.z-layers';
+
+@import 'src/styles/tools/tools.mediaquery';
+
+:host {
+	display: block;
+	position: relative;
+	z-index: $z-layer-main-nav;
+}
+
+.header-container {
+	padding: 0px;
+	box-shadow: 0 5px 15px rgb(0 0 0 / 20%);
+	@include mq-breakpoint-md() {
+		padding: 0;
+	}
+}
+
+.main-header {
+	z-index: 1;
+	position: relative;
+}
+
+mflooring-message-bar {
+	z-index: 0;
+	position: relative;
+}
+
+.fixed {
+	position: fixed;
+	width: 100%;
+	height: auto;
+	top: 0;
+	left: 0;
+	@include mq-breakpoint-md() {
+		height: 60px;
+	}
+}
+::ng-deep .fixed .menu-desktop {
+	margin-top: 10px !important;
+
+	&__logo {
+		width: 140px !important;
+		transition: 0.2s;
+	}
+	&__item {
+		// padding-bottom: 0 !important;
+		transition: 0.2s;
+	}
+}
+
+::ng-deep .header-container {
+	.layout-container {
+		&__grid {
+			&.inset {
+				@include mq-breakpoint-md() {
+					padding: 0 var(--horizontal-margins, 0px);
+				}
+				@include mq-breakpoint-lg() {
+					padding: 0 var(--horizontal-margins, 20px);
+				}
+			}
+		}
+	}
+}

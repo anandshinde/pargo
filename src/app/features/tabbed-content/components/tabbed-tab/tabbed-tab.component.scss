@@ -1,0 +1,250 @@
+@import 'src/styles/tools/tools.mediaquery';
+
+@import 'src/styles/tools/tools.typography';
+
+@import 'src/styles/settings/settings.colors';
+
+@import 'src/styles/settings/settings.containers';
+
+@import 'src/styles/elements/elements.lists';
+
+@import 'src/styles/settings/settings.containers';
+
+$default-row-gap: 20px;
+$default-tab-min-width: 80px;
+$default-img-width-height: 80px;
+$active-img-width-height: 115px;
+
+:host {
+	display: grid;
+	grid-template-columns: repeat(
+		1,
+		minmax($default-tab-min-width, $content-max-width)
+	);
+	row-gap: $default-row-gap;
+}
+:host ::ng-deep {
+	.accordion {
+		mat-panel-title {
+			mflooring-rich-text-compound {
+				p {
+					color: $mohawk-black;
+					@include font-nunito-semibold($size: [20, 20], $lineheight: 27px);
+				}
+			}
+		}
+		.mat-expansion-panel-body {
+			mflooring-rich-text-compound {
+				p {
+					color: $mohawk-black;
+					@include font-nunito-regular($size: [14, 14], $lineheight: 20px);
+				}
+			}
+			mflooring-video-player, mflooring-image-compound {
+				margin-bottom: 40px;
+				padding-bottom: 0px;
+				
+				.video-player {
+					max-width: 440px;
+				}
+				img {
+					width: auto;
+					max-height: 236px;
+					margin: 0 auto;
+					border-radius: 5px;
+				}	
+			}
+			mflooring-two-column-compound {
+				.two-column-compound__container {
+					display: flex;
+					justify-content: center;
+					margin-bottom: 55px;
+					mflooring-image-compound {
+						picture {
+							max-width: 442.25px;
+							max-height: 236px;
+							width: 100%;
+							img {
+								border-radius: 5px;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+:host ::ng-deep {
+	.mflooring-faq {
+		margin: 70px 0 50px 0;
+	}
+	.tabbed-tab-desktop {
+		.mat-elevation-z4 {
+			box-shadow: none;
+		}
+
+		.mat-tab-header {
+			border: 0;
+			margin-bottom: 10px;
+		}
+
+		.mat-ink-bar {
+			display: none;
+		}
+
+		.mat-tab-labels {
+			justify-content: space-around;
+		}
+
+		.mat-tab-body {
+			opacity: 0;
+			transition: opacity 200ms;
+
+			&-active {
+				opacity: 1;
+			}
+		}
+
+		.mat-tab-label {
+			height: unset;
+			padding: 0;
+			opacity: unset;
+			margin: 0 10px;
+			@include mq-breakpoint-md() {
+				min-width: $default-tab-min-width;
+				margin: 0 20px;
+			}
+		}
+
+		.mat-tab-label-active {
+			.tabbed-tab__text {
+				@include font-nunito-bold($size: 20px, $lineheight: 27px);
+				color: $mohawk-black;
+
+				&:after {
+					content: ''; /* This is necessary for the pseudo element to work. */
+					display: block; /* This will put the pseudo element on its own line. */
+					margin: 0 auto; /* This will center the border. */
+					width: 65%; /* Change this to whatever width you want. */
+					padding-top: 8px; /* This creates some space between the element and the border. */
+					border-bottom: 3px solid $mohawk-red; /* This creates the border */
+				}
+			}
+
+			.tabbed-tab__image {
+				img {
+					width: $active-img-width-height !important;
+					height: $active-img-width-height !important;
+				}
+			}
+		}
+
+		.mat-tab-label-content {
+			flex-direction: column;
+			row-gap: 10px;
+			width: 100%;
+			padding-top: 25px;
+			padding-bottom: 25px;
+		}
+
+		.tabbed-tab__image {
+			min-height: $default-img-width-height;
+		}
+
+		.tabbed-tab__image img {
+			width: $default-img-width-height !important;
+			height: $default-img-width-height !important;
+			box-shadow: 0px 5px 25px #0000001a;
+		}
+
+		.tabbed-tab__text {
+			color: $mohawk-black;
+			@include font-nunito-semibold($size: 22px, $lineheight: 30px);
+
+			@include mq-breakpoint-md() {
+				@include font-nunito-regular($size: 18px, $lineheight: 24px);
+			}
+		}
+
+		mflooring-faq-compound:last-child {
+			border-bottom: 2px solid $color-grey-light;
+		}
+	}
+	.no-border-bottom {
+		border-bottom: 0px !important;
+	}
+	.mobile-tabbed {
+		.image-carousel-main {
+			display: flex;
+			flex: 1;
+
+			.navigation-left {
+				width: 30%;
+				order: 1;
+				position: relative;
+
+				.swiper-button-prev {
+					font-weight: 600;
+					color: $color-grey;
+
+					&::after {
+						font-size: 25px;
+					}
+				}
+			}
+			.swiper {
+				flex: 1;
+				order: 2;
+				max-height: 150px;
+				max-width: 150px;
+
+				.tabbed-mobile-image-title {
+					@include font-nunito-bold($size: 22px, $lineheight: 30px);
+					color: $mohawk-black;
+					text-align: center;
+					margin-top: 15px;
+				}
+
+				.focused-slide__image {
+					position: relative;
+					text-align: center;
+					color: $color-white;
+
+					img {
+						background: transparent
+							linear-gradient(180deg, #00000000 0%, #0000004e 49%, #000000 100%)
+							0% 0% no-repeat padding-box;
+					}
+				}
+			}
+			.navigation-right {
+				width: 30%;
+				order: 3;
+				position: relative;
+
+				.swiper-button-next {
+					font-weight: 600;
+					color: $color-grey;
+
+					&::after {
+						font-size: 25px;
+					}
+				}
+			}
+		}
+
+		.mobile-tabbed-content-text {
+			margin-top: 60px;
+
+			mflooring-faq-compound:last-child {
+				border-bottom: 2px solid $color-grey-light;
+			}
+		}
+		.image-carousel-main {
+			display: flex;
+			flex: 1;
+			align-items: stretch;
+			justify-content: space-between;
+		}
+	}
+}

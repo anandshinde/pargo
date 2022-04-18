@@ -1,0 +1,86 @@
+@import './src/styles/settings/settings.colors';
+
+@import './src/styles/tools/tools.typography';
+
+@import './src/styles/tools/tools.mediaquery';
+
+@import 'src/styles/elements/elements.links';
+
+$default-padding-x-container: 15px;
+$default-height-nav: 40px;
+$default-padding-x-menu-item: 25px;
+$utility-nav-item-header-sizes: [10, 11];
+
+:host {
+	mflooring-menu-item {
+		padding-left: $default-padding-x-menu-item;
+		padding-right: $default-padding-x-menu-item;
+	}
+
+	.menu-utility {
+		display: flex;
+		list-style-type: none;
+
+		&--right {
+			margin-left: auto;
+		}
+	}
+
+	.menu-utility__item {
+		display: flex;
+		align-items: center;
+		color: $color-white;
+		letter-spacing: 0.05px;
+		line-height: 14px;
+
+		@include font-nunito-bold($size: $utility-nav-item-header-sizes);
+
+		&::before {
+			content: '|';
+			font-size: 17px;
+			font-family: Helvetica, sans-serif;
+			font-weight: 100;
+			font-style: normal;
+		}
+
+		&:first-child::before {
+			content: '';
+		}
+
+		@include mq-breakpoint-md() {
+			letter-spacing: 0.49px;
+			line-height: 15px;
+		}
+	}
+
+	.item__parent {
+		padding-right: 25px;
+		position: relative;
+
+		&::after {
+			content: '';
+			width: 0;
+			height: 0;
+			border-left: 5px solid transparent;
+			border-right: 5px solid transparent;
+			border-bottom: 5px solid white;
+			position: absolute;
+			display: block;
+			top: 50%;
+			right: 8px;
+			transform: translateY(-50%) rotate(-180deg);
+		}
+	}
+
+	.item__parent--opened::after {
+		transform: rotate(0);
+	}
+
+	::ng-deep .menu-button {
+		white-space: nowrap;
+		color: $color-white;
+		padding: 0;
+		cursor: pointer;
+		@include reset-button();
+	}
+}

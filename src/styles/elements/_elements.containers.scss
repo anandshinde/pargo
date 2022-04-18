@@ -1,0 +1,20 @@
+@import 'src/styles/settings/settings.containers';
+@import 'src/styles/tools/tools.mediaquery';
+
+@mixin containerWidth($inset: false, $mobile-inset: 0, $vertical-padding: 0) {
+	box-sizing: border-box;
+	width: 100%;
+	padding: $vertical-padding $mobile-inset;
+
+	@if ($inset) {
+		@include mq-breakpoint-md() {
+			padding-left: 20px;
+			padding-right: 20px;
+		}
+
+		@include mq-content-width() {
+			padding-left: calc((100% - #{$content-max-width}) / 2 + 20px);
+			padding-right: calc((100% - #{$content-max-width}) / 2 + 20px);
+		}
+	}
+}

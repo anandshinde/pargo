@@ -1,0 +1,567 @@
+@import 'src/styles/settings/settings.containers';
+
+@import 'src/styles/tools/tools.mediaquery';
+
+@import './src/styles/settings/settings.colors';
+
+@import 'src/styles/tools/tools.typography';
+
+@import 'src/styles/elements/elements.links';
+
+:host ::ng-deep {
+	.layout-container {
+		&__grid {
+			&.inset {
+				padding: 0;
+				@include mq-breakpoint-lg() {
+					grid-template-columns: calc((100% - 100%) / 2) auto calc(
+							(100% - 100%) / 2
+						);
+				}
+			}
+		}
+	}
+	h2 {
+		@include font-nunito-light($size: 26px, $lineheight: 35px);
+		margin-bottom: 40px;
+		text-align: center;
+		color: $mohawk-black;
+		@include mq-breakpoint-md() {
+			@include font-nunito-light($size: 25px, $lineheight: 35px);
+			margin-bottom: 30px;
+			padding: 0 15px;
+			text-align: left;
+		}
+	}
+	h3 {
+		@include font-nunito-light($size: 26px, $lineheight: 35px);
+		text-align: center;
+		margin-bottom: 0;
+		color: $color-black;
+		padding: 40px 0px 0 0;
+		@include mq-breakpoint-md() {
+			@include font-nunito-light($size: 18px, $lineheight: 25px);
+			margin-bottom: 30px;
+			padding: 60px 15px 0 15px;
+		}
+	}
+	.input-text {
+		&__label {
+			@include font-nunito-regular($size: 13px, $lineheight: 18px);
+			display: inline-block;
+		}
+		&__control {
+			border: 1px solid $color-grey;
+			border-radius: 5px;
+			height: 45px;
+			width: 100%;
+			@include mq-breakpoint-md() {
+				height: 42px;
+			}
+		}
+	}
+	.text-right {
+		text-align: right;
+	}
+
+	.is-background {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		&::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			z-index: 1;
+			background: rgba(0, 0, 0, 0.6);
+			@include mq-breakpoint-md() {
+				background: rgba(0, 0, 0, 0.2);
+			}
+		}
+		img {
+			position: absolute;
+			height: 100%;
+			width: 100%;
+			object-fit: cover;
+		}
+	}
+
+	.my-account {
+		position: relative;
+		z-index: 1;
+		max-width: 900px;
+		border-radius: 0px;
+		height: 100%;
+		margin: auto;
+		padding: 0px;
+		background: $color-white;
+
+		@include mq-breakpoint-md() {
+			margin: 100px auto;
+			min-height: 500px;
+			border-radius: 5px;
+			display: flex;
+		}
+
+		&__header {
+			position: relative;
+			h2 {
+				margin-bottom: 50px;
+				padding: 0;
+			}
+			&__arrow {
+				position: absolute;
+				display: block;
+				left: -10px;
+				top: 0px;
+				width: 25px;
+				height: 25px;
+				color: $color-grey;
+				@include mq-breakpoint-md() {
+					display: none;
+				}
+			}
+		}
+
+		&__form {
+			position: relative;
+			width: 100%;
+			text-align: left;
+			color: $color-dark-grey;
+			background: $color-white;
+			padding: 0px;
+			@include mq-breakpoint-md() {
+				display: flex;
+				align-items: flex-start;
+				margin: auto;
+				border-radius: 5px;
+				background: transparent;
+				border-radius: 0;
+			}
+
+			&__left-form,
+			&__right-form {
+				width: 100%;
+				padding: 0px;
+				@include mq-breakpoint-md() {
+					width: 50%;
+				}
+			}
+			&__left-form {
+				padding: 0;
+				@include mq-breakpoint-md() {
+					padding: 0 35px 0 0;
+				}
+			}
+			&__right-form {
+				.form-box {
+					display: flex;
+					width: 100%;
+					&__state,
+					&__zip {
+						width: 50%;
+					}
+					&__state {
+						padding-right: 5px;
+					}
+					&__zip {
+						padding-left: 5px;
+					}
+				}
+			}
+
+			.form-field {
+				width: 100%;
+				margin-bottom: 10px;
+			}
+
+			button.change-pwd {
+				cursor: pointer;
+				border: 0;
+				padding: 0;
+				background: none;
+				margin-top: 10px;
+				color: $color-teal;
+				text-decoration: underline;
+				@include font-nunito-bold($size: 12px, $lineheight: 16px);
+				@include mq-breakpoint-md() {
+					margin-top: 0;
+				}
+				&:hover {
+					text-decoration: none;
+				}
+			}
+
+			.menu-button {
+				@include reset-button();
+				text-align: right;
+				padding: 0;
+				margin-top: 0;
+				width: 100%;
+				left: 0;
+				right: 0;
+				display: flex;
+				justify-content: flex-end;
+				text-decoration: underline;
+
+				@include font-nunito-semibold($size: 16px, $lineheight: 22px);
+				@include mq-breakpoint-md() {
+					position: relative;
+					display: block;
+					bottom: auto;
+					@include font-nunito-bold($size: 12px, $lineheight: 16px);
+				}
+			}
+		}
+
+		&__left {
+			width: 100%;
+			max-width: 100%;
+			border-radius: 5px 0 0px 5px;
+
+			@include mq-breakpoint-md() {
+				max-width: 220px;
+				border-right: 1px solid $color-grey-light;
+				background: $color-extra-light-grey;
+			}
+			.list-item {
+				padding: 40px 0;
+				@include mq-breakpoint-md() {
+					padding: 0;
+				}
+				ul {
+					padding: 0;
+					margin: 0;
+					list-style: none;
+				}
+				li {
+					&:first-child {
+						a {
+							border-top: 1px solid $color-grey-light;
+						}
+					}
+					a {
+						display: block;
+						padding: 15px 10px;
+						border-bottom: 1px solid $color-grey-light;
+						text-decoration: none;
+						@include font-nunito-semibold($size: 15px, $lineheight: 18px);
+						text-transform: capitalize;
+						color: $mohawk-black;
+						text-align: center;
+						text-transform: uppercase;
+						@include mq-breakpoint-md() {
+							text-transform: none;
+							@include font-nunito-regular($size: 13px);
+						}
+
+						&:hover,
+						&.active {
+							@include font-nunito-bold($size: 13px, $lineheight: 18px);
+							border-right: 2px solid $color-red-light;
+							background: $color-white !important;
+							cursor: pointer;
+							@include mq-breakpoint-md() {
+								background: none;
+							}
+						}
+					}
+				}
+				li.sign-out {
+					text-align: center;
+					padding-top: 35px;
+					@include mq-breakpoint-md() {
+						padding-top: 15px;
+					}
+
+					a {
+						border: 0;
+						display: inline;
+						@include font-nunito-semibold($size: 15px, $lineheight: 18px);
+						text-decoration: underline;
+						color: $color-teal;
+						padding: 0px;
+						@include mq-breakpoint-md() {
+							@include font-nunito-semibold($size: 13px, $lineheight: 18px);
+						}
+						&:hover {
+							text-decoration: none;
+						}
+					}
+				}
+
+				&:first-child {
+					a {
+						border-top: 1px solid $color-grey-light;
+					}
+				}
+			}
+		}
+
+		&__right {
+			width: 100%;
+			padding: 40px 25px 40px 25px;
+			max-width: 100%;
+
+			@include mq-breakpoint-md() {
+				max-width: calc(100% - 220px);
+				padding: 80px 45px 60px 45px;
+			}
+		}
+		&__error {
+			color: $color-red;
+			@include font-nunito-regular($size: 12px, $lineheight: 16px);
+		}
+
+		.bottom-btn {
+			padding-top: 100px;
+			text-align: center;
+			display: flex;
+			justify-content: center;
+			@include mq-breakpoint-md() {
+				padding: 30px 15px 0px 15px;
+				text-align: right;
+				justify-content: flex-end;
+			}
+			button {
+				outline: none;
+				border: 1px solid;
+				border-radius: 5px;
+				padding: 10px 25px;
+				cursor: pointer;
+				text-decoration: none;
+				text-align: center;
+				color: $color-white;
+				background-color: $mohawk-black;
+				@include font-nunito-regular($size: 17px, $lineheight: 23px);
+				width: 100%;
+				@include mq-breakpoint-md() {
+					@include font-nunito-bold($size: 10px, $lineheight: 14px);
+					width: auto;
+				}
+			}
+		}
+	}
+
+	.myappointment-container {
+		table-layout: fixed;
+		width: 100%;
+
+		a {
+			border: 0;
+			display: inline;
+			@include font-nunito-bold($size: 15px, $lineheight: 18px);
+			text-decoration: underline;
+			color: $color-teal;
+			padding: 0px;
+			@include mq-breakpoint-md() {
+				@include font-nunito-bold($size: 12px, $lineheight: 16px);
+			}
+			&:hover {
+				text-decoration: none;
+			}
+		}
+
+		.table-grid {
+			min-height: 300px;
+			table {
+				position: relative;
+				width: 100%;
+				color: $mohawk-black;
+				border: 0;
+				padding: 0;
+				margin: 0;
+				tbody {
+					tr {
+						&.active,
+						&:hover {
+							background: $color-extra-light-grey;
+						}
+					}
+				}
+				th,
+				td {
+					padding-left: 10px;
+					padding-right: 10px;
+				}
+				td {
+					@include font-nunito-regular($size: 12px, $lineheight: 16px);
+					padding-top: 15px;
+					padding-bottom: 20px;
+				}
+				.table-header {
+					text-transform: uppercase;
+					white-space: normal;
+					text-align: center;
+					@include mq-breakpoint-md() {
+						padding-bottom: 10px;
+						@include font-nunito-extrabold($size: 10px);
+						border-bottom: 1px solid $color-grey-light;
+					}
+
+					&.name {
+						width: 20%;
+					}
+					&.location {
+						width: 50%;
+					}
+					&.date {
+						width: 30%;
+					}
+				}
+				.table-data {
+					white-space: normal;
+					text-align: center;
+
+					a {
+						text-decoration: underline;
+						@include font-nunito-semibold($size: 15px, $lineheight: 18px);
+						text-transform: capitalize;
+						text-align: center;
+						color: $color-teal;
+						cursor: pointer;
+						@include mq-breakpoint-md() {
+							text-transform: none;
+							@include font-nunito-bold($size: 12px, $lineheight: 16px);
+						}
+
+						&:hover,
+						&.active {
+							text-decoration: none;
+						}
+					}
+				}
+			}
+		}
+		.bottom-section {
+			display: flex;
+			padding-top: 15px;
+			color: $mohawk-black;
+			&__left {
+				width: 40%;
+				@include font-nunito-regular($size: 12px, $lineheight: 16px);
+			}
+			&__right {
+				text-align: right;
+				width: 60%;
+				@include font-nunito-regular($size: 12px, $lineheight: 16px);
+			}
+		}
+
+		.myappointment-mobile-view {
+			&__card {
+				border-radius: 10px;
+				box-shadow: 0px 5px 25px #0000001a;
+				padding: 0;
+				margin-bottom: 40px;
+				.card-title {
+					color: $color-white;
+					background: $color-grey;
+					border-radius: 10px 10px 0px 0px;
+					padding: 10px 0;
+					text-align: center;
+					@include font-nunito-semibold($size: 16px, $lineheight: 22px);
+				}
+				.mobile-table-grid {
+					padding: 60px 0 30px 0;
+
+					.data-grid {
+						ul {
+							padding: 0;
+							margin: 0;
+							list-style: none;
+							display: flex;
+							flex-wrap: wrap;
+							justify-content: center;
+							li {
+								width: 50%;
+								text-align: center;
+								margin-bottom: 40px;
+								padding: 0 20px;
+							}
+							.head {
+								@include font-nunito-bold($size: 14px, $lineheight: 19px);
+								padding-bottom: 10px;
+								text-decoration: underline;
+								color: $mohawk-black;
+							}
+							.sub-head {
+								@include font-nunito-regular($size: 14px, $lineheight: 19px);
+								color: $mohawk-black;
+							}
+						}
+						.bottom-link {
+							text-align: center;
+							a {
+								text-decoration: underline;
+								@include font-nunito-semibold($size: 16px, $lineheight: 22px);
+								text-transform: capitalize;
+
+								color: $color-teal;
+								cursor: pointer;
+
+								&:hover {
+									text-decoration: none;
+								}
+							}
+						}
+					}
+
+					table {
+						width: 100%;
+						th {
+							color: $mohawk-black;
+							border: 0;
+							padding: 0 0 15px 0;
+							margin: 0;
+							text-decoration: underline;
+							@include font-nunito-extrabold($size: 12px, $lineheight: 16px);
+							text-align: right;
+							&:first-child {
+								width: 80%;
+								text-align: left;
+							}
+						}
+						td {
+							padding-bottom: 3px;
+							text-align: right;
+							&:first-child {
+								text-align: left;
+							}
+						}
+					}
+				}
+			}
+			.bottom-btn {
+				padding-top: 0px;
+				text-align: center;
+				display: flex;
+				justify-content: center;
+				button {
+					outline: none;
+					border: 1px solid;
+					border-radius: 5px;
+					padding: 10px 25px;
+					cursor: pointer;
+					text-decoration: none;
+					text-align: center;
+					color: $color-white;
+					background-color: $mohawk-black;
+					@include font-nunito-regular($size: 17px, $lineheight: 23px);
+					width: 100%;
+					@include mq-breakpoint-md() {
+						@include font-nunito-bold($size: 10px, $lineheight: 14px);
+						width: auto;
+					}
+				}
+			}
+		}
+	}
+}

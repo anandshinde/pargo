@@ -1,0 +1,19 @@
+<mat-accordion displayMode="flat" [ngClass]="[orientationClass]">
+	<mat-expansion-panel hideToggle *ngFor="let filter of content; trackBy">
+		<mat-expansion-panel-header
+			[collapsedHeight]="panelHeaderHeight"
+			[expandedHeight]="panelHeaderHeight"
+		>
+			<mat-panel-title>
+				<span class="gallery-expansion__title__text">
+					{{ filter?.category }}
+				</span>
+				<span class="gallery-expansion__title__icon icon-"> mobile-drop-down </span>
+			</mat-panel-title>
+		</mat-expansion-panel-header>
+		<mflooring-radio-button
+			[control]="form.get(filter?.formControlName)"
+			[content]="filter?.options"
+		></mflooring-radio-button>
+	</mat-expansion-panel>
+</mat-accordion>
